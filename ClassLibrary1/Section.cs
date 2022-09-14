@@ -9,6 +9,11 @@ namespace Model
     public class Section
     {
         public SectionTypes SectionType;
+        
+        public Section(SectionTypes type)
+        {
+            SectionType = new SectionTypes();
+        }
     }
 
     public enum SectionTypes
