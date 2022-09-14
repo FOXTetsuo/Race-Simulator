@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    internal class Section
+    public class Section
     {
         public SectionTypes SectionType;
     }
 
-    internal enum SectionTypes
+    public enum SectionTypes
     {
         Straight,
         LeftCorner,

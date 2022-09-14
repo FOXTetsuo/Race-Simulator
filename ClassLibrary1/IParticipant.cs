@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Model
 {
-    internal interface IParticipant
+    public interface IParticipant
     {
         public string Name { get; set; }
         public int Points { get; set; }
@@ -14,7 +15,7 @@ namespace Model
         public TeamColors TeamColor { get; set; }
     }
 
-    internal enum TeamColors
+    public enum TeamColors
     {
         Red,
         Green,

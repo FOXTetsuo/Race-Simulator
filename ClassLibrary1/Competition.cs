@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    internal class Competition
+    public class Competition
     {
-        public Queue<Track> Tracks;
+        public Queue<Track> Tracks { get; set; }
         public List<IParticipant>? Participants { get; set; }
 
         public Track NextTrack()
         {
             return null;
         }
+
+
+
     }
 }
