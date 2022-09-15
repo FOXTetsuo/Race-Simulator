@@ -10,7 +10,7 @@ namespace Model
 	public class Competition
 	{
 		public Queue<Track> Tracks { get ; set; }
-		public List<IParticipant>? Participants { get; set; }
+		public List<IParticipant>? Participants;
 
 		public Track NextTrack()
 		{
