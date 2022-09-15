@@ -7,17 +7,23 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Competition
-    {
-        public Queue<Track> Tracks { get; set; }
-        public List<IParticipant>? Participants { get; set; }
+	public class Competition
+	{
+		public Queue<Track> Tracks { get ; set; }
+		public List<IParticipant>? Participants { get; set; }
 
-        public Track NextTrack()
-        {
-            return null;
-        }
-
-
-
-    }
+		public Track NextTrack()
+		{
+			if (Tracks.Count > 0)
+			{
+				return Tracks.Dequeue();
+			}
+			return null;
+		}
+		public Competition()
+		{
+			Participants = new List<IParticipant>();
+			Tracks = new Queue<Track>();
+		}
+	}
 }

@@ -9,8 +9,8 @@ namespace Controller
 {
 	public static class Data
 	{
-		static Competition Competition;
-   
+		static Competition? Competition;
+		public static Race? CurrentRace;
 		public static void Initialize()
 		{
 			Competition  =  new(); // maybe competition toevoegen asls alles breekt XDDD
@@ -29,6 +29,14 @@ namespace Controller
 			Competition.Tracks.Enqueue(new Track("Van zanten-voort", new LinkedList<Section>()));
 			Competition.Tracks.Enqueue(new Track("Spacebase", new LinkedList<Section>()));
 			Competition.Tracks.Enqueue(new Track("Vroemvroem-in-da-rondje", new LinkedList<Section>()));
+		}
+		public static void NextRace()
+		{
+			Track newTrack = Competition.NextTrack();
+			if (newTrack is not null )
+			{
+				CurrentRace = new Race(newTrack, Competition.Participants);
+			};
 		}
 
 	}

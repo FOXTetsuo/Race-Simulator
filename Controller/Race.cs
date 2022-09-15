@@ -7,12 +7,42 @@ using System.Threading.Tasks;
 
 namespace Controller
 {
-	internal class Race
+	public class Race
 	{
-		private Random _random { get => _random; set => _random = value; }
+		private Random _random;
 
-		Track Track { get => Track; set => Track = value; }
-		List<IParticipant>? Participants { get => Participants; set => Participants = value; }
-		DateTime StartTime { get => StartTime; set => StartTime = value; }
+		public Track Track;
+		List<IParticipant>? Participants;
+		public DateTime StartTime;
+
+		private Dictionary<Section, SectionData> _positions;
+
+		public SectionData GetSectionData(Section section)
+		{
+			if (!_positions.ContainsKey(section))
+			{
+				_positions.Add(section, new SectionData());
+			}
+			return _positions[section];
+		}
+
+		public Race(Track track, List<IParticipant>? participants)
+		{
+			_random = new Random(DateTime.Now.Millisecond);
+			Track = track;
+			Participants = participants;
+			StartTime = new DateTime();
+			_positions = new Dictionary<Section, SectionData>();
+		}
+
+		public void RandomizeEquipment()
+		{
+			foreach(IParticipant participant in Participants)
+			{
+				participant.Equipment.Quality = _random.Next(10);
+				participant.Equipment.Performance = _random.Next(10);
+			}
+		}
+
 	}
 }
