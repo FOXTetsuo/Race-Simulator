@@ -28,7 +28,8 @@ namespace Controller
 
 		public static SectionTypes[] TrackBuilder(string trackName)
 		{
-			if (trackName.Equals("Van zanten-voort"))
+			// dit hierondder gaat niet goed vanwege de .equals method
+			if (trackName.Equals("Rainbow Spaceroad"))
 			{
 				SectionTypes[] build = new SectionTypes[]
 				{
@@ -39,7 +40,8 @@ namespace Controller
 						SectionTypes.Straight,
 						SectionTypes.RightCorner,
 						SectionTypes.Straight,
-						SectionTypes.RightCorner
+						SectionTypes.RightCorner,
+						SectionTypes.Finish
 
 				};
 				return build;
@@ -53,7 +55,24 @@ namespace Controller
 				};
 				return build;
 			}
-			else return null;
+			if (trackName.Equals("Vroemvroem-in-da-rondje"))
+			{
+				SectionTypes[] build = new SectionTypes[]
+				{
+						SectionTypes.StartGrid,
+
+				};
+				return build;
+			}
+			else
+			//TEMPFIX - maak hier fucking switchcases van
+			{
+				SectionTypes[] build = new SectionTypes[]
+				{
+					SectionTypes.StartGrid,
+				};
+				return build;
+			}
 		}
 
 		public static void NextRace()
