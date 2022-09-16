@@ -21,9 +21,9 @@ namespace Controller
 		}
 		public static void AddTracks()
 		{
-			Competition.Tracks.Enqueue(new Track("Van zanten-voort", new SectionTypes[10]));
-			Competition.Tracks.Enqueue(new Track("Spacebase", new SectionTypes[0]));
-			Competition.Tracks.Enqueue(new Track("Vroemvroem-in-da-rondje", new SectionTypes[0]));
+			Competition.Tracks.Enqueue(new Track("Van zanten-voort", TrackBuilder("Van zanten-voort")));
+			Competition.Tracks.Enqueue(new Track("Spacebase", TrackBuilder("Spacebase")));
+			Competition.Tracks.Enqueue(new Track("Vroemvroem-in-da-rondje", TrackBuilder("Vroemvroem-in-da-rondje")));
 		}
 
 		public static SectionTypes[] TrackBuilder(string trackName)

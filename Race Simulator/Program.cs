@@ -6,7 +6,7 @@ Console.BackgroundColor = ConsoleColor.DarkGreen;
 Data.Initialize();
 Data.NextRace();
 Visualize.Initialize();
-Visualize.DrawTrack(Data.CurrentRace.Track);
+Visualize.DrawTrack(Data.CurrentRace.Track.Sections);
 
 for (; ; )
 {

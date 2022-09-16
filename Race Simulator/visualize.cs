@@ -13,15 +13,35 @@ namespace Race_Simulator
 		{
 
 		}
-
+		// graphics voor alles afmaken
 		#region graphics
 		private static string[] _finishHorizontal = { "----------", "  # ", "  # ", "----------" };
 		private static string[] _straightPath = {"--------", " ", " ", "--------" };
+		private static string[] _rightCorner;
+		private static string[] _leftCorner;
+		private static string[] _start;
 		#endregion
-
-		public static void DrawTrack(Track track)
+		// misschien het echte printen in de printTrack functie
+		public static void DrawTrack(LinkedList<Section> sectionList)
 		{
-			Console.WriteLine(_finishHorizontal);
+			foreach (Section section in sectionList)
+			{
+				if (section.SectionType == SectionTypes.Straight)
+				{
+					foreach (string s in _straightPath)
+					Console.WriteLine(s);
+				}
+				if (section.SectionType == SectionTypes.RightCorner)
+				{
+					foreach (string s in _rightCorner)
+						Console.WriteLine(s);
+				}
+			}
+		
+		}
+		public static void PrintTrack()
+		{
+
 		}
 	}
 }
