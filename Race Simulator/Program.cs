@@ -1,10 +1,15 @@
 ﻿using Controller;
+using Race_Simulator;
+using System;
 
+Console.BackgroundColor = ConsoleColor.DarkGreen;
 Data.Initialize();
 Data.NextRace();
-Console.WriteLine(Data.CurrentRace.Track.Name);
+Visualize.Initialize();
+Visualize.DrawTrack(Data.CurrentRace.Track);
 
 for (; ; )
 {
 	Thread.Sleep(100);
 }
+

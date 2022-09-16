@@ -8,13 +8,23 @@ namespace Model
 {
     public class Track
     {
-        public string Name;
-        public LinkedList<Section> Sections;
+        public string Name { get; set; }
+        public LinkedList<Section> Sections { get; set; }
 
-        public Track(string name, LinkedList<Section> sections)
+		public Track(string name, SectionTypes[] sections)
         {
             Name = name;
-            Sections = sections;
+			Sections = SectionTypeToLinkedList(sections);
         }
+		public LinkedList<Section> SectionTypeToLinkedList (SectionTypes[] sectionParemeter)
+		{
+			LinkedList<Section> sectionlist = new LinkedList<Section>();
+			foreach (SectionTypes sectionType in sectionParemeter)
+			{
+				Section section = new Section(sectionType);
+				sectionlist.AddLast(section);
+			}
+			return sectionlist;
+		}
     }
 }

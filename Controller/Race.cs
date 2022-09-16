@@ -9,13 +9,13 @@ namespace Controller
 {
 	public class Race
 	{
-		private Random _random;
+		private Random _random { get; set; }
 
-		public Track Track;
-		List<IParticipant>? Participants;
-		public DateTime StartTime;
+		public Track Track { get; set; }
+		List<IParticipant>? Participants { get; set; }
+		public DateTime StartTime { get; set; }
 
-		private Dictionary<Section, SectionData> _positions;
+		private Dictionary<Section, SectionData> _positions { get; set; }
 
 		public SectionData GetSectionData(Section section)
 		{

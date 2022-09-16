@@ -8,9 +8,9 @@ namespace Model
 {
     public class Section
     {
-        public SectionTypes SectionType;
-        
-        public Section(SectionTypes type)
+        public SectionTypes SectionType { get; set; }
+
+		public Section(SectionTypes type)
         {
             SectionType = new SectionTypes();
         }

@@ -11,7 +11,8 @@ namespace ControllerTest
 	public class Model_Competition_NextTrackShould
 	{
 		private Competition _competition;
-		public Competition Competition { get { return _competition; } set { _competition = value; } }
+		public Competition Competition { get => _competition;  set => _competition = value;}
+
 		[SetUp]
 		public void SetUp()
 		{
@@ -26,7 +27,8 @@ namespace ControllerTest
 		[Test]
 		public void NextTrack_OneInQueue_ReturnTrack()
 		{
-			Track first = new Track("name", new LinkedList<Section>());
+			// probably not be 0
+			Track first = new Track("name", new SectionTypes[0]);
 			Competition.Tracks.Enqueue(first);
 			Track result = Competition.NextTrack();
 			Assert.AreEqual(first, result);
@@ -34,7 +36,7 @@ namespace ControllerTest
 		[Test]
 		public void NextTrack_OneInQueue_RemoveTrackFromQueue()
 		{
-			Track first = new Track("name", new LinkedList<Section>());
+			Track first = new Track("name", new SectionTypes[0]);
 			Track result = Competition.NextTrack();
 			result = Competition.NextTrack();
 			Assert.IsNull(result);
@@ -42,8 +44,8 @@ namespace ControllerTest
 		[Test]
 		public void NextTrack_TwoInQueue_ReturnNextTrack()
 		{
-			Track first = new Track("First", new LinkedList<Section>());
-			Track second = new Track("Second", new LinkedList<Section>());
+			Track first = new Track("First", new SectionTypes[0]);
+			Track second = new Track("Second", new SectionTypes[0]);
 			Competition.Tracks.Enqueue(first);
 			Competition.Tracks.Enqueue(second);
 			Track result = Competition.NextTrack();
