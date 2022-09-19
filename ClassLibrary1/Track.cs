@@ -21,8 +21,7 @@ namespace Model
 			LinkedList<Section> sectionlist = new LinkedList<Section>();
 			foreach (SectionTypes sectionType in sectionParemeter)
 			{
-				Section section = new Section(sectionType);
-				sectionlist.AddLast(section);
+				sectionlist.AddLast(new Section(sectionType));
 			}
 			return sectionlist;
 		}

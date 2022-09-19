@@ -33,6 +33,21 @@ namespace Controller
 			{
 				SectionTypes[] build = new SectionTypes[]
 				{
+						SectionTypes.RightCornerReversed,
+						SectionTypes.StartGrid,
+						SectionTypes.RightCorner,
+						SectionTypes.StraightVertical,
+						SectionTypes.LeftCorner,
+						SectionTypes.Straight,
+						SectionTypes.LeftCornerReversed,
+						SectionTypes.StraightVertical
+				};
+				return build;
+			}
+			if (trackName.Equals("Spacebase"))
+			{
+				SectionTypes[] build = new SectionTypes[]
+				{
 						SectionTypes.StartGrid,
 						SectionTypes.RightCorner,
 						SectionTypes.Straight,
@@ -46,20 +61,19 @@ namespace Controller
 				};
 				return build;
 			}
-			if (trackName.Equals("Spacebase"))
-			{
-				SectionTypes[] build = new SectionTypes[]
-				{
-						SectionTypes.StartGrid,
-
-				};
-				return build;
-			}
 			if (trackName.Equals("Vroemvroem-in-da-rondje"))
 			{
 				SectionTypes[] build = new SectionTypes[]
 				{
 						SectionTypes.StartGrid,
+						SectionTypes.RightCorner,
+						SectionTypes.Straight,
+						SectionTypes.RightCorner,
+						SectionTypes.Straight,
+						SectionTypes.RightCorner,
+						SectionTypes.Straight,
+						SectionTypes.RightCorner,
+						SectionTypes.Finish
 
 				};
 				return build;

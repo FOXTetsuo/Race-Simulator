@@ -12,16 +12,19 @@ namespace Model
 
 		public Section(SectionTypes type)
         {
-            SectionType = new SectionTypes();
+            SectionType = type;
         }
     }
 
     public enum SectionTypes
     {
         Straight,
+		StraightVertical,
         LeftCorner,
+		LeftCornerReversed,
         RightCorner,
-        StartGrid,
+		RightCornerReversed,
+		StartGrid,
         Finish
     }
 }
