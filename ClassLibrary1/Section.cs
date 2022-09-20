@@ -20,10 +20,10 @@ namespace Model
     {
         Straight,
 		StraightVertical,
-        LeftCorner,
-		LeftCornerReversed,
-        RightCorner,
-		RightCornerReversed,
+        LeftCorner270,
+		LeftCorner0,
+        RightCorner180,
+		RightCorner90,
 		StartGrid,
         Finish
     }

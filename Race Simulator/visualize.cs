@@ -23,10 +23,10 @@ namespace Race_Simulator
 		private static string[] _finishHorizontal = { "-----", "  #  ", "  #  ", "  #  ", "-----" };
 		private static string[] _straightPath = { "-----", "     ", "     ", "     ", "-----" };
 		private static string[] _straightPathVertical = { "-   -", "-   -", "-   -", "-   -", "-   -" };
-		private static string[] _rightCorner = { "-----", "    -", "    -", "    -", "    -" };
-		private static string[] _rightCornerReversed = { "-----", "-    ", "-    ", "-    ", "-    " };
-		private static string[] _leftCorner = { "    -", "    -", "    -", "    -", "-----" };
-		private static string[] _leftCornerReversed = { "-    ", "-    ", "-    ", "-    ", "-----" };
+		private static string[] _right180 = { "-----", "    -", "    -", "    -", "    -" };
+		private static string[] _right90 = { "-----", "-    ", "-    ", "-    ", "-    " };
+		private static string[] _left270 = { "    -", "    -", "    -", "    -", "-----" };
+		private static string[] _left0 = { "-    ", "-    ", "-    ", "-    ", "-----" };
 		private static string[] _start = { "-----", ">    ",  ">    ", ">    ", "-----" };
 		#endregion
 		public static void DrawTrack(LinkedList<Section> sectionList)
@@ -44,21 +44,21 @@ namespace Race_Simulator
 					case SectionTypes.StraightVertical:
 						PrintTrack(_straightPathVertical);
 						break;
-					case SectionTypes.RightCorner:
+					case SectionTypes.RightCorner180:
 						direction = 180;
-						PrintTrack(_rightCorner);
+						PrintTrack(_right180);
 						break;
-					case SectionTypes.RightCornerReversed:
+					case SectionTypes.RightCorner90:
 						direction = 90;
-						PrintTrack(_rightCornerReversed);
+						PrintTrack(_right90);
 						break;
-					case SectionTypes.LeftCorner:
+					case SectionTypes.LeftCorner270:
 						direction = 270;
-						PrintTrack(_leftCorner);
+						PrintTrack(_left270);
 						break;
-					case SectionTypes.LeftCornerReversed:
+					case SectionTypes.LeftCorner0:
 						direction = 0;
-						PrintTrack(_leftCornerReversed);
+						PrintTrack(_left0);
 						break;
 					case SectionTypes.StartGrid:
 						PrintTrack(_start);
