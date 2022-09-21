@@ -15,9 +15,8 @@ namespace Race_Simulator
 		public static void Initialize()
 		{
 			//direction init moet zo weg kunnen
-			direction = 90;
-			xpos = 10;
-			ypos = 10;
+			xpos = 20;
+			ypos = 5;
 		}
 		// graphics voor alles afmaken
 		#region graphics
