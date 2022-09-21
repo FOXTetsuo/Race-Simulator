@@ -9,7 +9,7 @@ namespace Race_Simulator
 {
 	public static class Visualize
 	{
-		static int direction;
+		static int Direction;
 		static int xpos;
 		static int ypos;
 		public static void Initialize()
@@ -20,14 +20,54 @@ namespace Race_Simulator
 		}
 		// graphics voor alles afmaken
 		#region graphics
-		private static string[] _finishHorizontal = { "-----", "  #  ", "  #  ", "  #  ", "-----" };
-		private static string[] _straightPath = { "-----", "     ", "     ", "     ", "-----" };
-		private static string[] _straightPathVertical = { "-   -", "-   -", "-   -", "-   -", "-   -" };
-		private static string[] _NW = { "-----", "    -", "    -", "    -", "    -" };
-		private static string[] _SW = { "-----", "-    ", "-    ", "-    ", "-    " };
-		private static string[] _NE = { "    -", "    -", "    -", "    -", "-----" };
-		private static string[] _SE = { "-    ", "-    ", "-    ", "-    ", "-----" };
-		private static string[] _start = { "-----", ">    ",  ">    ", ">    ", "-----" };
+		private static string[] _finishHorizontal = {
+			"-----", 
+			"   # ", 
+			"   # ",
+			"   # ", 
+			"-----" };
+		private static string[] _straightPath = { 
+			"-----", 
+			"    1", 
+			"     ", 
+			"  2  ", 
+			"-----" };
+		private static string[] _straightPathVertical = { 
+			"-1  -", 
+			"-   -", 
+			"-   -", 
+			"-  2-", 
+			"-   -" };
+		private static string[] _NW = { 
+			"-----", 
+			"    -", 
+			"1   -", 
+			"   2-", 
+			"    -" };
+		private static string[] _SW = { 
+			"-----", 
+			"-   2", 
+			"-    ", 
+			"- 1  ", 
+			"-    " };
+		private static string[] _NE = { 
+			"    -", 
+			"  2 -", 
+			"1   -", 
+			"    -",
+			"-----" };
+		private static string[] _SE = { 
+			"-1   ", 
+			"-    ", 
+			"-  2 ", 
+			"-    ", 
+			"-----" };
+		private static string[] _start = { 
+			"-----", 
+			"  1 >",  
+			"    >", 
+			"  2 >", 
+			"-----" };
 		#endregion
 		public static void DrawTrack(LinkedList<Section> sectionList)
 		{
@@ -45,23 +85,23 @@ namespace Race_Simulator
 						PrintTrack(_straightPathVertical);
 						break;
 					case SectionTypes.CornerNE:
-						determineDirection(SectionTypes.CornerNE, direction);
+						determineDirection(SectionTypes.CornerNE, Direction);
 						PrintTrack(_NW);
 						break;
 					case SectionTypes.CornerSW:
-						determineDirection(SectionTypes.CornerSW, direction);
+						determineDirection(SectionTypes.CornerSW, Direction);
 						PrintTrack(_SW);
 						break;
 					case SectionTypes.CornerSE:
-						determineDirection(SectionTypes.CornerSE, direction);
+						determineDirection(SectionTypes.CornerSE, Direction);
 						PrintTrack(_NE);
 						break;
 					case SectionTypes.CornerNW:
-						determineDirection(SectionTypes.CornerNW, direction);
+						determineDirection(SectionTypes.CornerNW, Direction);
 						PrintTrack(_SE);
 						break;
 					case SectionTypes.StartGrid:
-						direction = 90;
+						Direction = 90;
 						PrintTrack(_start);
 						break;
 				}
@@ -73,21 +113,24 @@ namespace Race_Simulator
 		{
 			foreach (string s in type)
 			{
+				s.Replace('1', ' ');
+				s.Replace('2', ' ');
 				Console.SetCursorPosition(xpos, ypos);
 				Console.Write(s);
+				
 				ypos += 1;
 			}
-			if (direction == 90)
+			if (Direction == 90)
 			{
 				ypos += -5;
 				xpos += 5;
 			}
-			if (direction == 270)
+			if (Direction == 270)
 			{
 				ypos += -5;
 				xpos += -5;
 			}
-			if (direction == 0)
+			if (Direction == 0)
 			{
 				ypos += -10;
 			}
@@ -101,41 +144,41 @@ namespace Race_Simulator
 				case SectionTypes.CornerNE:
 					if (dir == 90)
 					{
-						direction = 180;
+						Direction = 180;
 					}
 					else if (dir == 0)
 					{
-						direction = 270;
+						Direction = 270;
 					}
 					break;
 				case SectionTypes.CornerSE:
 					if (dir == 180)
 					{
-						direction = 270;
+						Direction = 270;
 					}
 					else if (dir == 90)
 					{
-						direction = 0;
+						Direction = 0;
 					}
 					break;
 				case SectionTypes.CornerNW:
 					if (dir == 270)
 					{
-						direction = 0;
+						Direction = 0;
 					}
 					else if (dir == 180)
 					{
-						direction = 90;
+						Direction = 90;
 					}
 					break;
 				case SectionTypes.CornerSW:
 					if (dir == 0)
 					{
-						direction = 90;
+						Direction = 90;
 					}
 					else if (dir == 270)
 					{
-						direction = 180;
+						Direction = 180;
 					}
 					break;
 			}

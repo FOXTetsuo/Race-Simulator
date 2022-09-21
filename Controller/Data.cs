@@ -21,7 +21,7 @@ namespace Controller
 		}
 		public static void AddTracks()
 		{
-			Competition.Tracks.Enqueue(new Track("Rainbow Spaceroad", TrackBuilder("Rainbow Spaceroad")));
+			//Competition.Tracks.Enqueue(new Track("Rainbow Spaceroad", TrackBuilder("Rainbow Spaceroad")));
 			Competition.Tracks.Enqueue(new Track("Spacebase", TrackBuilder("Spacebase")));
 			Competition.Tracks.Enqueue(new Track("Vroemvroem-in-da-rondje", TrackBuilder("Vroemvroem-in-da-rondje")));
 		}
@@ -50,11 +50,13 @@ namespace Controller
 				{
 						SectionTypes.StartGrid,
 						SectionTypes.CornerNE,
+						SectionTypes.StraightVertical,
+						SectionTypes.StraightVertical,
+						SectionTypes.StraightVertical,
+						SectionTypes.CornerSE,
 						SectionTypes.Straight,
-						SectionTypes.CornerNE,
-						SectionTypes.Straight,
-						SectionTypes.CornerNE,
-						SectionTypes.Straight,
+						SectionTypes.CornerNW,
+						SectionTypes.StraightVertical,
 						SectionTypes.CornerNE,
 						SectionTypes.Finish
 

@@ -44,5 +44,10 @@ namespace Controller
 			}
 		}
 
+		public void PlaceContestants(Track tr, Driver dr)
+		{
+
+		}
+
 	}
 }
