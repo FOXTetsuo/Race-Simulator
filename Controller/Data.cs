@@ -33,14 +33,14 @@ namespace Controller
 			{
 				SectionTypes[] build = new SectionTypes[]
 				{
-						SectionTypes.RightCorner90,
 						SectionTypes.StartGrid,
-						SectionTypes.RightCorner180,
+						SectionTypes.CornerNE,
 						SectionTypes.StraightVertical,
-						SectionTypes.LeftCorner270,
+						SectionTypes.CornerSE,
 						SectionTypes.Straight,
-						SectionTypes.LeftCorner0,
-						SectionTypes.StraightVertical
+						SectionTypes.CornerNW,
+						SectionTypes.StraightVertical,
+						SectionTypes.CornerSW
 				};
 				return build;
 			}
@@ -49,13 +49,13 @@ namespace Controller
 				SectionTypes[] build = new SectionTypes[]
 				{
 						SectionTypes.StartGrid,
-						SectionTypes.RightCorner180,
+						SectionTypes.CornerNE,
 						SectionTypes.Straight,
-						SectionTypes.RightCorner180,
+						SectionTypes.CornerNE,
 						SectionTypes.Straight,
-						SectionTypes.RightCorner180,
+						SectionTypes.CornerNE,
 						SectionTypes.Straight,
-						SectionTypes.RightCorner180,
+						SectionTypes.CornerNE,
 						SectionTypes.Finish
 
 				};
@@ -66,13 +66,13 @@ namespace Controller
 				SectionTypes[] build = new SectionTypes[]
 				{
 						SectionTypes.StartGrid,
-						SectionTypes.RightCorner180,
+						SectionTypes.CornerNE,
 						SectionTypes.Straight,
-						SectionTypes.RightCorner180,
+						SectionTypes.CornerNE,
 						SectionTypes.Straight,
-						SectionTypes.RightCorner180,
+						SectionTypes.CornerNE,
 						SectionTypes.Straight,
-						SectionTypes.RightCorner180,
+						SectionTypes.CornerNE,
 						SectionTypes.Finish
 
 				};
