@@ -1,9 +1,5 @@
-﻿using Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Controller;
+using Model;
 
 namespace Race_Simulator
 {
@@ -12,25 +8,27 @@ namespace Race_Simulator
 		static int Direction;
 		static int xpos;
 		static int ypos;
-		public static void Initialize()
+		static Race Race;
+		public static void Initialize(Race race)
 		{
 			//direction init moet zo weg kunnen
 			xpos = 20;
 			ypos = 5;
+			Race = race;
 		}
 		// graphics voor alles afmaken
 		#region graphics
 		private static string[] _finishHorizontal = {
 			"-----", 
-			"   # ", 
+			"   #2", 
 			"   # ",
-			"   # ", 
+			"  1# ", 
 			"-----" };
 		private static string[] _straightPath = { 
 			"-----", 
-			"    1", 
+			"   1 ", 
 			"     ", 
-			"  2  ", 
+			" 2   ", 
 			"-----" };
 		private static string[] _straightPathVertical = { 
 			"-1  -", 
@@ -76,48 +74,53 @@ namespace Race_Simulator
 				switch (section.SectionType)
 				{
 					case SectionTypes.Finish:
-						PrintTrack(_finishHorizontal);
+						PrintTrack(_finishHorizontal, Race.GetSectionData(section));
 						break;
 					case SectionTypes.Straight:
-						PrintTrack(_straightPath);
+						PrintTrack(_straightPath, Race.GetSectionData(section));
 						break;
 					case SectionTypes.StraightVertical:
-						PrintTrack(_straightPathVertical);
+						PrintTrack(_straightPathVertical, Race.GetSectionData(section));
 						break;
 					case SectionTypes.CornerNE:
-						determineDirection(SectionTypes.CornerNE, Direction);
-						PrintTrack(_NW);
+						DetermineDirection(SectionTypes.CornerNE, Direction);
+						PrintTrack(_NW, Race.GetSectionData(section));
 						break;
 					case SectionTypes.CornerSW:
-						determineDirection(SectionTypes.CornerSW, Direction);
-						PrintTrack(_SW);
+						DetermineDirection(SectionTypes.CornerSW, Direction);
+						PrintTrack(_SW, Race.GetSectionData(section));
 						break;
 					case SectionTypes.CornerSE:
-						determineDirection(SectionTypes.CornerSE, Direction);
-						PrintTrack(_NE);
+						DetermineDirection(SectionTypes.CornerSE, Direction);
+						PrintTrack(_NE, Race.GetSectionData(section));
 						break;
 					case SectionTypes.CornerNW:
-						determineDirection(SectionTypes.CornerNW, Direction);
-						PrintTrack(_SE);
+						DetermineDirection(SectionTypes.CornerNW, Direction);
+						PrintTrack(_SE, Race.GetSectionData(section));
 						break;
 					case SectionTypes.StartGrid:
 						Direction = 90;
-						PrintTrack(_start);
+						PrintTrack(_start, Race.GetSectionData(section));
 						break;
 				}
 				Console.SetCursorPosition(xpos, ypos);
 			}
 		
 		}
-		public static void PrintTrack(string[] type)
+		public static void PrintTrack(string[] type, SectionData data)
 		{
+			
 			foreach (string s in type)
 			{
-				s.Replace('1', ' ');
-				s.Replace('2', ' ');
+				string temp = s;
+				// if drivers exist - replace 1/2 with their initals
+				if (data.Right != null && data.Left != null)
+				{
+					temp = ReplaceString(s,data.Left,data.Right);
+				}
 				Console.SetCursorPosition(xpos, ypos);
-				Console.Write(s);
-				
+				// replace leftover 1/2 with space
+				Console.Write(temp.Replace("1", " ").Replace("2", " "));
 				ypos += 1;
 			}
 			if (Direction == 90)
@@ -137,7 +140,7 @@ namespace Race_Simulator
 
 		}
 
-		public static void determineDirection(SectionTypes type, int dir )
+		public static void DetermineDirection(SectionTypes type, int dir )
 		{
 			switch (type)
 			{
@@ -183,5 +186,11 @@ namespace Race_Simulator
 					break;
 			}
 		}
+
+		public static string ReplaceString(string stringmetnummer, IParticipant participant1, IParticipant participant2)
+		{
+			return(stringmetnummer.Replace("1", participant1.Name[0].ToString()).Replace("2", participant2.Name[0].ToString()));
+		}
+
 	}
 }

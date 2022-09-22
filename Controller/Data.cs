@@ -8,20 +8,20 @@ namespace Controller
 		public static Race? CurrentRace { get; set; }
 		public static void Initialize()
 		{
-			Competition = new(); // maybe competition toevoegen asls alles breekt XDDD
+			Competition = new();
 			AddParticipants();
 			AddTracks();
 		}
 		public static void AddParticipants()
 		{
-			Competition.Participants.Add(new Driver("Joe", 2, new Car(10, 10, 10, false), TeamColors.Blue));
-			Competition.Participants.Add(new Driver("Aapie", 2, new Car(10, 10, 10, false), TeamColors.Red));
-			Competition.Participants.Add(new Driver("Jaapie", 2, new Car(10, 10, 10, false), TeamColors.Yellow));
-			Competition.Participants.Add(new Driver("Green", 2, new Car(10, 10, 10, false), TeamColors.Green));
+			Competition.Participants.Add(new Driver("Mike", 2, new Car(10, 10, 10, false), TeamColors.Blue));
+			Competition.Participants.Add(new Driver("Chrimst", 2, new Car(10, 10, 10, false), TeamColors.Green));
+			Competition.Participants.Add(new Driver("Stalin", 2, new Car(10, 10, 10, false), TeamColors.Yellow));
+			Competition.Participants.Add(new Driver("Ballin baller", 2, new Car(10, 10, 10, false), TeamColors.Red));
 		}
 		public static void AddTracks()
 		{
-			//Competition.Tracks.Enqueue(new Track("Rainbow Spaceroad", TrackBuilder("Rainbow Spaceroad")));
+			Competition.Tracks.Enqueue(new Track("Rainbow Spaceroad", TrackBuilder("Rainbow Spaceroad")));
 			Competition.Tracks.Enqueue(new Track("Spacebase", TrackBuilder("Spacebase")));
 			Competition.Tracks.Enqueue(new Track("Vroemvroem-in-da-rondje", TrackBuilder("Vroemvroem-in-da-rondje")));
 		}
@@ -59,7 +59,6 @@ namespace Controller
 						SectionTypes.StraightVertical,
 						SectionTypes.CornerNE,
 						SectionTypes.Finish
-
 				};
 				return build;
 			}
