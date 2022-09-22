@@ -27,7 +27,6 @@ namespace ControllerTest
 		[Test]
 		public void NextTrack_OneInQueue_ReturnTrack()
 		{
-			// probably not be 0
 			Track first = new Track("name", new SectionTypes[0]);
 			Competition.Tracks.Enqueue(first);
 			Track result = Competition.NextTrack();

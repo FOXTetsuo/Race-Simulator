@@ -16,8 +16,8 @@ namespace Controller
 		{
 			Competition.Participants.Add(new Driver("Mike", 2, new Car(10, 10, 10, false), TeamColors.Blue));
 			Competition.Participants.Add(new Driver("Chrimst", 2, new Car(10, 10, 10, false), TeamColors.Green));
-			Competition.Participants.Add(new Driver("Stalin", 2, new Car(10, 10, 10, false), TeamColors.Yellow));
-			Competition.Participants.Add(new Driver("Ballin baller", 2, new Car(10, 10, 10, false), TeamColors.Red));
+			Competition.Participants.Add(new Driver("Bruger", 2, new Car(10, 10, 10, false), TeamColors.Yellow));
+			Competition.Participants.Add(new Driver("Pimpin", 2, new Car(10, 10, 10, false), TeamColors.Red));
 		}
 		public static void AddTracks()
 		{
@@ -28,7 +28,6 @@ namespace Controller
 
 		public static SectionTypes[] TrackBuilder(string trackName)
 		{
-			// dit hierondder gaat niet goed vanwege de .equals method
 			if (trackName.Equals("Rainbow Spaceroad"))
 			{
 				SectionTypes[] build = new SectionTypes[]
@@ -80,7 +79,6 @@ namespace Controller
 				return build;
 			}
 			else
-			//TEMPFIX - maak hier fucking switchcases van
 			{
 				SectionTypes[] build = new SectionTypes[]
 				{

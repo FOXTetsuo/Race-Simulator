@@ -16,3 +16,4 @@ for (; ; )
 	Thread.Sleep(100);
 }
 
+GC.Collect(0);
