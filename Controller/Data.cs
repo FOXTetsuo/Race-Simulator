@@ -25,7 +25,8 @@ namespace Controller
 			Competition.Tracks.Enqueue(new Track("Spacebase", TrackBuilder("Spacebase")));
 			Competition.Tracks.Enqueue(new Track("Vroemvroem-in-da-rondje", TrackBuilder("Vroemvroem-in-da-rondje")));
 		}
-
+		// Takes the tracknname and builds the track. 
+		// Tracks are stored here
 		public static SectionTypes[] TrackBuilder(string trackName)
 		{
 			if (trackName.Equals("Rainbow Spaceroad"))
@@ -37,9 +38,9 @@ namespace Controller
 						SectionTypes.StraightVertical,
 						SectionTypes.CornerSE,
 						SectionTypes.Straight,
-						SectionTypes.CornerNW,
+						SectionTypes.CornerSW,
 						SectionTypes.StraightVertical,
-						SectionTypes.CornerSW
+						SectionTypes.CornerNW
 				};
 				return build;
 			}
@@ -54,7 +55,7 @@ namespace Controller
 						SectionTypes.StraightVertical,
 						SectionTypes.CornerSE,
 						SectionTypes.Straight,
-						SectionTypes.CornerNW,
+						SectionTypes.CornerSW,
 						SectionTypes.StraightVertical,
 						SectionTypes.CornerNE,
 						SectionTypes.Finish
@@ -87,7 +88,7 @@ namespace Controller
 				return build;
 			}
 		}
-
+		// Makes a new race if it didn't exist, otherwise goes to the next race
 		public static void NextRace()
 		{
 			Track newTrack = Competition.NextTrack();

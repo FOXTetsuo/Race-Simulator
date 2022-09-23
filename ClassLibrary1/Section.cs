@@ -21,9 +21,9 @@ namespace Model
         Straight,
 		StraightVertical,
         CornerSE,
-		CornerNW,
-        CornerNE,
 		CornerSW,
+        CornerNE,
+		CornerNW,
 		StartGrid,
         Finish
     }

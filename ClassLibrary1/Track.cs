@@ -16,6 +16,8 @@ namespace Model
             Name = name;
 			Sections = SectionTypeToLinkedList(sections);
         }
+
+		//turns an array of sectiontypes into a linkedlist of sections.
 		public LinkedList<Section> SectionTypeToLinkedList (SectionTypes[] sectionParemeter)
 		{
 			LinkedList<Section> sectionlist = new LinkedList<Section>();

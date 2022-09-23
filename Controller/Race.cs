@@ -9,7 +9,7 @@ namespace Controller
 		public List<IParticipant>? Participants { get; set; }
 		public DateTime StartTime { get; set; }
 		private Dictionary<Section, SectionData> _positions { get; set; }
-
+		// returns sectiondata from a section, if there isn't any, a new sectiondata is made first.
 		public SectionData GetSectionData(Section section)
 		{
 			if (!_positions.ContainsKey(section))
@@ -18,7 +18,7 @@ namespace Controller
 			}
 			return _positions[section];
 		}
-
+		// constructor
 		public Race(Track track, List<IParticipant>? participants)
 		{
 			_random = new Random(DateTime.Now.Millisecond);
@@ -27,7 +27,7 @@ namespace Controller
 			StartTime = new DateTime();
 			_positions = new Dictionary<Section, SectionData>();
 		}
-
+		// randomizes the equipment of the racers
 		public void RandomizeEquipment()
 		{
 			foreach (IParticipant participant in Participants)

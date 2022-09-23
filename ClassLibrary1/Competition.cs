@@ -12,6 +12,7 @@ namespace Model
 		public Queue<Track> Tracks { get ; set; }
 		public List<IParticipant>? Participants { get; set; }
 
+		// Gets the next track in the queue
 		public Track NextTrack()
 		{
 			if (Tracks.Count > 0)
