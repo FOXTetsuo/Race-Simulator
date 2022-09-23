@@ -35,34 +35,34 @@ namespace Race_Simulator
 			"-  2-", 
 			"-   -" };
 		private static string[] NE = { 
-			"-----", 
+			"----\\", 
 			"    -", 
 			"1   -", 
 			"   2-", 
-			"    -" };
+			"\\   -" };
 		private static string[] _NW = { 
-			"-----", 
+			"/----", 
 			"-   2", 
 			"-    ", 
 			"- 1  ", 
-			"-    " };
+			"-   /" };
 		private static string[] _SE = { 
-			"    -", 
+			"/   -", 
 			"  2 -", 
 			"1   -", 
 			"    -",
-			"-----" };
+			"----/" };
 		private static string[] _SW = { 
-			"-1   ", 
+			"-1  \\", 
 			"-    ", 
 			"-  2 ", 
 			"-    ", 
-			"-----" };
+			"\\----" };
 		private static string[] _start = { 
 			"-----", 
-			"  1 >",  
-			"    >", 
-			"  2 >", 
+			"  1 ]",  
+			"    ]", 
+			"  2 ]", 
 			"-----" };
 		#endregion
 		// function takes a linkedlist of tracks (from currentrace.track.sections)
