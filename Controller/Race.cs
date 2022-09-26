@@ -4,6 +4,7 @@ namespace Controller
 {
 	public class Race
 	{
+		System.Timers.Timer Timer;
 		private Random _random { get; set; }
 		public Track Track { get; set; }
 		public List<IParticipant>? Participants { get; set; }
@@ -21,6 +22,7 @@ namespace Controller
 		// constructor
 		public Race(Track track, List<IParticipant>? participants)
 		{
+			Timer = new System.Timers.Timer(500);
 			_random = new Random(DateTime.Now.Millisecond);
 			Track = track;
 			Participants = participants;
