@@ -4,7 +4,9 @@ namespace Controller
 {
 	public class Race
 	{
-		System.Timers.Timer Timer;
+		public event EventHandler<DriversChangedEventArgs> DriversChanged;
+
+		private System.Timers.Timer Timer { get; set; }
 		private Random _random { get; set; }
 		public Track Track { get; set; }
 		public List<IParticipant>? Participants { get; set; }
@@ -23,12 +25,16 @@ namespace Controller
 		public Race(Track track, List<IParticipant>? participants)
 		{
 			Timer = new System.Timers.Timer(500);
+
+			Timer.Elapsed += OnTimedEvent;
+
 			_random = new Random(DateTime.Now.Millisecond);
 			Track = track;
 			Participants = participants;
 			StartTime = new DateTime();
 			_positions = new Dictionary<Section, SectionData>();
 		}
+
 		// randomizes the equipment of the racers
 		public void RandomizeEquipment()
 		{
@@ -80,5 +86,16 @@ namespace Controller
 			}
 		}
 
+		public void OnTimedEvent(object sender, EventArgs args)
+		{
+
+			DriversChanged.Invoke(this, args);
+
+		}
+
+		public void Start()
+		{
+			Timer.Start();
+		}
 	}
 }

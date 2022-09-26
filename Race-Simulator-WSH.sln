@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControllerTest", "Controlle
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controller", "Controller\Controller.csproj", "{E24102FB-CFF6-403E-A5BA-E7B516FA05DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceSimulatorTest", "RaceSimulatorTest\RaceSimulatorTest.csproj", "{F2126899-4877-4BC8-8906-EEF0CC6D5990}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaceSimulatorTest", "RaceSimulatorTest\RaceSimulatorTest.csproj", "{F2126899-4877-4BC8-8906-EEF0CC6D5990}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

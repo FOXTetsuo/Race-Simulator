@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
+	//sectielengte = 100m
 	public interface IEquipment
 	{
 		public int Quality { get; set; }

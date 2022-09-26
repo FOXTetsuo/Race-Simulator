@@ -70,9 +70,9 @@ namespace Race_Simulator
 		// and then draws that section, by calling PrintTrack.
 		// sectiondata is given to put drivers on the track in the right place.
 		// then when it exits the loop, updated xpos & ypos.
-		public static void DrawTrack(LinkedList<Section> sectionList)
+		public static void DrawTrack(Track track)
 		{
-			foreach (Section section in sectionList)
+			foreach (Section section in track.Sections)
 			{
 				switch (section.SectionType)
 				{
@@ -198,5 +198,9 @@ namespace Race_Simulator
 			return(stringmetnummer.Replace("1", participant1.Name[0].ToString()).Replace("2", participant2.Name[0].ToString()));
 		}
 
+		public static void OnDriversChanged(object sender, DriversChangedEventArgs args)
+		{
+			DrawTrack(args.Track);
+		}
 	}
 }
