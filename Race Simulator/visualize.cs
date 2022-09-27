@@ -14,6 +14,7 @@ namespace Race_Simulator
 			xpos = 20;
 			ypos = 5;
 			Race = race;
+			Data.CurrentRace.DriversChanged += OnDriversChanged;
 		}
 		#region graphics
 		private static string[] _finishHorizontal = {

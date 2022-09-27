@@ -25,9 +25,7 @@ namespace Controller
 		public Race(Track track, List<IParticipant>? participants)
 		{
 			Timer = new System.Timers.Timer(500);
-
 			Timer.Elapsed += OnTimedEvent;
-
 			_random = new Random(DateTime.Now.Millisecond);
 			Track = track;
 			Participants = participants;
@@ -88,9 +86,7 @@ namespace Controller
 
 		public void OnTimedEvent(object sender, EventArgs args)
 		{
-
-			DriversChanged.Invoke(this, args);
-
+			DriversChanged.Invoke(this, new DriversChangedEventArgs(Track));
 		}
 
 		public void Start()
