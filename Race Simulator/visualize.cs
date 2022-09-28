@@ -12,7 +12,7 @@ namespace Race_Simulator
 		public static void Initialize(Race race)
 		{
 			xpos = 20;
-			ypos = 5;
+			ypos = 15;
 			Race = race;
 			Data.CurrentRace.DriversChanged += OnDriversChanged;
 		}

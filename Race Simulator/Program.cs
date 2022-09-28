@@ -6,6 +6,7 @@ using System;
 Console.BackgroundColor = ConsoleColor.DarkGreen;
 Data.Initialize();
 Data.NextRace();
+Data.NextRace();
 Visualize.Initialize(Data.CurrentRace);
 
 Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);

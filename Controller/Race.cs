@@ -106,15 +106,17 @@ namespace Controller
 
 		public void MoveParticipants()
 		{
+			//Timer.Stop();
 			foreach (IParticipant participant in Participants)
 			{
 				participant.DistanceCovered += (participant.Equipment.Performance * participant.Equipment.Speed);
-				if (participant.DistanceCovered > 100)
+				if (participant.DistanceCovered >= 100)
 				{
-					participant.DistanceCovered = 0 ;
+					participant.DistanceCovered += -100 ;
 					AdvanceParticipant(participant);
 				}
 			}
+			//Timer.Start();
 		}
 
 		public void AdvanceParticipant(IParticipant participant)
@@ -135,7 +137,7 @@ namespace Controller
 						sectData.Right = null;
 					}
 					
-					if (Track.Sections.Count < (i + 1))
+					if (Track.Sections.Count <= (i + 1))
 					{
 						i = -1;
 					}
@@ -149,7 +151,8 @@ namespace Controller
 					{
 						NewData.Right = participant;
 					}
-					//participant.CurrentSection = Track.Sections.ElementAt(i + 1);
+					participant.CurrentSection = Track.Sections.ElementAt(i + 1);
+					return;
 				}
 				i++;
 			}
