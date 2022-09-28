@@ -115,7 +115,6 @@ namespace Race_Simulator
 		}
 		public static void PrintTrack(string[] type, SectionData data)
 		{
-			
 			foreach (string s in type)
 			{
 				string temp = s;
@@ -201,6 +200,7 @@ namespace Race_Simulator
 
 		public static void OnDriversChanged(object sender, DriversChangedEventArgs args)
 		{
+			Console.Clear();
 			DrawTrack(args.Track);
 		}
 	}
