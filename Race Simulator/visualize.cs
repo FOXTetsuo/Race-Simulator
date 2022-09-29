@@ -5,6 +5,8 @@ namespace Race_Simulator
 {
 	public static class Visualize
 	{
+		//ONRACEEND EVENTHANDLER HERE
+
 		static Direction _direction;
 		static int xpos;
 		static int ypos;

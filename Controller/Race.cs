@@ -7,6 +7,7 @@ namespace Controller
 	public class Race
 	{
 		public event EventHandler<DriversChangedEventArgs> DriversChanged;
+		
 		private System.Timers.Timer Timer { get; set; }
 		private Random _random { get; set; }
 		public Track Track { get; set; }
@@ -33,7 +34,7 @@ namespace Controller
 			Participants = participants;
 			StartTime = new DateTime();
 			_positions = new Dictionary<Section, SectionData>();
-			//RandomizeEquipment();
+			RandomizeEquipment();
 		}
 
 		// randomizes the equipment of the racers
@@ -103,6 +104,13 @@ namespace Controller
 			
 			DriversChanged.Invoke(this, new DriversChangedEventArgs(Track));
 		}
+
+		public void OnRaceEnd(object sender, EventArgs args)
+		{
+			//CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+			//CurrentRace.Start();
+		}
+
 
 		//start de timer
 		public void Start()
@@ -178,11 +186,8 @@ namespace Controller
 						{
 							Cleaner();
 							Data.NextRace();
-
-							//Visualize.Initialize(Data.CurrentRace);
-							//Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
-							//Visualize.DrawTrack(Data.CurrentRace.Track);
-							//Data.CurrentRace.Start();
+							Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+							Data.CurrentRace.Start();
 						}
 					}
 					
