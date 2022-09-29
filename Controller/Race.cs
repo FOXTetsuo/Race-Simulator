@@ -22,6 +22,7 @@ namespace Controller
 			}
 			return _positions[section];
 		}
+
 		// constructor
 		public Race(Track track, List<IParticipant>? participants)
 		{
@@ -39,8 +40,8 @@ namespace Controller
 		{
 			foreach (IParticipant participant in Participants)
 			{
-				participant.Equipment.Quality = _random.Next(10);
-				participant.Equipment.Performance = _random.Next(10);
+				participant.Equipment.Quality = _random.Next(1, 11);
+				participant.Equipment.Performance = _random.Next(1, 11);
 			}
 		}
 
@@ -158,6 +159,7 @@ namespace Controller
 					{
 						NewData.Right = participant;
 					}
+
 					participant.CurrentSection = Track.Sections.ElementAt(i + 1);
 
 					if (CheckFinish(participant) == true)
@@ -184,7 +186,7 @@ namespace Controller
 			if (participant.CurrentSection.SectionType == SectionTypes.Finish)
 			{
 				participant.LoopsPassed += 1;
-				if (participant.LoopsPassed == 1)
+				if (participant.LoopsPassed == 4)
 				{
 					return true;
 				}
