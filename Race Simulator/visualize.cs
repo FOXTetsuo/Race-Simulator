@@ -128,9 +128,19 @@ namespace Race_Simulator
 			{
 				string temp = s;
 				// if drivers exist - replace 1/2 with their initals
+				//pakt sectiondata van trackl
+				// kijkt naar of de 
 				if (data.Right != null && data.Left != null)
 				{
 					temp = ReplaceString(s,data.Left,data.Right);
+				}
+				else if (data.Left != null)
+				{
+					temp = ReplaceString(s, data.Left);
+				}
+				else if (data.Right != null)
+				{
+					temp = ReplaceString(s, data.Right);
 				}
 				Console.SetCursorPosition(xpos, ypos);
 				// replace leftover "1"/"2" with space
@@ -206,6 +216,21 @@ namespace Race_Simulator
 		{
 			return(stringmetnummer.Replace("1", participant1.Name[0].ToString()).Replace("2", participant2.Name[0].ToString()));
 		}
+
+		// method ovearload in case only 1 driver needs to be moved
+		public static string ReplaceString(string stringmetnummer, IParticipant participant)
+		{
+			if (Race.GetSectionData(participant.CurrentSection).Left == participant)
+			{
+				return (stringmetnummer.Replace("1", participant.Name[0].ToString()));
+			}
+			else if (Race.GetSectionData(participant.CurrentSection).Right == participant)
+			{
+				return (stringmetnummer.Replace("2", participant.Name[0].ToString()));
+			}
+			else return null;
+		}
+
 
 		public static void OnDriversChanged(object sender, DriversChangedEventArgs args)
 		{
