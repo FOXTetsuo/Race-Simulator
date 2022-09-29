@@ -5,7 +5,7 @@ namespace Race_Simulator
 {
 	public static class Visualize
 	{
-		static int Direction;
+		static Direction _direction;
 		static int xpos;
 		static int ypos;
 		static Race Race;
@@ -16,6 +16,15 @@ namespace Race_Simulator
 			Race = race;
 			Data.CurrentRace.DriversChanged += OnDriversChanged;
 		}
+
+		public enum Direction
+		{
+			North = 0,
+			East = 90,
+			South = 180,
+			West = 270
+		}
+
 		#region graphics
 		private static string[] _finishHorizontal = {
 			"-----", 
@@ -87,24 +96,24 @@ namespace Race_Simulator
 						PrintTrack(_straightPathVertical, Race.GetSectionData(section));
 						break;
 					case SectionTypes.CornerNE:
-						DetermineDirection(SectionTypes.CornerNE, Direction);
+						DetermineDirection(SectionTypes.CornerNE, _direction);
 						PrintTrack(NE, Race.GetSectionData(section));
 						break;
 					case SectionTypes.CornerNW:
-						DetermineDirection(SectionTypes.CornerNW, Direction);
+						DetermineDirection(SectionTypes.CornerNW, _direction);
 						PrintTrack(_NW, Race.GetSectionData(section));
 						break;
 					case SectionTypes.CornerSE:
-						DetermineDirection(SectionTypes.CornerSE, Direction);
+						DetermineDirection(SectionTypes.CornerSE, _direction);
 						PrintTrack(_SE, Race.GetSectionData(section));
 						break;
 					case SectionTypes.CornerSW:
-						DetermineDirection(SectionTypes.CornerSW, Direction);
+						DetermineDirection(SectionTypes.CornerSW, _direction);
 						PrintTrack(_SW, Race.GetSectionData(section));
 						break;
 					case SectionTypes.StartGrid:
 						// Hardcoded direction for now, can be changed by adding onto PrintTrack.
-						Direction = 90;
+						_direction = Direction.East;
 						PrintTrack(_start, Race.GetSectionData(section));
 						break;
 				}
@@ -128,65 +137,65 @@ namespace Race_Simulator
 				Console.Write(temp.Replace("1", " ").Replace("2", " "));
 				ypos += 1;
 			}
-			if (Direction == 90)
+			if (_direction == Direction.East)
 			{
 				ypos += -5;
 				xpos += 5;
 			}
-			if (Direction == 270)
+			if (_direction == Direction.West)
 			{
 				ypos += -5;
 				xpos += -5;
 			}
-			if (Direction == 0)
+			if (_direction == Direction.North)
 			{
 				ypos += -10;
 			}
 		}
 
-		public static void DetermineDirection(SectionTypes type, int dir )
+		public static void DetermineDirection(SectionTypes type, Direction dir )
 		{
 			switch (type)
 			{
 				// sets the direction according to where the corner is entered
 				case SectionTypes.CornerNE:
-					if (dir == 90)
+					if (dir == Direction.East)
 					{
-						Direction = 180;
+						_direction = Direction.South;
 					}
-					else if (dir == 0)
+					else if (dir == Direction.North)
 					{
-						Direction = 270;
+						_direction = Direction.West;
 					}
 					break;
 				case SectionTypes.CornerSE:
-					if (dir == 180)
+					if (dir == Direction.South)
 					{
-						Direction = 270;
+						_direction = Direction.West;
 					}
-					else if (dir == 90)
+					else if (dir == Direction.East)
 					{
-						Direction = 0;
+						_direction = Direction.North;
 					}
 					break;
 				case SectionTypes.CornerSW:
-					if (dir == 270)
+					if (dir == Direction.West)
 					{
-						Direction = 0;
+						_direction = Direction.North;
 					}
-					else if (dir == 180)
+					else if (dir == Direction.South)
 					{
-						Direction = 90;
+						_direction = Direction.East;
 					}
 					break;
 				case SectionTypes.CornerNW:
-					if (dir == 0)
+					if (dir == Direction.North)
 					{
-						Direction = 90;
+						_direction = Direction.East;
 					}
-					else if (dir == 270)
+					else if (dir == Direction.West)
 					{
-						Direction = 180;
+						_direction = Direction.South;
 					}
 					break;
 			}
