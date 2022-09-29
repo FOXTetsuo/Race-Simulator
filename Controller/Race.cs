@@ -33,6 +33,7 @@ namespace Controller
 			Participants = participants;
 			StartTime = new DateTime();
 			_positions = new Dictionary<Section, SectionData>();
+			RandomizeEquipment();
 		}
 
 		// randomizes the equipment of the racers
