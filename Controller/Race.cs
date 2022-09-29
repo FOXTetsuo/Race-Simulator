@@ -1,4 +1,6 @@
 ﻿using Model;
+using static System.Collections.Specialized.BitVector32;
+using Section = Model.Section;
 
 namespace Controller
 {
@@ -63,22 +65,23 @@ namespace Controller
 						// maak / get sectiondata om aan te vullen
 						SectionData sectionData = GetSectionData(track.Sections.ElementAt(index - (i / 2)));
 						//checkt of dingen al gevuld zijn
+
 						if (sectionData.Left == null)
 						{
 							//eerste participant op linkerbaan
 							sectionData.Left = participants[i];
 
 							// onthoudt waar de participant is op dit moment
-							participants[i].CurrentSection = section;
+							participants[i].CurrentSection = track.Sections.ElementAt(index - (i / 2));
 						}
-						// checkt of er wel nog twee participants zijn om toe te voegen
+						// checkt of er wel nog twee participants zijn om toe te voegen m.b.v modulo
 						if (sectionData.Right == null && participants.Count % 2 == 0)
 						{
 							//tweede participant op rechterbaan
 							sectionData.Right = participants[i + 1];
 
 							// onthoudt waar de participant is op dit moment
-							participants[i + 1].CurrentSection = section;
+							participants[i + 1].CurrentSection = track.Sections.ElementAt(index - (i / 2));
 						}
 						// voegt de participant(s) toe aan _positions.
 						//_positions.Add(track.Sections.ElementAt(index - (i)), sectionData);
@@ -94,19 +97,23 @@ namespace Controller
 			// kijk naar speed / tracklength etc, als een driver over de lengte heen is
 			// dan advance je deze naar de volgende tracksection
 			
-			MoveParticipants();
+			CheckWhetherToMoveParticipants();
 			
 			DriversChanged.Invoke(this, new DriversChangedEventArgs(Track));
 		}
 
+		//start de timer
 		public void Start()
 		{
 			Timer.Start();
 		}
 
-		public void MoveParticipants()
+		// kijkt of elke participant verder is dan de lengte van de track
+		// zo ja, haal de lengte van de track van de distanceCovered af,
+		// en beweeg de driver naar het volgende stuck track
+		public void CheckWhetherToMoveParticipants()
 		{
-			//Timer.Stop();
+			Timer.Stop();
 			foreach (IParticipant participant in Participants)
 			{
 				participant.DistanceCovered += (participant.Equipment.Performance * participant.Equipment.Speed);
@@ -116,17 +123,17 @@ namespace Controller
 					AdvanceParticipant(participant);
 				}
 			}
-			//Timer.Start();
+			Timer.Start();
 		}
 
 		public void AdvanceParticipant(IParticipant participant)
 		{
 			int i = 0;
-			foreach (Section sect in Track.Sections)
+			foreach (Section section in Track.Sections)
 			{
-				if (sect == participant.CurrentSection)
+				if (section == participant.CurrentSection)
 				{
-					SectionData sectData = GetSectionData(sect);
+					SectionData sectData = GetSectionData(section);
 					
 					if (sectData.Left == participant)
 					{
@@ -152,11 +159,47 @@ namespace Controller
 						NewData.Right = participant;
 					}
 					participant.CurrentSection = Track.Sections.ElementAt(i + 1);
+
+					if (CheckFinish(participant) == true)
+					{
+						participant.CurrentSection = null;
+						if (NewData.Left == participant)
+						{
+							NewData.Left = null;
+						}
+						else if (NewData.Right == participant)
+						{
+							NewData.Right = null;
+						}
+					}
 					return;
 				}
 				i++;
+				
 			}
-			
+		}
+		// mogelijk parameter Track toevoegen, zodat elke race ander aantal rondjes heeft
+		public Boolean CheckFinish(IParticipant participant)
+		{
+			if (participant.CurrentSection.SectionType == SectionTypes.Finish)
+			{
+				participant.LoopsPassed += 1;
+				if (participant.LoopsPassed == 1)
+				{
+					return true;
+				}
+				else return false;
+			}
+			else return false;
+		}
+
+		//mogelijke leuke uitbreiding xdDDdd
+		public void OverTake(Section section)
+		{
+			// geef section mee die overgehaald moet worden
+			// pak de sectiondata, remove de racers.
+			// snellere racers vervolgens in deze sectiondata
+			// daarna de oude racers in het vorige stuck track
 		}
 	}
 }

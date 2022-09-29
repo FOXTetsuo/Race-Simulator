@@ -14,6 +14,7 @@ namespace Model
 		public TeamColors TeamColor { get; set; }
 		public Section CurrentSection { get; set; }
 		public int DistanceCovered { get; set; }
+		public int LoopsPassed { get; set; }
 
 		public Driver(string name, int points, IEquipment equipment, TeamColors teamcolor)
         {
@@ -22,6 +23,7 @@ namespace Model
             Equipment = equipment;
             TeamColor = teamcolor;
 			DistanceCovered = 0;
+			LoopsPassed = 0;
         }
     }
 }
