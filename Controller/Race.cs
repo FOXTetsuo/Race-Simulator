@@ -234,7 +234,7 @@ namespace Controller
 			Console.Clear();
 			Console.WriteLine("Cleaning data");
 			//unsubscribe
-			Data.CurrentRace.DriversChanged = null;
+			DriversChanged = null;
 			Console.WriteLine("Data cleaned");
 			GC.Collect(0);
 		}
