@@ -1,4 +1,4 @@
-﻿using Model;
+﻿ using Model;
 
 namespace Controller
 {
@@ -48,8 +48,6 @@ namespace Controller
 			{
 				SectionTypes[] build = new SectionTypes[]
 				{
-						SectionTypes.Straight,
-						SectionTypes.Straight,
 						SectionTypes.StartGrid,
 						SectionTypes.CornerNE,
 						SectionTypes.StraightVertical,
