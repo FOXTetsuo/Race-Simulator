@@ -33,7 +33,7 @@ namespace Controller
 			Participants = participants;
 			StartTime = new DateTime();
 			_positions = new Dictionary<Section, SectionData>();
-			RandomizeEquipment();
+			//RandomizeEquipment();
 		}
 
 		// randomizes the equipment of the racers
@@ -174,20 +174,44 @@ namespace Controller
 						{
 							NewData.Right = null;
 						}
+						if (CheckRaceFinished() == true)
+						{
+							Cleaner();
+							Data.NextRace();
+
+							//Visualize.Initialize(Data.CurrentRace);
+							//Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+							//Visualize.DrawTrack(Data.CurrentRace.Track);
+							//Data.CurrentRace.Start();
+						}
 					}
+					
 					return;
 				}
 				i++;
 				
 			}
 		}
+
+		public Boolean CheckRaceFinished()
+		{
+			foreach (Section section in Track.Sections)
+			{
+				if (GetSectionData(section).Left != null || (GetSectionData(section).Right != null))
+				{ 
+					return false;
+				}
+			}
+			return true;
+		}
+
 		// mogelijk parameter Track toevoegen, zodat elke race ander aantal rondjes heeft
 		public Boolean CheckFinish(IParticipant participant)
 		{
 			if (participant.CurrentSection.SectionType == SectionTypes.Finish)
 			{
 				participant.LoopsPassed += 1;
-				if (participant.LoopsPassed == 4)
+				if (participant.LoopsPassed == 1)
 				{
 					return true;
 				}
@@ -203,6 +227,16 @@ namespace Controller
 			// pak de sectiondata, remove de racers.
 			// snellere racers vervolgens in deze sectiondata
 			// daarna de oude racers in het vorige stuck track
+		}
+
+		public void Cleaner()
+		{
+			Console.Clear();
+			Console.WriteLine("Cleaning data");
+			//unsubscribe
+			Data.CurrentRace.DriversChanged = null;
+			Console.WriteLine("Data cleaned");
+			GC.Collect(0);
 		}
 	}
 }

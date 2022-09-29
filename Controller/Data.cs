@@ -14,7 +14,7 @@ namespace Controller
 		}
 		public static void AddParticipants()
 		{
-			Competition.Participants.Add(new Driver("Mike", 2, new Car(1, 3, 10, false), TeamColors.Blue));
+			Competition.Participants.Add(new Driver("Mike", 2, new Car(1, 10, 10, false), TeamColors.Blue));
 			Competition.Participants.Add(new Driver("Chrimst", 2, new Car(1, 10, 10, false), TeamColors.Green));
 			Competition.Participants.Add(new Driver("Bruger", 2, new Car(1, 5, 10, false), TeamColors.Yellow));
 			Competition.Participants.Add(new Driver("Pimpin", 2, new Car(1, 5, 10, false), TeamColors.Red));
