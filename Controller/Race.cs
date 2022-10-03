@@ -1,4 +1,5 @@
 ﻿using Model;
+using System.Linq.Expressions;
 using static System.Collections.Specialized.BitVector32;
 using Section = Model.Section;
 
@@ -101,12 +102,38 @@ namespace Controller
 			// kijk naar speed / tracklength etc, als een driver over de lengte heen is
 			// dan advance je deze naar de volgende tracksection
 			
+			//invloed van equipment quality toevoegen!
+			foreach (IParticipant participant in Data.CurrentRace.Participants)
+			{
+				if (participant.Equipment.IsBroken == false && (participant.Equipment.Quality - _random.Next(10) <= 2))
+				{
+					participant.Equipment.IsBroken = true;
+					int determinePenalty = _random.Next(2);
+					switch (determinePenalty)
+					{
+						case 0:
+							if (participant.Equipment.Performance > 2)	
+							{
+								participant.Equipment.Performance += -1;
+							}
+							break;
+						case 1:
+							if (participant.Equipment.Speed > 2)
+							{
+								participant.Equipment.Speed += -1;
+							}
+							
+							break;
+					}
+				}
+				else if (participant.Equipment.IsBroken == true && (participant.Equipment.Quality + _random.Next(10) >= 8))
+				{
+					participant.Equipment.IsBroken = false;
+				}
+			}
 			CheckWhetherToMoveParticipants();
-			
 			DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
 		}
-
-
 
 		//start de timer
 		public void Start()
@@ -119,11 +146,12 @@ namespace Controller
 		// en beweeg de driver naar het volgende stuck track
 		public void CheckWhetherToMoveParticipants()
 		{
+			//Timer.Stop zodat de thread niet verder gaat in de berekening.
 			Timer.Stop();
 			foreach (IParticipant participant in Participants)
 			{
 				participant.DistanceCovered += (participant.Equipment.Performance * participant.Equipment.Speed);
-				if (participant.DistanceCovered >= 100)
+				if (participant.DistanceCovered >= 100 && participant.Equipment.IsBroken == false)
 				{
 					participant.DistanceCovered += -100 ;
 					AdvanceParticipant(participant);
@@ -183,7 +211,6 @@ namespace Controller
 							PrepareNextRace();
 						}
 					}
-					
 					return;
 				}
 				i++;
@@ -200,7 +227,6 @@ namespace Controller
 			Data.CurrentRace.Start();
 
 		}
-		
 
 		public Boolean CheckRaceFinished()
 		{
