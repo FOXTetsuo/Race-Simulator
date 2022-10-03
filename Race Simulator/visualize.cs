@@ -215,7 +215,15 @@ namespace Race_Simulator
 		// replace 1/2's with participants 
 		public static string ReplaceString(string stringmetnummer, IParticipant participant1, IParticipant participant2)
 		{
-			return(stringmetnummer.Replace("1", participant1.Name[0].ToString()).Replace("2", participant2.Name[0].ToString()));
+			if (participant1.Equipment.IsBroken == true && participant2.Equipment.IsBroken == false)
+			{
+				return stringmetnummer.Replace("1", "X").Replace("2", participant2.Name[0].ToString());
+			}
+			else if (participant1.Equipment.IsBroken == false && participant2.Equipment.IsBroken == true)
+			{
+				return stringmetnummer.Replace("1", participant1.Name[0].ToString()).Replace("2", "X");
+			}
+			else return (stringmetnummer.Replace("1", participant1.Name[0].ToString()).Replace("2", participant2.Name[0].ToString()));
 		}
 
 		// method overload in case only 1 driver needs to be moved
@@ -223,11 +231,21 @@ namespace Race_Simulator
 		{
 			if (Race.GetSectionData(participant.CurrentSection).Left == participant)
 			{
-				return (stringmetnummer.Replace("1", participant.Name[0].ToString()));
+				if (participant.Equipment.IsBroken == false)
+				{
+					return (stringmetnummer.Replace("1", participant.Name[0].ToString()));
+				}
+				else return (stringmetnummer.Replace("1", "X"));
+
 			}
 			else if (Race.GetSectionData(participant.CurrentSection).Right == participant)
 			{
-				return (stringmetnummer.Replace("2", participant.Name[0].ToString()));
+				if (participant.Equipment.IsBroken == false)
+				{
+					return (stringmetnummer.Replace("2", participant.Name[0].ToString()));
+				}
+				else return (stringmetnummer.Replace("2", "X"));
+				
 			}
 			else return null;
 		}

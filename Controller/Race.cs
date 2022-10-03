@@ -36,7 +36,7 @@ namespace Controller
 			Participants = participants;
 			StartTime = new DateTime();
 			_positions = new Dictionary<Section, SectionData>();
-			//RandomizeEquipment();
+			RandomizeEquipment();
 		}
 
 		// randomizes the equipment of the racers
@@ -159,7 +159,7 @@ namespace Controller
 					}
 				}
 				// recovery afhankelijk van quality
-				else if (participant.Equipment.Quality + _random.Next(5) >= 5)
+				else if (participant.Equipment.Quality + _random.Next(30) >= 20)
 				{
 					participant.Equipment.IsBroken = false;
 				}
@@ -252,7 +252,7 @@ namespace Controller
 			if (participant.CurrentSection.SectionType == SectionTypes.Finish)
 			{
 				participant.LoopsPassed += 1;
-				if (participant.LoopsPassed == 1)
+				if (participant.LoopsPassed == 2)
 				{
 					return true;
 				}
@@ -268,6 +268,7 @@ namespace Controller
 			// pak de sectiondata, remove de racers.
 			// snellere racers vervolgens in deze sectiondata
 			// daarna de oude racers in het vorige stuck track
+
 		}
 
 		public void Cleaner()
