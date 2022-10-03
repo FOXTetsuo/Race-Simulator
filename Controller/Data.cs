@@ -16,14 +16,13 @@ namespace Controller
 		{
 			Competition.Participants.Add(new Driver("Mike", 2, new Car(1, 10, 10, false), TeamColors.Blue));
 			Competition.Participants.Add(new Driver("Chrimst", 2, new Car(1, 10, 10, false), TeamColors.Green));
-			Competition.Participants.Add(new Driver("Bruger", 2, new Car(1, 5, 10, false), TeamColors.Yellow));
-			Competition.Participants.Add(new Driver("Pimpin", 2, new Car(1, 5, 10, false), TeamColors.Red));
+			Competition.Participants.Add(new Driver("Bruger", 2, new Car(1, 2, 10, false), TeamColors.Yellow));
+			Competition.Participants.Add(new Driver("Pimpin", 2, new Car(1, 2, 10, false), TeamColors.Red));
 		}
 		public static void AddTracks()
 		{
 			Competition.Tracks.Enqueue(new Track("Spacebase", TrackBuilder("Spacebase")));
 			Competition.Tracks.Enqueue(new Track("Rainbow Spaceroad", TrackBuilder("Rainbow Spaceroad")));
-			
 			Competition.Tracks.Enqueue(new Track("Vroemvroem-in-da-rondje", TrackBuilder("Vroemvroem-in-da-rondje")));
 		}
 		// Takes the tracknname and builds the track. 

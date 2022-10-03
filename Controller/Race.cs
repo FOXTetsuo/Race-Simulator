@@ -197,7 +197,6 @@ namespace Controller
 			Data.NextRace();
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
 			RaceFinished.Invoke(this, new EventArgs());
-			Start();
 			Data.CurrentRace.Start();
 
 		}
@@ -242,16 +241,17 @@ namespace Controller
 		public void Cleaner()
 		{
 			Console.Clear();
-			Console.WriteLine("Cleaning data");
+			Console.WriteLine("Track finished");
 			foreach (IParticipant participant in Participants)
 			{
 				participant.CurrentSection = null;
 				participant.DistanceCovered = 0;
 				participant.LoopsPassed = 0;
 			}
-			//unsubscribe
+			//unsubscribe, timer = null maybe unnesessacary 
+			Timer = null;
 			DriversChanged = null;
-			Console.WriteLine("Data cleaned");
+			Console.WriteLine("loading next track...");
 			GC.Collect(0);
 		}
 	}
