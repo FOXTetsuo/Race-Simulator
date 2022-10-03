@@ -101,36 +101,9 @@ namespace Controller
 		{
 			// kijk naar speed / tracklength etc, als een driver over de lengte heen is
 			// dan advance je deze naar de volgende tracksection
-			
+
 			//invloed van equipment quality toevoegen!
-			foreach (IParticipant participant in Data.CurrentRace.Participants)
-			{
-				if (participant.Equipment.IsBroken == false && (participant.Equipment.Quality - _random.Next(10) <= 2))
-				{
-					participant.Equipment.IsBroken = true;
-					int determinePenalty = _random.Next(2);
-					switch (determinePenalty)
-					{
-						case 0:
-							if (participant.Equipment.Performance > 2)	
-							{
-								participant.Equipment.Performance += -1;
-							}
-							break;
-						case 1:
-							if (participant.Equipment.Speed > 2)
-							{
-								participant.Equipment.Speed += -1;
-							}
-							
-							break;
-					}
-				}
-				else if (participant.Equipment.IsBroken == true && (participant.Equipment.Quality + _random.Next(10) >= 8))
-				{
-					participant.Equipment.IsBroken = false;
-				}
-			}
+			DetermineBroken();
 			CheckWhetherToMoveParticipants();
 			DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
 		}
@@ -158,6 +131,39 @@ namespace Controller
 				}
 			}
 			Timer.Start();
+		}
+
+		public void DetermineBroken()
+		{
+			foreach (IParticipant participant in Data.CurrentRace.Participants)
+			{
+				// 1 op 15 kans dat auto kapot gaat
+				if (participant.Equipment.IsBroken == false && (_random.Next(15) == 13))
+				{
+					participant.Equipment.IsBroken = true;
+					int determinePenalty = _random.Next(2);
+					switch (determinePenalty)
+					{
+						case 0:
+							if (participant.Equipment.Performance > 2)
+							{
+								participant.Equipment.Performance += -1;
+							}
+							break;
+						case 1:
+							if (participant.Equipment.Speed > 2)
+							{
+								participant.Equipment.Speed += -1;
+							}
+							break;
+					}
+				}
+				// recovery afhankelijk van quality
+				else if (participant.Equipment.Quality + _random.Next(5) >= 5)
+				{
+					participant.Equipment.IsBroken = false;
+				}
+			}
 		}
 
 		public void AdvanceParticipant(IParticipant participant)
