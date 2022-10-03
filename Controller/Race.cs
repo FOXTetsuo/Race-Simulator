@@ -119,7 +119,7 @@ namespace Controller
 		// en beweeg de driver naar het volgende stuck track
 		public void CheckWhetherToMoveParticipants()
 		{
-			//Timer.Stop();
+			Timer.Stop();
 			foreach (IParticipant participant in Participants)
 			{
 				participant.DistanceCovered += (participant.Equipment.Performance * participant.Equipment.Speed);
@@ -129,7 +129,7 @@ namespace Controller
 					AdvanceParticipant(participant);
 				}
 			}
-			//Timer.Start();
+			Timer.Start();
 		}
 
 		public void AdvanceParticipant(IParticipant participant)
@@ -241,7 +241,7 @@ namespace Controller
 		public void Cleaner()
 		{
 			Console.Clear();
-			Console.WriteLine("Track finished");
+			Console.WriteLine("Track finished, loading next track...");
 			foreach (IParticipant participant in Participants)
 			{
 				participant.CurrentSection = null;
@@ -251,7 +251,6 @@ namespace Controller
 			//unsubscribe, timer = null maybe unnesessacary 
 			Timer = null;
 			DriversChanged = null;
-			Console.WriteLine("loading next track...");
 			GC.Collect(0);
 		}
 	}
