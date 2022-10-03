@@ -5,18 +5,17 @@ namespace Race_Simulator
 {
 	public static class Visualize
 	{
-		//ONRACEEND EVENTHANDLER HERE
-
-		static Direction _direction;
-		static int xpos;
-		static int ypos;
-		static Race Race;
+		public static Direction _direction { get; set; }
+		public static int xpos { get; set; }
+		public static int ypos { get; set; }
+		public static Race Race { get; set; }
 		public static void Initialize(Race race)
 		{
 			xpos = 20;
 			ypos = 15;
 			Race = race;
 			Data.CurrentRace.DriversChanged += OnDriversChanged;
+			Data.CurrentRace.RaceFinished += OnRaceFinished;
 		}
 
 		public enum Direction
@@ -219,7 +218,7 @@ namespace Race_Simulator
 			return(stringmetnummer.Replace("1", participant1.Name[0].ToString()).Replace("2", participant2.Name[0].ToString()));
 		}
 
-		// method ovearload in case only 1 driver needs to be moved
+		// method overload in case only 1 driver needs to be moved
 		public static string ReplaceString(string stringmetnummer, IParticipant participant)
 		{
 			if (Race.GetSectionData(participant.CurrentSection).Left == participant)
@@ -238,6 +237,12 @@ namespace Race_Simulator
 		{
 			Console.Clear();
 			DrawTrack(args.Track);
+		}
+
+		public static void OnRaceFinished(object sender, EventArgs args)
+		{
+			Initialize(Data.CurrentRace);
+			DrawTrack(Data.CurrentRace.Track);
 		}
 	}
 }

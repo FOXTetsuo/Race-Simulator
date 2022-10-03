@@ -52,6 +52,7 @@ namespace ControllerTest
 			result = Competition.NextTrack();
 			Assert.That(second.Name, Is.EqualTo(result.Name));
 		}
+		
 	}
 	
 }

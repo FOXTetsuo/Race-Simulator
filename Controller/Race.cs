@@ -8,6 +8,7 @@ namespace Controller
 	{
 		public event EventHandler<DriversChangedEventArgs> DriversChanged;
 		
+		public event EventHandler<EventArgs> RaceFinished;
 		private System.Timers.Timer Timer { get; set; }
 		private Random _random { get; set; }
 		public Track Track { get; set; }
@@ -34,7 +35,7 @@ namespace Controller
 			Participants = participants;
 			StartTime = new DateTime();
 			_positions = new Dictionary<Section, SectionData>();
-			RandomizeEquipment();
+			//RandomizeEquipment();
 		}
 
 		// randomizes the equipment of the racers
@@ -102,14 +103,9 @@ namespace Controller
 			
 			CheckWhetherToMoveParticipants();
 			
-			DriversChanged.Invoke(this, new DriversChangedEventArgs(Track));
+			DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
 		}
 
-		public void OnRaceEnd(object sender, EventArgs args)
-		{
-			//CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
-			//CurrentRace.Start();
-		}
 
 
 		//start de timer
@@ -123,7 +119,7 @@ namespace Controller
 		// en beweeg de driver naar het volgende stuck track
 		public void CheckWhetherToMoveParticipants()
 		{
-			Timer.Stop();
+			//Timer.Stop();
 			foreach (IParticipant participant in Participants)
 			{
 				participant.DistanceCovered += (participant.Equipment.Performance * participant.Equipment.Speed);
@@ -133,7 +129,7 @@ namespace Controller
 					AdvanceParticipant(participant);
 				}
 			}
-			Timer.Start();
+			//Timer.Start();
 		}
 
 		public void AdvanceParticipant(IParticipant participant)
@@ -184,10 +180,7 @@ namespace Controller
 						}
 						if (CheckRaceFinished() == true)
 						{
-							Cleaner();
-							Data.NextRace();
-							Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
-							Data.CurrentRace.Start();
+							PrepareNextRace();
 						}
 					}
 					
@@ -197,6 +190,18 @@ namespace Controller
 				
 			}
 		}
+
+		private void PrepareNextRace()
+		{
+			Cleaner();
+			Data.NextRace();
+			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+			RaceFinished.Invoke(this, new EventArgs());
+			Start();
+			Data.CurrentRace.Start();
+
+		}
+		
 
 		public Boolean CheckRaceFinished()
 		{
@@ -238,6 +243,12 @@ namespace Controller
 		{
 			Console.Clear();
 			Console.WriteLine("Cleaning data");
+			foreach (IParticipant participant in Participants)
+			{
+				participant.CurrentSection = null;
+				participant.DistanceCovered = 0;
+				participant.LoopsPassed = 0;
+			}
 			//unsubscribe
 			DriversChanged = null;
 			Console.WriteLine("Data cleaned");
