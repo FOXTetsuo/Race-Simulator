@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>WPF_App</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Splatoon3_Overview_Splatted_Squid.png" />
+    <None Remove="WPF Images\Road\CornerNEXL.png" />
+    <None Remove="WPF Images\Road\CornerNWXL.png" />
+    <None Remove="WPF Images\Road\CornerSEXL.png" />
+    <None Remove="WPF Images\Road\CornerSWXL.png" />
+    <None Remove="WPF Images\Road\FinishLineXL..png" />
+    <None Remove="WPF Images\Road\HorizontalXL..png" />
+    <None Remove="WPF Images\Road\VerticalXL.png" />
+    <None Remove="WPF Images\Squid1.png" />
+    <None Remove="WPF Images\Squid2.png" />
+    <None Remove="WPF Images\Squid3.png" />
+    <None Remove="WPF Images\Squid4.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="WPF Images\Road\CornerNEXL.png" />
+    <Content Include="WPF Images\Road\CornerNWXL.png" />
+    <Content Include="WPF Images\Road\CornerSEXL.png" />
+    <Content Include="WPF Images\Road\CornerSWXL.png" />
+    <Content Include="WPF Images\Road\FinishLineXL..png" />
+    <Content Include="WPF Images\Road\HorizontalXL..png" />
+    <Content Include="WPF Images\Road\VerticalXL.png" />
+    <Content Include="WPF Images\Squid1.png" />
+    <Content Include="WPF Images\Squid2.png" />
+    <Content Include="WPF Images\Squid3.png" />
+    <Content Include="WPF Images\Squid4.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Splatoon3_Overview_Splatted_Squid.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\Model.csproj" />
+    <ProjectReference Include="..\Controller\Controller.csproj" />
+  </ItemGroup>
+
+</Project>
