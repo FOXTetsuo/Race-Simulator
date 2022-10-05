@@ -19,7 +19,6 @@ namespace WPF_App
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
 			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
 			WPFVisualizer.Initialize(Data.CurrentRace);
-			WPFVisualizer.DetermineTrackWidthAndHeight();
 			Data.CurrentRace.Start();
 		}
 

@@ -2,6 +2,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,18 +19,6 @@ namespace WPF_App
 			South = 180,
 			West = 270
 		}
-		public static Direction _direction { get; set; }
-		public static int XSize { get; set; }
-		public static int YSize { get; set; }
-		public static int xpos { get; set; }
-		public static int ypos { get; set; }
-		public const int imageSize = 192;
-		public static Race Race { get; set; }
-		public static BitmapSource DrawTrack(Track track)
-		{
-			
-		}
-
 		public static void Initialize(Race race)
 		{
 			XSize = 0;
@@ -39,8 +28,58 @@ namespace WPF_App
 			Race = race;
 			_direction = Direction.East;
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
+			DetermineTrackWidthAndHeight();
 		}
+		public static Direction _direction { get; set; }
+		public static int XSize { get; set; }
+		public static int YSize { get; set; }
+		public static int xpos { get; set; }
+		public static int ypos { get; set; }
+		public const int imageSize = 192;
+		public static Race Race { get; set; }
+		public static BitmapSource DrawTrack(Track track)
+		{
+			string sectiontypename;
+			Bitmap bitmap = new Bitmap(XSize, YSize);
+			Graphics graphics = Graphics.FromImage(bitmap);
+			
+			foreach (Section section in Race.Track.Sections)
+			{
+					switch (section.SectionType)
+					{
+						case SectionTypes.StartGrid:
+							sectiontypename = StartGrid;
+						//dit is een nuttig begin ?!?!?!?!?
+						graphics.DrawImage(ImageHandler.DrawImage(xpos, ypos, sectiontypename), xpos, ypos);
+						break;
+						case SectionTypes.Finish:
+							sectiontypename = Finish;
+							break;
+						case SectionTypes.Straight:
+							sectiontypename = Straight;
+							break;
+						case SectionTypes.StraightVertical:
+							sectiontypename = StraightVertical;
+							break;
+						case SectionTypes.CornerNE:
+							sectiontypename = CornerNE;
+							break;
+						case SectionTypes.CornerNW:
+							sectiontypename = CornerNW;
+							break;
+						case SectionTypes.CornerSE:
+							sectiontypename = CornerSE;
+							break;
+						case SectionTypes.CornerSW:
+							sectiontypename = CornerSW;
+							break;
+					}
+				TrackImage.draw();
+					ImageHandler.DrawImage(x * imageSize, y * imageSize, sectiontypename);
+				}
+			}
 		
+
 		public static void DetermineTrackWidthAndHeight()
 		{
 			int XCurrent = 0;
@@ -133,6 +172,7 @@ namespace WPF_App
 
 		#region Graphics
 		// Change to local reference?
+		private const String StartGrid = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\HorizontalXL.png";
 		private const String CornerNE = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\CornerNEXL.png";
 		private const String CornerNW = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\CornerNWXL.png";
 		private const String CornerSE = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\CornerSEXl.png";

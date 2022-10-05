@@ -30,7 +30,6 @@ namespace WPF_App
 		public static Bitmap DrawImage(int x, int y, string image)
 		{
 			Bitmap newBitmap = GetBitmap(image);
-			Graphics graphics = Graphics.FromImage(newBitmap);
 			Bitmap clone = newBitmap.Clone(new Rectangle(x, y, newBitmap.Width, newBitmap.Height), PixelFormat.Format32bppArgb);
 			return (clone);
 		}
