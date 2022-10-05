@@ -27,16 +27,11 @@ namespace WPF_App
 			_imageCache.Clear();
 		}
 
-		public static Bitmap DrawImage(int x, int y)
+		public static Bitmap DrawImage(int x, int y, string image)
 		{
-			
-			Bitmap newBitmap = GetBitmap("C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\HorizontalXL..png");
+			Bitmap newBitmap = GetBitmap(image);
 			Graphics graphics = Graphics.FromImage(newBitmap);
-
-			//misschien kloten met solidBrush?
-			graphics.Clear(Color.Aquamarine);
-
-			Bitmap clone = newBitmap.Clone(new Rectangle(0, 0, newBitmap.Width, newBitmap.Height), PixelFormat.Format32bppArgb);
+			Bitmap clone = newBitmap.Clone(new Rectangle(x, y, newBitmap.Width, newBitmap.Height), PixelFormat.Format32bppArgb);
 			return (clone);
 		}
 

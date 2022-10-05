@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1366" Width="768">
+        Title="MainWindow" Height="768" Width="1366">
     <Grid Background="#FF59ABC7">
-        <Image x:Name="TrackImage" HorizontalAlignment="Left" Height="100" Margin="370,371,0,0" VerticalAlignment="Top" Width="100"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="363*"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="TrackImage" HorizontalAlignment="Left" Height="697" Margin="10,10,0,0" VerticalAlignment="Top" Width="1314" Grid.ColumnSpan="3"/>
 
     </Grid>
 </Window>

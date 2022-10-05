@@ -273,7 +273,7 @@ namespace Controller
 
 		public void Cleaner()
 		{
-			Console.Clear();
+			//Console.Clear();
 			Console.WriteLine("Track finished, loading next track...");
 			foreach (IParticipant participant in Participants)
 			{
