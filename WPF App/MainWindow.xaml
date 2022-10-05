@@ -12,7 +12,7 @@
             <ColumnDefinition Width="11*"/>
             <ColumnDefinition Width="363*"/>
         </Grid.ColumnDefinitions>
-        <Image x:Name="TrackImage" HorizontalAlignment="Left" Height="697" Margin="10,10,0,0" VerticalAlignment="Top" Width="1314" Grid.ColumnSpan="3"/>
+        <Image x:Name="TrackImage" HorizontalAlignment="Left" Height="247" Margin="484,285,0,0" VerticalAlignment="Top" Width="289" Grid.Column="2"/>
 
     </Grid>
 </Window>

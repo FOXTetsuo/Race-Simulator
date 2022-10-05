@@ -36,7 +36,7 @@ namespace Controller
 			Participants = participants;
 			StartTime = new DateTime();
 			_positions = new Dictionary<Section, SectionData>();
-			RandomizeEquipment();
+			//RandomizeEquipment();
 		}
 
 		// randomizes the equipment of the racers
@@ -252,7 +252,7 @@ namespace Controller
 			if (participant.CurrentSection.SectionType == SectionTypes.Finish)
 			{
 				participant.LoopsPassed += 1;
-				if (participant.LoopsPassed == 2)
+				if (participant.LoopsPassed == 1)
 				{
 					return true;
 				}
@@ -274,7 +274,6 @@ namespace Controller
 		public void Cleaner()
 		{
 			//Console.Clear();
-			Console.WriteLine("Track finished, loading next track...");
 			foreach (IParticipant participant in Participants)
 			{
 				participant.CurrentSection = null;
