@@ -17,9 +17,10 @@ namespace WPF_App
 			Data.Initialize();
 			Data.NextRace();
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
-			Data.CurrentRace.Start();
 			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
-
+			WPFVisualizer.Initialize(Data.CurrentRace);
+			WPFVisualizer.DetermineTrackWidthAndHeight();
+			Data.CurrentRace.Start();
 		}
 
 		private void CurrentRace_DriversChanged(object? sender, DriversChangedEventArgs e)
@@ -28,6 +29,8 @@ namespace WPF_App
 			DispatcherPriority.Render,
 			new Action(() =>
 			{
+				TrackImage.Width = WPFVisualizer.XSize*WPFVisualizer.imageSize;
+				TrackImage.Height = WPFVisualizer.YSize * WPFVisualizer.imageSize;
 				this.TrackImage.Source = null;
 				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
 			}));

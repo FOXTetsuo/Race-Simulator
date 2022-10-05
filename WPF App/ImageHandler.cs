@@ -35,18 +35,6 @@ namespace WPF_App
 			return (clone);
 		}
 
-		//public static Bitmap DrawImage(int x, int y)
-		//{
-		//	if (!_imageCache.ContainsKey("empty"))
-		//	{
-		//		Bitmap bitmap = new Bitmap(192, 192);
-		//		Graphics graphics = Graphics.FromImage(bitmap);
-		//		graphics.FillRegion(new SolidBrush(Color.White), new Region(new Rectangle(0, 0, 192, 192)));
-		//		_imageCache.Add("empty", bitmap);
-		//		return bitmap;
-		//	}
-		//	else return _imageCache["empty"];
-		//}
 		public static BitmapSource CreateBitmapSourceFromGdiBitmap(Bitmap bitmap)
 		{
 			if (bitmap == null)
