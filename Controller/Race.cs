@@ -101,9 +101,9 @@ namespace Controller
 		{
 			// kijk naar speed / tracklength etc, als een driver over de lengte heen is
 			// dan advance je deze naar de volgende tracksection
-
-			//invloed van equipment quality toevoegen!
-			DetermineBroken();
+			
+			//UItgecomment voor bugfixes
+			//DetermineBroken();
 			CheckWhetherToMoveParticipants();
 			DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
 		}
@@ -120,7 +120,7 @@ namespace Controller
 		public void CheckWhetherToMoveParticipants()
 		{
 			//Timer.Stop zodat de thread niet verder gaat in de berekening.
-			Timer.Stop();
+			//Timer.Stop();
 			foreach (IParticipant participant in Participants)
 			{
 				participant.DistanceCovered += (participant.Equipment.Performance * participant.Equipment.Speed);
@@ -130,15 +130,15 @@ namespace Controller
 					AdvanceParticipant(participant);
 				}
 			}
-			Timer.Start();
+			//Timer.Start();
 		}
 
 		public void DetermineBroken()
 		{
 			foreach (IParticipant participant in Data.CurrentRace.Participants)
 			{
-				// 1 op 15 kans dat auto kapot gaat
-				if (participant.Equipment.IsBroken == false && (_random.Next(15) == 13))
+				// 1 op 32 kans dat auto kapot gaat
+				if (participant.Equipment.IsBroken == false && (_random.Next(32) == 13))
 				{
 					participant.Equipment.IsBroken = true;
 					int determinePenalty = _random.Next(2);
