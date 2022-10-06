@@ -15,70 +15,80 @@ namespace WPF_App
 			South = 180,
 			West = 270
 		}
+		
+		public static Direction _direction { get; set; }
+		public static int TrackWidth { get; set; }
+		public static int TrackHeight { get; set; }
+		public static int xpos { get; set; }
+		public static int ypos { get; set; }
+		
+		public const int imageSize = 128;
+		public static Race Race { get; set; }
+
 		public static void Initialize(Race race)
 		{
-			XSize = 10;
-			YSize = 10;
+			TrackWidth = 10;
+			TrackHeight = 10;
 			xpos = 0;
 			ypos = 0;
 			Race = race;
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
 			//DetermineTrackWidthAndHeight();
 		}
-		public static Direction _direction { get; set; }
-		public static int XSize { get; set; }
-		public static int YSize { get; set; }
-		public static int xpos { get; set; }
-		public static int ypos { get; set; }
-		public const int imageSize = 128;
-		public static Race Race { get; set; }
+
+		public static int CalculateXDraw()
+		{
+			return xpos * imageSize;
+		}
+
+		public static int CalculateYDraw()
+		{
+			return ypos * imageSize;
+		}
+		
 		public static BitmapSource DrawTrack(Track track)
 		{
-			string sectiontypename;
-			Bitmap bitmap = new Bitmap(XSize * imageSize, YSize * imageSize);
-			Graphics graphics = Graphics.FromImage(bitmap);
+			Bitmap canvas = new Bitmap(TrackWidth * imageSize, TrackHeight * imageSize);
+			Graphics graphics = Graphics.FromImage(canvas);
 
 			foreach (Section section in Race.Track.Sections)
 			{
 				switch (section.SectionType)
 				{
 					case SectionTypes.StartGrid:
-						sectiontypename = StartGrid;
-						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(StartGrid), CalculateXDraw(), CalculateYDraw());
 						break;
 					case SectionTypes.Finish:
-						sectiontypename = Finish;
-						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Finish), CalculateXDraw(), CalculateYDraw());
 						break;
 					case SectionTypes.Straight:
-						sectiontypename = Straight;
-						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Straight), CalculateXDraw(), CalculateYDraw());
 						break;
 					case SectionTypes.StraightVertical:
-						sectiontypename = StraightVertical;
-						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(StraightVertical), CalculateXDraw(), CalculateYDraw());
 						break;
 					case SectionTypes.CornerNE:
-						sectiontypename = CornerNE;
-						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerNE), CalculateXDraw(), CalculateYDraw());
 						break;
 					case SectionTypes.CornerNW:
-						sectiontypename = CornerNW;
-						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerNW), CalculateXDraw(), CalculateYDraw());
 						break;
 					case SectionTypes.CornerSE:
-						sectiontypename = CornerSE;
-						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerSE), CalculateXDraw(), CalculateYDraw());
 						break;
 					case SectionTypes.CornerSW:
-						sectiontypename = CornerSW;
-						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerSW), CalculateXDraw(), CalculateYDraw());
 						break;
 				}
 				DetermineDirection(section.SectionType, _direction);
 			}
-
-			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(bitmap));
+			//return map from cache
+			
+			//if (!ImageHandler._trackImageCache.ContainsKey(track.Name))
+			//{
+			//	ImageHandler._trackImageCache.Add(track.Name, ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
+			//}
+			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
 
 
@@ -93,9 +103,9 @@ namespace WPF_App
 				if (_direction == Direction.East)
 				{
 					XCurrent += 1;
-					if (XCurrent >= XSize)
+					if (XCurrent >= TrackWidth)
 					{
-						XSize = XCurrent;
+						TrackWidth = XCurrent;
 					}
 				}
 				if (_direction == Direction.West)
@@ -109,9 +119,9 @@ namespace WPF_App
 				if (_direction == Direction.South)
 				{
 					YCurrent += 1;
-					if (YCurrent >= YSize)
+					if (YCurrent >= TrackHeight)
 					{
-						YSize = YCurrent;
+						TrackHeight = YCurrent;
 					}
 				}
 				DetermineDirection(section.SectionType, _direction);
@@ -205,7 +215,7 @@ namespace WPF_App
 		//private const String StraightVertical = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\VerticalXL.png";
 		//private const String Finish = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\FinishLineXL.png";
 		#endregion
-
+		
 		#region Graphics_Large
 		// Change to local reference?
 		private const String StartGrid = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road_L\\StraightL.png";

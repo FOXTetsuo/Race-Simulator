@@ -14,6 +14,8 @@ namespace WPF_App
 	{
 		private static Dictionary<string, Bitmap> _imageCache = new Dictionary<string, Bitmap>();
 
+		//public static Dictionary<string, BitmapSource> _trackImageCache = new Dictionary<string, BitmapSource>();
+		// possible cache to redraw the track without calculations
 		public static Bitmap GetBitmap(String strng)
 		{
 			if (!_imageCache.ContainsKey(strng))
@@ -34,7 +36,7 @@ namespace WPF_App
 		//	return (clone);
 		//}
 
-		public static Bitmap DrawImage(string image)
+		public static Bitmap CloneImageFromCache(string image)
 		{
 			Bitmap newBitmap = GetBitmap(image);
 			Bitmap clone = newBitmap.Clone(new Rectangle(0, 0, newBitmap.Width, newBitmap.Height), PixelFormat.Format32bppArgb);

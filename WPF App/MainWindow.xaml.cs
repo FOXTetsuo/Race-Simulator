@@ -17,11 +17,11 @@ namespace WPF_App
 			Data.Initialize();
 			Data.NextRace();
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
-			
-			
+
+
 			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
-			
-			
+
+
 			WPFVisualizer.Initialize(Data.CurrentRace);
 			Data.CurrentRace.Start();
 
@@ -36,17 +36,26 @@ namespace WPF_App
 
 		private void CurrentRace_DriversChanged(object? sender, DriversChangedEventArgs e)
 		{
+
 			this.TrackImage.Dispatcher.BeginInvoke(
 			DispatcherPriority.Render,
 			new Action(() =>
 			{
 				TrackImage.HorizontalAlignment = HorizontalAlignment.Left;
 				TrackImage.VerticalAlignment = VerticalAlignment.Top;
-				TrackImage.Width = WPFVisualizer.XSize * WPFVisualizer.imageSize;
-				TrackImage.Height = WPFVisualizer.YSize * WPFVisualizer.imageSize;
+				TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
+				TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
 				this.TrackImage.Source = null;
-				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
+
+				//if (!ImageHandler._trackImageCache.ContainsKey(e.Track.Name))
+				//{
+					this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
+				//}
+
+				//else this.TrackImage.Source = ImageHandler._trackImageCache[e.Track.Name];
+
 			}));
+
 		}
 	}
 }
