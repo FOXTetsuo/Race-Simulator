@@ -27,20 +27,12 @@ namespace WPF_App
 			_imageCache.Clear();
 		}
 
-		//public static Bitmap DrawImage(string image)
+		//public static Bitmap DrawImage(int x, int y, string image)
 		//{
 		//	Bitmap newBitmap = GetBitmap(image);
-		//	Bitmap clone = newBitmap.Clone(new Rectangle(0, 0, newBitmap.Width, newBitmap.Height), PixelFormat.Format32bppArgb);
+		//	Bitmap clone = newBitmap.Clone(new Rectangle(x, y, newBitmap.Width, newBitmap.Height), PixelFormat.Format32bppArgb);
 		//	return (clone);
 		//}
-
-		public static Bitmap DrawImage(int x, int y, string image)
-		{
-			Bitmap newBitmap = GetBitmap(image);
-			Bitmap clone = newBitmap.Clone(new Rectangle(x, y, newBitmap.Width, newBitmap.Height), PixelFormat.Format32bppArgb);
-			//Bitmap clone = newBitmap.Clone(new Rectangle(x, y, newBitmap.Width, newBitmap.Height), PixelFormat.Format32bppArgb);
-			return (clone);
-		}
 
 		public static Bitmap DrawImage(string image)
 		{

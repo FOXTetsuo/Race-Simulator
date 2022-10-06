@@ -25,28 +25,28 @@ namespace WPF_App
 			WPFVisualizer.Initialize(Data.CurrentRace);
 			Data.CurrentRace.Start();
 
-			TrackImage.HorizontalAlignment = HorizontalAlignment.Left;
-			TrackImage.VerticalAlignment = VerticalAlignment.Top;
-			TrackImage.Width = WPFVisualizer.XSize * WPFVisualizer.imageSize;
-			TrackImage.Height = WPFVisualizer.YSize * WPFVisualizer.imageSize;
-			this.TrackImage.Source = null;
-			this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
+			//TrackImage.HorizontalAlignment = HorizontalAlignment.Left;
+			//TrackImage.VerticalAlignment = VerticalAlignment.Top;
+			//TrackImage.Width = WPFVisualizer.XSize * WPFVisualizer.imageSize;
+			//TrackImage.Height = WPFVisualizer.YSize * WPFVisualizer.imageSize;
+			//this.TrackImage.Source = null;
+			//this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
 
 		}
 
 		private void CurrentRace_DriversChanged(object? sender, DriversChangedEventArgs e)
 		{
-			//this.TrackImage.Dispatcher.BeginInvoke(
-			//DispatcherPriority.Render,
-			//new Action(() =>
-			//{
-			//	TrackImage.HorizontalAlignment = HorizontalAlignment.Left;
-			//	TrackImage.VerticalAlignment = VerticalAlignment.Top;
-			//	TrackImage.Width = WPFVisualizer.XSize * WPFVisualizer.imageSize;
-			//	TrackImage.Height = WPFVisualizer.YSize * WPFVisualizer.imageSize;
-			//	this.TrackImage.Source = null;
-			//	this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
-			//}));
+			this.TrackImage.Dispatcher.BeginInvoke(
+			DispatcherPriority.Render,
+			new Action(() =>
+			{
+				TrackImage.HorizontalAlignment = HorizontalAlignment.Left;
+				TrackImage.VerticalAlignment = VerticalAlignment.Top;
+				TrackImage.Width = WPFVisualizer.XSize * WPFVisualizer.imageSize;
+				TrackImage.Height = WPFVisualizer.YSize * WPFVisualizer.imageSize;
+				this.TrackImage.Source = null;
+				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
+			}));
 		}
 	}
 }
