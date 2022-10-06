@@ -22,14 +22,15 @@ namespace WPF_App
 			WPFVisualizer.Initialize(Data.CurrentRace);
 			Data.CurrentRace.Start();
 
-			TrackImage.HorizontalAlignment = HorizontalAlignment.Left;
-			TrackImage.VerticalAlignment = VerticalAlignment.Top;
+			//TrackImage.HorizontalAlignment = HorizontalAlignment.Left;
+			//TrackImage.VerticalAlignment = VerticalAlignment.Top;
+			
 			TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
 			TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
 			this.TrackImage.Source = null;
 			this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
 		}
-
+		//somewhere, the positioning for the racers is going wrong, plms fix
 		private void CurrentRace_RaceFinished(object? sender, EventArgs e)
 		{
 			ImageHandler.Clear();
@@ -50,10 +51,6 @@ namespace WPF_App
 			DispatcherPriority.Render,
 			new Action(() =>
 			{
-				TrackImage.HorizontalAlignment = HorizontalAlignment.Left;
-				TrackImage.VerticalAlignment = VerticalAlignment.Top;
-				TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
-				TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
 				this.TrackImage.Source = null;
 				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
 
