@@ -93,30 +93,7 @@ namespace WPF_App
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
 
-		
-
-		public static BitmapSource DrawRacers(Track track)
-		{
-			Bitmap canvas = new Bitmap(TrackWidth * imageSize, TrackHeight * imageSize);
-			Graphics graphics = Graphics.FromImage(canvas);
-
-			foreach (Section section in Race.Track.Sections)
-			{
-				DrawDrivers(graphics, Race, section);
-				DetermineDirection(section.SectionType, _direction);
-				//NODIG VANWEGE XPOS EN YPOS :DDDDDDDDDDDDD
-				moveImageCursor();
-			}
-
-			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
-		}
-
-
-
-
-
-
-
+	
 		private static void DrawDrivers(Graphics graphics, Race race, Section section)
 		{
 			foreach (IParticipant participant in race.Participants)
@@ -136,27 +113,6 @@ namespace WPF_App
 			}
 		}
 
-		private static void DrawDrivers(Graphics graphics, Race race)
-		{
-			foreach (Section section in Race.Track.Sections)
-			{
-				foreach (IParticipant participant in race.Participants)
-				{
-					if (participant.CurrentSection == section)
-					{
-						if (race.GetSectionData(section).Left == participant)
-						{
-							DrawParticipant(graphics, participant, "Left");
-						}
-						if (race.GetSectionData(section).Right == participant)
-						{
-							DrawParticipant(graphics, participant, "Right");
-						}
-					}
-
-				}
-			}
-		}
 
 		private static void DrawParticipant(Graphics graphics, IParticipant participant, string side)
 		{

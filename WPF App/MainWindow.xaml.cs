@@ -41,12 +41,21 @@ namespace WPF_App
 			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
 			InitializeComponent();
 			WPFVisualizer.Initialize(Data.CurrentRace);
+
+			this.TrackImage.Dispatcher.BeginInvoke(
+			DispatcherPriority.Render,
+			new Action(() =>
+			{
+				this.TrackImage.Source = null;
+				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
+
+			}));
+
 			Data.CurrentRace.Start();
 		}
 
 		private void CurrentRace_DriversChanged(object? sender, DriversChangedEventArgs e)
 		{
-
 			this.TrackImage.Dispatcher.BeginInvoke(
 			DispatcherPriority.Render,
 			new Action(() =>
