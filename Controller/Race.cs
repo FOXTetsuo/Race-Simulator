@@ -231,7 +231,6 @@ namespace Controller
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
 			RaceFinished.Invoke(this, new EventArgs());
 			Data.CurrentRace.Start();
-
 		}
 
 		public Boolean CheckRaceFinished()
@@ -252,7 +251,7 @@ namespace Controller
 			if (participant.CurrentSection.SectionType == SectionTypes.Finish)
 			{
 				participant.LoopsPassed += 1;
-				if (participant.LoopsPassed == 1)
+				if (participant.LoopsPassed == 5)
 				{
 					return true;
 				}
@@ -272,15 +271,14 @@ namespace Controller
 		}
 
 		public void Cleaner()
-		{
-			//Console.Clear();
+		{	
 			foreach (IParticipant participant in Participants)
 			{
 				participant.CurrentSection = null;
 				participant.DistanceCovered = 0;
 				participant.LoopsPassed = 0;
 			}
-			//unsubscribe, timer = null maybe unnesessacary 
+			//unsubscribe, timer = null might be unnesessacary 
 			Timer = null;
 			DriversChanged = null;
 			GC.Collect(0);

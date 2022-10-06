@@ -17,20 +17,9 @@ namespace WPF_App
 			Data.Initialize();
 			Data.NextRace();
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
-
-
-			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
-
-
 			WPFVisualizer.Initialize(Data.CurrentRace);
 			Data.CurrentRace.Start();
-
-			//TrackImage.HorizontalAlignment = HorizontalAlignment.Left;
-			//TrackImage.VerticalAlignment = VerticalAlignment.Top;
-			//TrackImage.Width = WPFVisualizer.XSize * WPFVisualizer.imageSize;
-			//TrackImage.Height = WPFVisualizer.YSize * WPFVisualizer.imageSize;
-			//this.TrackImage.Source = null;
-			//this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
+			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
 
 		}
 
