@@ -251,7 +251,7 @@ namespace Controller
 			if (participant.CurrentSection.SectionType == SectionTypes.Finish)
 			{
 				participant.LoopsPassed += 1;
-				if (participant.LoopsPassed == 5)
+				if (participant.LoopsPassed == 1)
 				{
 					return true;
 				}
@@ -272,6 +272,7 @@ namespace Controller
 
 		public void Cleaner()
 		{	
+
 			foreach (IParticipant participant in Participants)
 			{
 				participant.CurrentSection = null;

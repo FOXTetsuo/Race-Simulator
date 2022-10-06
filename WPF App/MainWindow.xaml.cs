@@ -17,10 +17,30 @@ namespace WPF_App
 			Data.Initialize();
 			Data.NextRace();
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
+			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
 			WPFVisualizer.Initialize(Data.CurrentRace);
 			Data.CurrentRace.Start();
-			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
 
+			TrackImage.HorizontalAlignment = HorizontalAlignment.Left;
+			TrackImage.VerticalAlignment = VerticalAlignment.Top;
+			TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
+			TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
+			this.TrackImage.Source = null;
+			this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
+		}
+
+		private void CurrentRace_RaceFinished(object? sender, EventArgs e)
+		{
+			ImageHandler.Clear();
+			Data.Initialize();
+			// y u no next race :(
+			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
+			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
+			InitializeComponent();
+			WPFVisualizer.Initialize(Data.CurrentRace);
+			Data.CurrentRace.Start();
 		}
 
 		private void CurrentRace_DriversChanged(object? sender, DriversChangedEventArgs e)
@@ -35,10 +55,11 @@ namespace WPF_App
 				TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
 				TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
 				this.TrackImage.Source = null;
+				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
 
 				//if (!ImageHandler._trackImageCache.ContainsKey(e.Track.Name))
 				//{
-					this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
+
 				//}
 
 				//else this.TrackImage.Source = ImageHandler._trackImageCache[e.Track.Name];

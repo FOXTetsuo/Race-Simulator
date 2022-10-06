@@ -1,10 +1,7 @@
 ﻿using Controller;
 using Model;
 using System;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
-using System.Reflection.Metadata;
 using System.Windows.Media.Imaging;
 
 namespace WPF_App
@@ -18,13 +15,13 @@ namespace WPF_App
 			South = 180,
 			West = 270
 		}
-		
+
 		public static Direction _direction { get; set; }
 		public static int TrackWidth { get; set; }
 		public static int TrackHeight { get; set; }
 		public static int xpos { get; set; }
 		public static int ypos { get; set; }
-		
+
 		public const int imageSize = 128;
 		public static Race Race { get; set; }
 
@@ -35,11 +32,10 @@ namespace WPF_App
 			xpos = 0;
 			ypos = 0;
 			Race = race;
-			Data.CurrentRace.RaceFinished += OnRaceFinished;
 			DetermineTrackWidthAndHeight();
 		}
 
-		
+
 
 		public static int CalculateXDraw()
 		{
@@ -50,14 +46,17 @@ namespace WPF_App
 		{
 			return ypos * imageSize;
 		}
-		
+
 		public static BitmapSource DrawTrack(Track track)
 		{
 			Bitmap canvas = new Bitmap(TrackWidth * imageSize, TrackHeight * imageSize);
 			Graphics graphics = Graphics.FromImage(canvas);
-
+			
 			foreach (Section section in Race.Track.Sections)
 			{
+
+				//DrawDrivers(graphics, Race, section);
+
 				switch (section.SectionType)
 				{
 					case SectionTypes.StartGrid:
@@ -85,30 +84,83 @@ namespace WPF_App
 						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerSW), CalculateXDraw(), CalculateYDraw());
 						break;
 				}
-				DetermineDirection(section.SectionType, _direction);
 				DrawDrivers(graphics, Race, section);
+				DetermineDirection(section.SectionType, _direction);
+				moveImageCursor();
+				//DrawDrivers(graphics, Race, section);
 			}
 
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
+
 		
+
+		public static BitmapSource DrawRacers(Track track)
+		{
+			Bitmap canvas = new Bitmap(TrackWidth * imageSize, TrackHeight * imageSize);
+			Graphics graphics = Graphics.FromImage(canvas);
+
+			foreach (Section section in Race.Track.Sections)
+			{
+				DrawDrivers(graphics, Race, section);
+				DetermineDirection(section.SectionType, _direction);
+				//NODIG VANWEGE XPOS EN YPOS :DDDDDDDDDDDDD
+				moveImageCursor();
+			}
+
+			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
+		}
+
+
+
+
+
+
+
 		private static void DrawDrivers(Graphics graphics, Race race, Section section)
 		{
 			foreach (IParticipant participant in race.Participants)
 			{
-				if (race.GetSectionData(section).Left == participant)
+				if (participant.CurrentSection == section)
 				{
-					DrawParticipant(graphics, participant, "Left");
+					if (race.GetSectionData(section).Left == participant)
+					{
+						DrawParticipant(graphics, participant, "Left");
+					}
+					if (race.GetSectionData(section).Right == participant)
+					{
+						DrawParticipant(graphics, participant, "Right");
+					}
 				}
-				if (race.GetSectionData(section).Right == participant)
+
+			}
+		}
+
+		private static void DrawDrivers(Graphics graphics, Race race)
+		{
+			foreach (Section section in Race.Track.Sections)
+			{
+				foreach (IParticipant participant in race.Participants)
 				{
-					DrawParticipant(graphics, participant, "Right");
+					if (participant.CurrentSection == section)
+					{
+						if (race.GetSectionData(section).Left == participant)
+						{
+							DrawParticipant(graphics, participant, "Left");
+						}
+						if (race.GetSectionData(section).Right == participant)
+						{
+							DrawParticipant(graphics, participant, "Right");
+						}
+					}
+
 				}
 			}
 		}
 
 		private static void DrawParticipant(Graphics graphics, IParticipant participant, string side)
 		{
+			// CALCULATION IS NOT WORKING CORRECTLY FOR THE SECTIONS
 			int xposition = CalculateXDraw();
 			int yposition = CalculateYDraw();
 			// match de participant aan de afbeelding
@@ -137,7 +189,7 @@ namespace WPF_App
 				else if (side == "Right")
 				{
 					xposition += (imageSize / 2);
-					yposition += ((imageSize / 4)*3);
+					yposition += ((imageSize / 4) * 3);
 				}
 			}
 
@@ -158,7 +210,6 @@ namespace WPF_App
 			}
 		}
 
-
 		public static void DetermineTrackWidthAndHeight()
 		{
 			int XCurrent = 0;
@@ -178,7 +229,7 @@ namespace WPF_App
 					{
 						XMax = XCurrent;
 					}
-					
+
 				}
 				if (_direction == Direction.West)
 				{
@@ -210,7 +261,7 @@ namespace WPF_App
 			TrackWidth = (XMax - XMin + 1);
 			TrackHeight = (YMax - YMin + 1);
 		}
-		
+
 		public static void DetermineDirection(SectionTypes type, Direction dir)
 		{
 			switch (type)
@@ -261,8 +312,6 @@ namespace WPF_App
 					break;
 			}
 
-			moveImageCursor();		
-
 		}
 
 		public static void moveImageCursor()
@@ -282,13 +331,6 @@ namespace WPF_App
 					ypos += -1;
 					break;
 			}
-		}
-
-		public static void OnRaceFinished(object sender, EventArgs args)
-		{
-			ImageHandler.Clear();
-			Initialize(Data.CurrentRace);
-			DrawTrack(Data.CurrentRace.Track);
 		}
 
 
