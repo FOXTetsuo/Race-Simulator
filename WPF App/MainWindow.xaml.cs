@@ -28,7 +28,9 @@ namespace WPF_App
 			DispatcherPriority.Render,
 			new Action(() =>
 			{
-				TrackImage.Width = WPFVisualizer.XSize*WPFVisualizer.imageSize;
+				TrackImage.HorizontalAlignment = HorizontalAlignment.Left;
+				TrackImage.VerticalAlignment = VerticalAlignment.Top;
+				TrackImage.Width = WPFVisualizer.XSize * WPFVisualizer.imageSize;
 				TrackImage.Height = WPFVisualizer.YSize * WPFVisualizer.imageSize;
 				this.TrackImage.Source = null;
 				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);

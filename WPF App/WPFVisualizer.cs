@@ -1,11 +1,7 @@
 ﻿using Controller;
 using Model;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace WPF_App
@@ -21,14 +17,13 @@ namespace WPF_App
 		}
 		public static void Initialize(Race race)
 		{
-			XSize = 0;
-			YSize = 1;
+			XSize = 10;
+			YSize = 10;
 			xpos = 0;
 			ypos = 0;
 			Race = race;
-			_direction = Direction.East;
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
-			DetermineTrackWidthAndHeight();
+			//DetermineTrackWidthAndHeight();
 		}
 		public static Direction _direction { get; set; }
 		public static int XSize { get; set; }
@@ -40,54 +35,65 @@ namespace WPF_App
 		public static BitmapSource DrawTrack(Track track)
 		{
 			string sectiontypename;
-			Bitmap bitmap = new Bitmap(XSize, YSize);
+			Bitmap bitmap = new Bitmap(XSize * imageSize, YSize * imageSize);
 			Graphics graphics = Graphics.FromImage(bitmap);
-			
+
 			foreach (Section section in Race.Track.Sections)
 			{
-					switch (section.SectionType)
-					{
-						case SectionTypes.StartGrid:
-							sectiontypename = StartGrid;
-						//dit is een nuttig begin ?!?!?!?!?
-						graphics.DrawImage(ImageHandler.DrawImage(xpos, ypos, sectiontypename), xpos, ypos);
+				switch (section.SectionType)
+				{
+					case SectionTypes.StartGrid:
+						sectiontypename = StartGrid;
+						DetermineDirection(SectionTypes.StartGrid, _direction);
+						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
 						break;
-						case SectionTypes.Finish:
-							sectiontypename = Finish;
-							break;
-						case SectionTypes.Straight:
-							sectiontypename = Straight;
-							break;
-						case SectionTypes.StraightVertical:
-							sectiontypename = StraightVertical;
-							break;
-						case SectionTypes.CornerNE:
-							sectiontypename = CornerNE;
-							break;
-						case SectionTypes.CornerNW:
-							sectiontypename = CornerNW;
-							break;
-						case SectionTypes.CornerSE:
-							sectiontypename = CornerSE;
-							break;
-						case SectionTypes.CornerSW:
-							sectiontypename = CornerSW;
-							break;
-					}
-				TrackImage.draw();
-					ImageHandler.DrawImage(x * imageSize, y * imageSize, sectiontypename);
+					case SectionTypes.Finish:
+						sectiontypename = Finish;
+						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						break;
+					case SectionTypes.Straight:
+						sectiontypename = Straight;
+						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						break;
+					case SectionTypes.StraightVertical:
+						sectiontypename = StraightVertical;
+						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						break;
+					case SectionTypes.CornerNE:
+						DetermineDirection(SectionTypes.CornerNE, _direction);
+						sectiontypename = CornerNE;
+						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						break;
+					case SectionTypes.CornerNW:
+						DetermineDirection(SectionTypes.CornerNW, _direction);
+						sectiontypename = CornerNW;
+						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						break;
+					case SectionTypes.CornerSE:
+						DetermineDirection(SectionTypes.CornerSE, _direction);
+						sectiontypename = CornerSE;
+						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						break;
+					case SectionTypes.CornerSW:
+						DetermineDirection(SectionTypes.CornerSW, _direction);
+						sectiontypename = CornerSW;
+						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
+						break;
 				}
 			}
-		
+
+			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(bitmap));
+		}
+
 
 		public static void DetermineTrackWidthAndHeight()
 		{
 			int XCurrent = 0;
 			int YCurrent = 1;
-			
+
 			foreach (Section section in Race.Track.Sections)
 			{
-				
+
 				if (_direction == Direction.East)
 				{
 					XCurrent += 1;
@@ -161,6 +167,25 @@ namespace WPF_App
 						_direction = Direction.South;
 					}
 					break;
+				case SectionTypes.StartGrid:
+					_direction = Direction.East;
+					break;
+			}
+
+			switch(_direction)
+			{
+				case Direction.East:
+					xpos += 1;
+					break;
+				case Direction.South:
+					ypos += 1;
+					break;
+				case Direction.West:
+					xpos += -1;
+					break;
+				case Direction.North:
+					ypos += -1;
+						break;
 			}
 		}
 
@@ -183,21 +208,3 @@ namespace WPF_App
 		#endregion
 	}
 }
-
-
-//if (_direction == Direction.East)
-//{
-//	xpos += 192;
-//}
-//if (_direction == Direction.West)
-//{
-//	xpos += -192;
-//}
-//if (_direction == Direction.North)
-//{
-//	ypos += -192;
-//}
-//if (_direction == Direction.South)
-//{
-//	ypos += 192;
-//}

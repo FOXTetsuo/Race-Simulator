@@ -28,8 +28,6 @@
     <Content Include="WPF Images\Road\CornerNWXL.png" />
     <Content Include="WPF Images\Road\CornerSEXL.png" />
     <Content Include="WPF Images\Road\CornerSWXL.png" />
-    <Content Include="WPF Images\Road\FinishLineXL..png" />
-    <Content Include="WPF Images\Road\HorizontalXL..png" />
     <Content Include="WPF Images\Road\VerticalXL.png" />
     <Content Include="WPF Images\Squid1.png" />
     <Content Include="WPF Images\Squid2.png" />
