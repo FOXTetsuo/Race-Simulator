@@ -48,4 +48,8 @@
     <ProjectReference Include="..\Controller\Controller.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="WPF Images\NewFolder\" />
+  </ItemGroup>
+
 </Project>

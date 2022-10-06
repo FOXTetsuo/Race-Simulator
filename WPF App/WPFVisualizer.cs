@@ -19,7 +19,7 @@ namespace WPF_App
 		{
 			XSize = 10;
 			YSize = 10;
-			xpos = 0;
+			xpos = 1;
 			ypos = 0;
 			Race = race;
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
@@ -44,7 +44,6 @@ namespace WPF_App
 				{
 					case SectionTypes.StartGrid:
 						sectiontypename = StartGrid;
-						DetermineDirection(SectionTypes.StartGrid, _direction);
 						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
 						break;
 					case SectionTypes.Finish:
@@ -60,26 +59,23 @@ namespace WPF_App
 						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
 						break;
 					case SectionTypes.CornerNE:
-						DetermineDirection(SectionTypes.CornerNE, _direction);
 						sectiontypename = CornerNE;
 						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
 						break;
 					case SectionTypes.CornerNW:
-						DetermineDirection(SectionTypes.CornerNW, _direction);
 						sectiontypename = CornerNW;
 						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
 						break;
 					case SectionTypes.CornerSE:
-						DetermineDirection(SectionTypes.CornerSE, _direction);
 						sectiontypename = CornerSE;
 						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
 						break;
 					case SectionTypes.CornerSW:
-						DetermineDirection(SectionTypes.CornerSW, _direction);
 						sectiontypename = CornerSW;
 						graphics.DrawImage(ImageHandler.DrawImage(sectiontypename), xpos * imageSize, ypos * imageSize);
 						break;
 				}
+				DetermineDirection(section.SectionType, _direction);
 			}
 
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(bitmap));
@@ -121,8 +117,9 @@ namespace WPF_App
 				DetermineDirection(section.SectionType, _direction);
 			}
 		}
-
+		
 		public static void DetermineDirection(SectionTypes type, Direction dir)
+		// hier gaat fout xDDDDDDDDD
 		{
 			switch (type)
 			{
@@ -187,12 +184,14 @@ namespace WPF_App
 					ypos += -1;
 						break;
 			}
+
+			//xpos += 1;
 		}
 
 		public static void OnRaceFinished(object sender, EventArgs args)
 		{
-			Initialize(Data.CurrentRace);
-			DrawTrack(Data.CurrentRace.Track);
+			//Initialize(Data.CurrentRace);
+			//DrawTrack(Data.CurrentRace.Track);
 		}
 
 		#region Graphics
@@ -204,7 +203,7 @@ namespace WPF_App
 		private const String CornerSW = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\CornerSWXL.png";
 		private const String Straight = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\HorizontalXL.png";
 		private const String StraightVertical = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\VerticalXL.png";
-		private const String Finish = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\VerticalXL.png";
+		private const String Finish = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\FinishLineXL.png";
 		#endregion
 	}
 }
