@@ -29,13 +29,6 @@ namespace WPF_App
 			_imageCache.Clear();
 		}
 
-		//public static Bitmap DrawImage(int x, int y, string image)
-		//{
-		//	Bitmap newBitmap = GetBitmap(image);
-		//	Bitmap clone = newBitmap.Clone(new Rectangle(x, y, newBitmap.Width, newBitmap.Height), PixelFormat.Format32bppArgb);
-		//	return (clone);
-		//}
-
 		public static Bitmap CloneImageFromCache(string image)
 		{
 			Bitmap newBitmap = GetBitmap(image);

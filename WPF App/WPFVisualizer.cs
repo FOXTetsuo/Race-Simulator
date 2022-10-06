@@ -27,13 +27,13 @@ namespace WPF_App
 
 		public static void Initialize(Race race)
 		{
-			TrackWidth = 10;
-			TrackHeight = 10;
+			//TrackWidth = 10;
+			//TrackHeight = 10;
 			xpos = 0;
 			ypos = 0;
 			Race = race;
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
-			//DetermineTrackWidthAndHeight();
+			DetermineTrackWidthAndHeight();
 		}
 
 		public static int CalculateXDraw()
@@ -96,6 +96,10 @@ namespace WPF_App
 		{
 			int XCurrent = 0;
 			int YCurrent = 1;
+			int XMin = 0;
+			int YMin = 0;
+			int XMax = 0;
+			int YMax = 0;
 
 			foreach (Section section in Race.Track.Sections)
 			{
@@ -103,33 +107,44 @@ namespace WPF_App
 				if (_direction == Direction.East)
 				{
 					XCurrent += 1;
-					if (XCurrent >= TrackWidth)
+					if (XCurrent >= XMax)
 					{
-						TrackWidth = XCurrent;
+						XMax = XCurrent;
 					}
+					
 				}
 				if (_direction == Direction.West)
 				{
 					XCurrent -= 1;
+					if (XCurrent <= XMin)
+					{
+						XMin = XCurrent;
+					}
 				}
 				if (_direction == Direction.North)
 				{
 					YCurrent += -1;
+					if (YCurrent <= YMin)
+					{
+						YMin = YCurrent;
+					}
 				}
 				if (_direction == Direction.South)
 				{
 					YCurrent += 1;
-					if (YCurrent >= TrackHeight)
+					if (YCurrent >= YMax)
 					{
-						TrackHeight = YCurrent;
+						YMax = YCurrent;
 					}
 				}
+
 				DetermineDirection(section.SectionType, _direction);
 			}
+			TrackWidth = (XMax - XMin + 1);
+			TrackHeight = (YMax - YMin + 1);
 		}
 		
 		public static void DetermineDirection(SectionTypes type, Direction dir)
-		// hier gaat fout xDDDDDDDDD
 		{
 			switch (type)
 			{
@@ -179,7 +194,13 @@ namespace WPF_App
 					break;
 			}
 
-			switch(_direction)
+			moveImageCursor();		
+
+		}
+
+		public static void moveImageCursor()
+		{
+			switch (_direction)
 			{
 				case Direction.East:
 					xpos += 1;
@@ -192,10 +213,8 @@ namespace WPF_App
 					break;
 				case Direction.North:
 					ypos += -1;
-						break;
+					break;
 			}
-
-			//xpos += 1;
 		}
 
 		public static void OnRaceFinished(object sender, EventArgs args)
