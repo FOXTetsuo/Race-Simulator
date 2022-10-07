@@ -149,21 +149,44 @@ namespace WPF_App
 				}
 			}
 
-			switch (participant.Name)
+			//voeg hier mooie BROKE Squid art toe :DDD
+			if (participant.Equipment.IsBroken)
 			{
-				case "Mike":
-					graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid1), xposition, yposition);
-					break;
-				case "Chrimst":
-					graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid2), xposition, yposition);
-					break;
-				case "Bruger":
-					graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid3), xposition, yposition);
-					break;
-				case "Pimpin":
-					graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid4), xposition, yposition);
-					break;
+				switch (participant.Name)
+				{
+					case "Mike":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid1), xposition, yposition);
+						break;
+					case "Chrimst":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid2), xposition, yposition);
+						break;
+					case "Bruger":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid3), xposition, yposition);
+						break;
+					case "Pimpin":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid4), xposition, yposition);
+						break;
+				}
 			}
+			else
+			{
+				switch (participant.Name)
+				{
+					case "Mike":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid1), xposition, yposition);
+						break;
+					case "Chrimst":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid2), xposition, yposition);
+						break;
+					case "Bruger":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid3), xposition, yposition);
+						break;
+					case "Pimpin":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid4), xposition, yposition);
+						break;
+				}
+			}
+			
 		}
 
 		public static void DetermineTrackWidthAndHeight()

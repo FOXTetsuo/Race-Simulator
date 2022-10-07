@@ -45,7 +45,7 @@ namespace Controller
 			foreach (IParticipant participant in Participants)
 			{
 				participant.Equipment.Quality = _random.Next(1, 11);
-				participant.Equipment.Performance = _random.Next(1, 11);
+				participant.Equipment.Performance = _random.Next(3, 11);
 			}
 		}
 
@@ -102,8 +102,8 @@ namespace Controller
 			// kijk naar speed / tracklength etc, als een driver over de lengte heen is
 			// dan advance je deze naar de volgende tracksection
 			
-			//UItgecomment voor bugfixes
-			//DetermineBroken();
+			//Comment in case you're trying to fix bugs :')
+			DetermineBroken();
 			CheckWhetherToMoveParticipants();
 			DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
 		}
@@ -193,11 +193,17 @@ namespace Controller
 					if (NewData.Left == null)
 					{
 						NewData.Left = participant;
+						participant.CurrentSection = Track.Sections.ElementAt(i + 1);
 					}
 					else if (NewData.Right == null)
 					{
 						NewData.Right = participant;
+						participant.CurrentSection = Track.Sections.ElementAt(i + 1);
 					}
+					else
+					{
+						participant.DistanceCovered = 200;
+					} 
 
 					participant.CurrentSection = Track.Sections.ElementAt(i + 1);
 

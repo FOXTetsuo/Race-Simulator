@@ -13,18 +13,22 @@ namespace WPF_App
 	{
 		public MainWindow()
 		{
+			// initialize window components and set the datacontext
 			InitializeComponent();
 			Data.Initialize();
 			Data.NextRace();
+			// place contestants and subscribe to events
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
 			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
 			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
+			//start the visualizer & the race
 			WPFVisualizer.Initialize(Data.CurrentRace);
 			Data.CurrentRace.Start();
 
 			//TrackImage.HorizontalAlignment = HorizontalAlignment.Left;
 			//TrackImage.VerticalAlignment = VerticalAlignment.Top;
 			
+			// initial track drawing.
 			TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
 			TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
 			this.TrackImage.Source = null;
@@ -34,9 +38,7 @@ namespace WPF_App
 		private void CurrentRace_RaceFinished(object? sender, EventArgs e)
 		{
 			ImageHandler.Clear();
-			Data.Initialize();
-			// y u no next race :(
-			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+
 			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
 			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
 			InitializeComponent();

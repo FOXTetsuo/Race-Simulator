@@ -14,8 +14,8 @@ namespace Controller
 		}
 		public static void AddParticipants()
 		{
-			Competition.Participants.Add(new Driver("Mike", 2, new Car(10, 10, 10, false), TeamColors.Blue));
-			Competition.Participants.Add(new Driver("Chrimst", 2, new Car(1, 10, 10, false), TeamColors.Green));
+			Competition.Participants.Add(new Driver("Mike", 2, new Car(10, 5, 10, false), TeamColors.Blue));
+			Competition.Participants.Add(new Driver("Chrimst", 2, new Car(1, 5, 10, false), TeamColors.Green));
 			Competition.Participants.Add(new Driver("Bruger", 2, new Car(7, 10, 10, false), TeamColors.Yellow));
 			Competition.Participants.Add(new Driver("Pimpin", 2, new Car(10, 10, 10, false), TeamColors.Red));
 		}
@@ -72,13 +72,6 @@ namespace Controller
 				SectionTypes[] build = new SectionTypes[]
 				{
 						SectionTypes.StartGrid,
-						SectionTypes.CornerNE,
-						SectionTypes.Straight,
-						SectionTypes.CornerNE,
-						SectionTypes.Straight,
-						SectionTypes.CornerNE,
-						SectionTypes.Straight,
-						SectionTypes.CornerNE,
 						SectionTypes.Finish
 
 				};
@@ -97,10 +90,14 @@ namespace Controller
 		public static void NextRace()
 		{
 			Track newTrack = Competition.NextTrack();
-			if (newTrack is not null)
+			if (newTrack != null)
 			{
 				CurrentRace = new Race(newTrack, Competition.Participants);
 			};
+			else
+			{
+
+			}
 		}
 
 

@@ -163,7 +163,6 @@ namespace Race_Simulator
 				ypos += -10;
 			}
 		}
-
 		public static void DetermineDirection(SectionTypes type, Direction dir )
 		{
 			switch (type)
