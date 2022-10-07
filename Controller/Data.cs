@@ -93,10 +93,10 @@ namespace Controller
 			if (newTrack != null)
 			{
 				CurrentRace = new Race(newTrack, Competition.Participants);
-			};
+			}
 			else
 			{
-
+				// competition eds, pls call a function for it.
 			}
 		}
 
