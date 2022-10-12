@@ -131,7 +131,7 @@ namespace WPF_App
 				else if (side == "Right")
 				{
 					yposition += (imageSize / 2);
-					xposition += ((imageSize / 4) * 3);
+					xposition += ((imageSize / 4) * 2);
 				}
 			}
 
@@ -145,25 +145,48 @@ namespace WPF_App
 				else if (side == "Right")
 				{
 					xposition += (imageSize / 2);
-					yposition += ((imageSize / 4) * 3);
+					yposition += ((imageSize / 2));
 				}
 			}
 
-			switch (participant.Name)
+			//voeg hier mooie BROKE Squid art toe :DDD
+			if (participant.Equipment.IsBroken)
 			{
-				case "Mike":
-					graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid1), xposition, yposition);
-					break;
-				case "Chrimst":
-					graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid2), xposition, yposition);
-					break;
-				case "Bruger":
-					graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid3), xposition, yposition);
-					break;
-				case "Pimpin":
-					graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid4), xposition, yposition);
-					break;
+				switch (participant.Name)
+				{
+					case "Mike":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid1_Ink), xposition, yposition);
+						break;
+					case "Chrimst":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid2_Ink), xposition, yposition);
+						break;
+					case "Bruger":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid3_Ink), xposition, yposition);
+						break;
+					case "Pimpin":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid4_Ink), xposition, yposition);
+						break;
+				}
 			}
+			else
+			{
+				switch (participant.Name)
+				{
+					case "Mike":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid1), xposition, yposition);
+						break;
+					case "Chrimst":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid2), xposition, yposition);
+						break;
+					case "Bruger":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid3), xposition, yposition);
+						break;
+					case "Pimpin":
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid4), xposition, yposition);
+						break;
+				}
+			}
+			
 		}
 
 		public static void DetermineTrackWidthAndHeight()
@@ -177,7 +200,6 @@ namespace WPF_App
 
 			foreach (Section section in Race.Track.Sections)
 			{
-
 				if (_direction == Direction.East)
 				{
 					XCurrent += 1;
@@ -185,7 +207,6 @@ namespace WPF_App
 					{
 						XMax = XCurrent;
 					}
-
 				}
 				if (_direction == Direction.West)
 				{
@@ -211,7 +232,6 @@ namespace WPF_App
 						YMax = YCurrent;
 					}
 				}
-
 				DetermineDirection(section.SectionType, _direction);
 			}
 			TrackWidth = (XMax - XMin + 1);
@@ -316,6 +336,10 @@ namespace WPF_App
 		private const String Squid2 = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid2_S.png";
 		private const String Squid3 = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid3_S.png";
 		private const String Squid4 = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid4_S.png";
+		private const String Squid1_Ink = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid1_Ink.png";
+		private const String Squid2_Ink = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid2_Ink.png";
+		private const String Squid3_Ink = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid3_Ink.png";
+		private const String Squid4_Ink = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid4_Ink.png";
 		#endregion
 	}
 }

@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1366">
+        Title="MainWindow" Height="1080" Width="1920">
     <Grid Background="#FF59C766">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="11*"/>
             <ColumnDefinition Width="363*"/>
         </Grid.ColumnDefinitions>
-        <Image x:Name="TrackImage" HorizontalAlignment="Left" Margin="0,32,0,0" VerticalAlignment="Top" Grid.Column="1" Height="668" Width="1041" Grid.ColumnSpan="2"/>
-        <Image x:Name="RacerImage" HorizontalAlignment="Left" Margin="0,32,0,0" VerticalAlignment="Top" Grid.Column="1" Height="668" Width="1041" Grid.ColumnSpan="2"/>
+        <Image x:Name="TrackImage" HorizontalAlignment="Left" Margin="0,10,0,0" Width="351" Height="241" VerticalAlignment="Top" Grid.ColumnSpan="3" OpacityMask="Black"/>
 
     </Grid>
 </Window>

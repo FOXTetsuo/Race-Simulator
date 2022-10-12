@@ -36,7 +36,7 @@ namespace Controller
 			Participants = participants;
 			StartTime = new DateTime();
 			_positions = new Dictionary<Section, SectionData>();
-			//RandomizeEquipment();
+			RandomizeEquipment();
 		}
 
 		// randomizes the equipment of the racers
@@ -45,7 +45,7 @@ namespace Controller
 			foreach (IParticipant participant in Participants)
 			{
 				participant.Equipment.Quality = _random.Next(1, 11);
-				participant.Equipment.Performance = _random.Next(1, 11);
+				participant.Equipment.Performance = _random.Next(3, 11);
 			}
 		}
 
@@ -102,8 +102,8 @@ namespace Controller
 			// kijk naar speed / tracklength etc, als een driver over de lengte heen is
 			// dan advance je deze naar de volgende tracksection
 			
-			//UItgecomment voor bugfixes
-			//DetermineBroken();
+			//Comment in case you're trying to fix bugs :')
+			DetermineBroken();
 			CheckWhetherToMoveParticipants();
 			DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
 		}
@@ -173,51 +173,57 @@ namespace Controller
 			{
 				if (section == participant.CurrentSection)
 				{
-					SectionData sectData = GetSectionData(section);
-					
-					if (sectData.Left == participant)
-					{
-						sectData.Left = null;
-					}
-					else if (sectData.Right == participant)
-					{
-						sectData.Right = null;
-					}
-					
 					if (Track.Sections.Count <= (i + 1))
 					{
 						i = -1;
 					}
+					SectionData NewData = GetSectionData(Track.Sections.ElementAt(i + 1));
 
-					SectionData NewData = GetSectionData(Track.Sections.ElementAt(i+1));
-					if (NewData.Left == null)
+					if (NewData.Left == null || NewData.Right == null)
 					{
-						NewData.Left = participant;
-					}
-					else if (NewData.Right == null)
-					{
-						NewData.Right = participant;
+						SectionData sectData = GetSectionData(section);
+
+						if (sectData.Left == participant)
+						{
+							sectData.Left = null;
+						}
+						else if (sectData.Right == participant)
+						{
+							sectData.Right = null;
+						}
+
+						if (NewData.Left == null)
+						{
+							NewData.Left = participant;
+						}
+						else if (NewData.Right == null)
+						{
+							NewData.Right = participant;
+						}
+
+						participant.CurrentSection = Track.Sections.ElementAt(i + 1);
+
+						//hier breekkt somehow alles :DDD
+						if (CheckFinish(participant) == true)
+						{
+							participant.CurrentSection = null;
+							if (NewData.Left == participant)
+							{
+								NewData.Left = null;
+							}
+							else if (NewData.Right == participant)
+							{
+								NewData.Right = null;
+							}
+							if (CheckRaceFinished() == true)
+							{
+								PrepareNextRace();
+							}
+						}
+						return;
 					}
 
-					participant.CurrentSection = Track.Sections.ElementAt(i + 1);
-
-					if (CheckFinish(participant) == true)
-					{
-						participant.CurrentSection = null;
-						if (NewData.Left == participant)
-						{
-							NewData.Left = null;
-						}
-						else if (NewData.Right == participant)
-						{
-							NewData.Right = null;
-						}
-						if (CheckRaceFinished() == true)
-						{
-							PrepareNextRace();
-						}
-					}
-					return;
+					else participant.DistanceCovered = 100;
 				}
 				i++;
 				
