@@ -13,6 +13,9 @@ namespace Model
         public int Points { get; set; }
         public IEquipment Equipment  { get; set; }
         public TeamColors TeamColor { get; set; }
+		public Section CurrentSection { get; set; }
+		public int DistanceCovered { get; set; }
+		public int LoopsPassed { get; set; }
     }
 
     public enum TeamColors

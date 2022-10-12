@@ -1,0 +1,19 @@
+﻿<Window x:Class="WPF_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_App"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="768" Width="1366">
+    <Grid Background="#FF59C766">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="363*"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="TrackImage" HorizontalAlignment="Left" Margin="0,32,0,0" VerticalAlignment="Top" Grid.Column="1" Height="668" Width="1041" Grid.ColumnSpan="2"/>
+        <Image x:Name="RacerImage" HorizontalAlignment="Left" Margin="0,32,0,0" VerticalAlignment="Top" Grid.Column="1" Height="668" Width="1041" Grid.ColumnSpan="2"/>
+
+    </Grid>
+</Window>

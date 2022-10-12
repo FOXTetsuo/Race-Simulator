@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary1\Model.csproj" />
+    <ProjectReference Include="..\Controller\Controller.csproj" />
+    <ProjectReference Include="..\Race Simulator\Race Simulator.csproj" />
   </ItemGroup>
 
 </Project>
