@@ -155,16 +155,16 @@ namespace WPF_App
 				switch (participant.Name)
 				{
 					case "Mike":
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid1), xposition, yposition);
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid1_Ink), xposition, yposition);
 						break;
 					case "Chrimst":
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid2), xposition, yposition);
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid2_Ink), xposition, yposition);
 						break;
 					case "Bruger":
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid3), xposition, yposition);
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid3_Ink), xposition, yposition);
 						break;
 					case "Pimpin":
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid4), xposition, yposition);
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid4_Ink), xposition, yposition);
 						break;
 				}
 			}
@@ -336,6 +336,10 @@ namespace WPF_App
 		private const String Squid2 = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid2_S.png";
 		private const String Squid3 = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid3_S.png";
 		private const String Squid4 = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid4_S.png";
+		private const String Squid1_Ink = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid1_Ink.png";
+		private const String Squid2_Ink = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid2_Ink.png";
+		private const String Squid3_Ink = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid3_Ink.png";
+		private const String Squid4_Ink = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid4_Ink.png";
 		#endregion
 	}
 }
