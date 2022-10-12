@@ -131,7 +131,7 @@ namespace WPF_App
 				else if (side == "Right")
 				{
 					yposition += (imageSize / 2);
-					xposition += ((imageSize / 4) * 3);
+					xposition += ((imageSize / 4) * 2);
 				}
 			}
 
@@ -145,7 +145,7 @@ namespace WPF_App
 				else if (side == "Right")
 				{
 					xposition += (imageSize / 2);
-					yposition += ((imageSize / 4) * 3);
+					yposition += ((imageSize / 2));
 				}
 			}
 
