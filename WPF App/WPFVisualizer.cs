@@ -322,24 +322,23 @@ namespace WPF_App
 		//private const String Finish = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\FinishLineXL.png";
 		#endregion
 
-		#region Graphics_Large
-		// Change to local reference?
-		private const String StartGrid = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road_L\\StraightL.png";
-		private const String CornerNE = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road_L\\CornerNEL.png";
-		private const String CornerNW = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road_L\\CornerNWL.png";
-		private const String CornerSE = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road_L\\CornerSEl.png";
-		private const String CornerSW = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road_L\\CornerSWL.png";
-		private const String Straight = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road_L\\StraightL.png";
-		private const String StraightVertical = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road_L\\VerticalL.png";
-		private const String Finish = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road_L\\FinishLineL.png";
-		private const String Squid1 = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid1_S.png";
-		private const String Squid2 = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid2_S.png";
-		private const String Squid3 = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid3_S.png";
-		private const String Squid4 = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid4_S.png";
-		private const String Squid1_Ink = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid1_Ink.png";
-		private const String Squid2_Ink = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid2_Ink.png";
-		private const String Squid3_Ink = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid3_Ink.png";
-		private const String Squid4_Ink = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Squid4_Ink.png";
+		#region Graphics_Large_Local
+		private const String StartGrid = "WPF Images\\Road_L\\StraightL.png";
+		private const String CornerNE = "WPF Images\\Road_L\\CornerNEL.png";
+		private const String CornerNW = "WPF Images\\Road_L\\CornerNWL.png";
+		private const String CornerSE = "WPF Images\\Road_L\\CornerSEl.png";
+		private const String CornerSW = "WPF Images\\Road_L\\CornerSWL.png";
+		private const String Straight = "WPF Images\\Road_L\\StraightL.png";
+		private const String StraightVertical = "WPF Images\\Road_L\\VerticalL.png";
+		private const String Finish = "WPF Images\\Road_L\\FinishLineL.png";
+		private const String Squid1 = "WPF Images\\Squid1_S.png";
+		private const String Squid2 = "WPF Images\\Squid2_S.png";
+		private const String Squid3 = "WPF Images\\Squid3_S.png";
+		private const String Squid4 = "WPF Images\\Squid4_S.png";
+		private const String Squid1_Ink = "WPF Images\\Squid1_Ink.png";
+		private const String Squid2_Ink = "WPF Images\\Squid2_Ink.png";
+		private const String Squid3_Ink = "WPF Images\\Squid3_Ink.png";
+		private const String Squid4_Ink = "WPF Images\\Squid4_Ink.png";
 		#endregion
 	}
 }

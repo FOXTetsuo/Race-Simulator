@@ -17,10 +17,25 @@
     <None Remove="WPF Images\Road\FinishLineXL..png" />
     <None Remove="WPF Images\Road\HorizontalXL..png" />
     <None Remove="WPF Images\Road\VerticalXL.png" />
+    <None Remove="WPF Images\Road_L\CornerNEL.png" />
+    <None Remove="WPF Images\Road_L\CornerNWL.png" />
+    <None Remove="WPF Images\Road_L\CornerSEL.png" />
+    <None Remove="WPF Images\Road_L\CornerSWL.png" />
+    <None Remove="WPF Images\Road_L\FinishLineL.png" />
+    <None Remove="WPF Images\Road_L\StraightL.png" />
+    <None Remove="WPF Images\Road_L\VerticalL.png" />
     <None Remove="WPF Images\Squid1.png" />
+    <None Remove="WPF Images\Squid1_Ink.png" />
+    <None Remove="WPF Images\Squid1_S.png" />
     <None Remove="WPF Images\Squid2.png" />
+    <None Remove="WPF Images\Squid2_Ink.png" />
+    <None Remove="WPF Images\Squid2_S.png" />
     <None Remove="WPF Images\Squid3.png" />
+    <None Remove="WPF Images\Squid3_Ink.png" />
+    <None Remove="WPF Images\Squid3_S.png" />
     <None Remove="WPF Images\Squid4.png" />
+    <None Remove="WPF Images\Squid4_Ink.png" />
+    <None Remove="WPF Images\Squid4_S.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,10 +44,55 @@
     <Content Include="WPF Images\Road\CornerSEXL.png" />
     <Content Include="WPF Images\Road\CornerSWXL.png" />
     <Content Include="WPF Images\Road\VerticalXL.png" />
+    <Content Include="WPF Images\Road_L\CornerNEL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WPF Images\Road_L\CornerNWL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WPF Images\Road_L\CornerSEL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WPF Images\Road_L\CornerSWL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WPF Images\Road_L\FinishLineL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WPF Images\Road_L\StraightL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WPF Images\Road_L\VerticalL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="WPF Images\Squid1.png" />
+    <Content Include="WPF Images\Squid1_Ink.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WPF Images\Squid1_S.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="WPF Images\Squid2.png" />
+    <Content Include="WPF Images\Squid2_Ink.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WPF Images\Squid2_S.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="WPF Images\Squid3.png" />
+    <Content Include="WPF Images\Squid3_Ink.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WPF Images\Squid3_S.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="WPF Images\Squid4.png" />
+    <Content Include="WPF Images\Squid4_Ink.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WPF Images\Squid4_S.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -46,10 +106,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary1\Model.csproj" />
     <ProjectReference Include="..\Controller\Controller.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="WPF Images\Road_L\" />
   </ItemGroup>
 
 </Project>
