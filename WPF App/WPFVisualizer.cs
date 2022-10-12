@@ -200,7 +200,6 @@ namespace WPF_App
 
 			foreach (Section section in Race.Track.Sections)
 			{
-
 				if (_direction == Direction.East)
 				{
 					XCurrent += 1;
@@ -208,7 +207,6 @@ namespace WPF_App
 					{
 						XMax = XCurrent;
 					}
-
 				}
 				if (_direction == Direction.West)
 				{
