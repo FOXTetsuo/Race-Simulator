@@ -24,9 +24,6 @@ namespace WPF_App
 			//start the visualizer & the race
 			WPFVisualizer.Initialize(Data.CurrentRace);
 			Data.CurrentRace.Start();
-
-			//TrackImage.HorizontalAlignment = HorizontalAlignment.Left;
-			//TrackImage.VerticalAlignment = VerticalAlignment.Top;
 			
 			// initial track drawing.
 			TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
@@ -64,13 +61,6 @@ namespace WPF_App
 			{
 				this.TrackImage.Source = null;
 				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
-
-				//if (!ImageHandler._trackImageCache.ContainsKey(e.Track.Name))
-				//{
-
-				//}
-
-				//else this.TrackImage.Source = ImageHandler._trackImageCache[e.Track.Name];
 
 			}));
 
