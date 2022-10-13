@@ -32,7 +32,8 @@ namespace WPF_App
 			xpos = 0;
 			ypos = 0;
 			Race = race;
-			DetermineTrackWidthAndHeight();
+			//DetermineTrackWidthAndHeight();
+			CalculateTrackSize();
 		}
 
 

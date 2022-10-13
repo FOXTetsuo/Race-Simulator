@@ -6,7 +6,7 @@
 		xmlns:local="clr-namespace:WPF_App"
 		xmlns:Controller="clr-namespace:Controller;assembly=Controller" x:Class="WPF_App.MainWindow"
 		mc:Ignorable="d"
-		Title="MainWindow" Height="768" Width="1366">
+		Title="MainWindow" Height="1080" Width="1920">
     <Window.DataContext>
         <Controller:DataContext_MainWindow/>
     </Window.DataContext>
