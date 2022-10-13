@@ -33,7 +33,7 @@ namespace Controller
 			// Indicate that name has changed && rebind ondriverschanged
 		{
 			Data.CurrentRace.DriversChanged += OnDriversChanged;
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RaceTrackName"));
 		}
 
 		public void OnDriversChanged(object? sender, DriversChangedEventArgs e)
@@ -44,11 +44,13 @@ namespace Controller
 
 		public void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			//if (e.PropertyName == "RaceTrackName")
-			//{
-			//	
-			//}
-			RaceTrackName = new Func<string>(() => Data.CurrentRace.Track.Name)();
+			switch (e.PropertyName)
+			{
+				case ("RaceTrackName"):
+					RaceTrackName = new Func<string>(() => Data.CurrentRace.Track.Name)();
+					break;
+			}
+			
 		}
 	}
 }
