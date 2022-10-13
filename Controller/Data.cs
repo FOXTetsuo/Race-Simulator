@@ -14,22 +14,22 @@ namespace Controller
 		}
 		public static void AddParticipants()
 		{
-			Competition.Participants.Add(new Driver("Mike", 2, new Car(10, 5, 10, false), TeamColors.Blue));
-			Competition.Participants.Add(new Driver("Chrimst", 2, new Car(1, 5, 10, false), TeamColors.Green));
-			Competition.Participants.Add(new Driver("Bruger", 2, new Car(7, 10, 10, false), TeamColors.Yellow));
-			Competition.Participants.Add(new Driver("Pimpin", 2, new Car(10, 10, 10, false), TeamColors.Red));
+			Competition.Participants.Add(new Inkling("Mike", 2, new Car(10, 5, 10, false), TeamColors.Blue));
+			Competition.Participants.Add(new Inkling("Chrimst", 2, new Car(1, 5, 10, false), TeamColors.Green));
+			Competition.Participants.Add(new Inkling("Bruger", 2, new Car(7, 10, 10, false), TeamColors.Yellow));
+			Competition.Participants.Add(new Inkling("Pimpin", 2, new Car(10, 10, 10, false), TeamColors.Red));
 		}
 		public static void AddTracks()
 		{
-			Competition.Tracks.Enqueue(new Track("Rainbow Spaceroad", TrackBuilder("Rainbow Spaceroad")));
-			Competition.Tracks.Enqueue(new Track("Spacebase", TrackBuilder("Spacebase")));
-			Competition.Tracks.Enqueue(new Track("Vroemvroem-in-da-rondje", TrackBuilder("Vroemvroem-in-da-rondje")));
+			Competition.Tracks.Enqueue(new Track("STAROFDACOMPETITION", TrackBuilder("STAROFDACOMPETITION")));
+			Competition.Tracks.Enqueue(new Track("MEWHENDARACEISBIG", TrackBuilder("MEWHENDARACEISBIG")));
+			Competition.Tracks.Enqueue(new Track("NYEEEEEEEEEEEEEEEEEEEOM", TrackBuilder("NYEEEEEEEEEEEEEEEEEEEOM")));
 		}
 		// Takes the tracknname and builds the track. 
 		// Tracks are stored here
 		public static SectionTypes[] TrackBuilder(string trackName)
 		{
-			if (trackName.Equals("Rainbow Spaceroad"))
+			if (trackName.Equals("STAROFDACOMPETITION"))
 			{
 				SectionTypes[] build = new SectionTypes[]
 				{
@@ -47,7 +47,7 @@ namespace Controller
 				};
 				return build;
 			}
-			if (trackName.Equals("Spacebase"))
+			if (trackName.Equals("MEWHENDARACEISBIG"))
 			{
 				SectionTypes[] build = new SectionTypes[]
 				{
@@ -67,12 +67,35 @@ namespace Controller
 				};
 				return build;
 			}
-			if (trackName.Equals("Vroemvroem-in-da-rondje"))
+			if (trackName.Equals("NYEEEEEEEEEEEEEEEEEEEOM"))
 			{
+				// width : 6 height : 3
 				SectionTypes[] build = new SectionTypes[]
 				{
+						SectionTypes.CornerNW,
 						SectionTypes.StartGrid,
-						SectionTypes.Finish
+						SectionTypes.Straight,
+						SectionTypes.Straight,
+						SectionTypes.Straight,
+						SectionTypes.Straight,
+						SectionTypes.CornerNE,
+						SectionTypes.StraightVertical,
+						SectionTypes.CornerSW,
+						SectionTypes.CornerNE,
+						SectionTypes.CornerSE,
+						SectionTypes.Straight,
+						SectionTypes.Straight,
+						SectionTypes.CornerSW,
+						SectionTypes.StraightVertical,
+						SectionTypes.CornerNE,
+						SectionTypes.CornerNW,
+						SectionTypes.StraightVertical,
+						SectionTypes.CornerSE,
+						SectionTypes.Straight,
+						SectionTypes.Finish,
+						SectionTypes.CornerSW,
+						SectionTypes.StraightVertical,
+						SectionTypes.StraightVertical,
 
 				};
 				return build;

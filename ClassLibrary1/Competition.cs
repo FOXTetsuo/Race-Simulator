@@ -9,8 +9,9 @@ namespace Model
 {
 	public class Competition
 	{
-		public Queue<Track> Tracks { get ; set; }
+		public Queue<Track> Tracks { get; set; }
 		public List<IParticipant>? Participants { get; set; }
+		public IParticipant Winner {get; set;}
 
 		// Gets the next track in the queue
 		public Track NextTrack()

@@ -1,5 +1,5 @@
 ﻿[TestFixture]
-public class RaceSimulator_Visualize_Directiondetermination
+public class RaceSimulator_WPFVisualize_Directiondetermination
 {
 	
 }
