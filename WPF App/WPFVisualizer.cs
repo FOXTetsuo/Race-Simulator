@@ -89,21 +89,25 @@ namespace WPF_App
 		}
 		private static void DrawDriversInSection(Graphics graphics, Race race, Section section)
 		{
-			foreach (IParticipant participant in race.Participants)
+			if(race.GetSectionData(section).Left is not null || race.GetSectionData(section).Right is not null)
 			{
-				if (participant.CurrentSection == section)
+				foreach (IParticipant participant in race.Participants)
 				{
-					if (race.GetSectionData(section).Left == participant)
+					if (participant.CurrentSection == section)
 					{
-						DrawParticipant(graphics, participant, "Left");
+						if (race.GetSectionData(section).Left == participant)
+						{
+							DrawParticipant(graphics, participant, "Left");
+						}
+						if (race.GetSectionData(section).Right == participant)
+						{
+							DrawParticipant(graphics, participant, "Right");
+						}
 					}
-					if (race.GetSectionData(section).Right == participant)
-					{
-						DrawParticipant(graphics, participant, "Right");
-					}
-				}
 
+				}
 			}
+			
 		}
 		private static void DrawParticipant(Graphics graphics, IParticipant participant, string side)
 		{

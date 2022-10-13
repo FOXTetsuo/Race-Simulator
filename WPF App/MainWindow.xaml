@@ -16,8 +16,8 @@
         <DockPanel LastChildFill="False" Margin="0,0,0,20" Grid.ColumnSpan="3">
             <Menu DockPanel.Dock="Top" Height="20" VerticalAlignment="Top">
                 <MenuItem Header="Menu" Click="OpenMenu">
-                    <MenuItem x:Name="OpenFirstWindow" Header="Open first window" Click="OpenFirstWindow"/>
-                    <MenuItem x:Name="OpenSecondWindow" Header="Open second window" Click="OpenSecondWindow"/>
+                    <MenuItem x:Name="FirstWindowMenuItem" Header="Open first window" Click="OpenFirstWindow"/>
+                    <MenuItem x:Name="SecondWindowMenuItem" Header="Open second window" Click="OpenSecondWindow"/>
                     <MenuItem x:Name="CloseApplication" Header="Close application" Click="MenuItem_Exit_Click"/>
                 </MenuItem>
             </Menu>

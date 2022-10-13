@@ -9,8 +9,14 @@ namespace WPF_App
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
+	/// 
+
+	
 	public partial class MainWindow : Window
 	{
+		private Window1 Window1;
+		private Window2 Window2;
+
 		public MainWindow()
 		{
 			// initialize window components and set the datacontext
@@ -73,7 +79,20 @@ namespace WPF_App
 
 		private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
 		{
+			this.Close();
+			Application.Current.Shutdown();
+		}
 
+		private void OpenFirstWindow(object sender, RoutedEventArgs e)
+		{
+			Window1 = new Window1();
+			Window1.Show();
+		}
+
+		private void OpenSecondWindow(object sender, RoutedEventArgs e)
+		{
+			Window2 = new Window2();
+			Window2.Show();
 		}
 	}
 }
