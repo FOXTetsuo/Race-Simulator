@@ -19,11 +19,12 @@ namespace WPF_App
 		public MainWindow()
 		{
 			// initialize window components and set the datacontext
-			InitializeComponent();
 			Data.Initialize();
 			Data.NextRace();
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
 			InitializeRace();
+			RaceNameLabel.FontSize = 30;
+			RaceNameLabel.FontFamily = new System.Windows.Media.FontFamily("Informal Roman");
 		}
 		//somewhere, the positioning for the racers is going wrong, plms fix
 		private void CurrentRace_RaceFinished(object? sender, EventArgs e)
@@ -65,6 +66,7 @@ namespace WPF_App
 
 		private void InitializeRace()
 		{
+			InitializeComponent();
 			//Resubscribe to events and initialize visualizer
 			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
 			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;

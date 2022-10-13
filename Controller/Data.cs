@@ -21,15 +21,15 @@ namespace Controller
 		}
 		public static void AddTracks()
 		{
-			Competition.Tracks.Enqueue(new Track("Rainbow Spaceroad", TrackBuilder("Rainbow Spaceroad")));
-			Competition.Tracks.Enqueue(new Track("Spacebase", TrackBuilder("Spacebase")));
-			Competition.Tracks.Enqueue(new Track("Vroemvroem-in-da-rondje", TrackBuilder("Vroemvroem-in-da-rondje")));
+//			Competition.Tracks.Enqueue(new Track("STAROFDACOMPETITION", TrackBuilder("STAROFDACOMPETITION")));
+//			Competition.Tracks.Enqueue(new Track("MEWHENDARACEISBIG", TrackBuilder("MEWHENDARACEISBIG")));
+			Competition.Tracks.Enqueue(new Track("NYEEEEEEEEEEEEEEEEEEEOM", TrackBuilder("NYEEEEEEEEEEEEEEEEEEEOM")));
 		}
 		// Takes the tracknname and builds the track. 
 		// Tracks are stored here
 		public static SectionTypes[] TrackBuilder(string trackName)
 		{
-			if (trackName.Equals("Rainbow Spaceroad"))
+			if (trackName.Equals("STAROFDACOMPETITION"))
 			{
 				SectionTypes[] build = new SectionTypes[]
 				{
@@ -47,7 +47,7 @@ namespace Controller
 				};
 				return build;
 			}
-			if (trackName.Equals("Spacebase"))
+			if (trackName.Equals("MEWHENDARACEISBIG"))
 			{
 				SectionTypes[] build = new SectionTypes[]
 				{
@@ -67,12 +67,19 @@ namespace Controller
 				};
 				return build;
 			}
-			if (trackName.Equals("Vroemvroem-in-da-rondje"))
+			if (trackName.Equals("NYEEEEEEEEEEEEEEEEEEEOM"))
 			{
 				SectionTypes[] build = new SectionTypes[]
 				{
+						SectionTypes.CornerNW,
 						SectionTypes.StartGrid,
-						SectionTypes.Finish
+						SectionTypes.CornerNE,
+						SectionTypes.CornerSE,
+						SectionTypes.Finish,
+						SectionTypes.CornerSW,
+
+
+
 
 				};
 				return build;

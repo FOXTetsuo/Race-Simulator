@@ -232,6 +232,26 @@ namespace WPF_App
 			TrackHeight = (YMax - YMin + 1);
 		}
 
+		public static void CalculateTrackSize()
+		{
+			TrackWidth = 2;
+			TrackHeight = 2;
+			foreach (Section section in Race.Track.Sections)
+			{
+				DetermineDirection(section.SectionType, _direction);
+
+				if (_direction == Direction.East)
+				{
+					TrackWidth++;
+				}
+
+				else if (_direction == Direction.South)
+				{
+					TrackHeight++;
+				}
+			}
+		}
+
 		public static void DetermineDirection(SectionTypes type, Direction dir)
 		{
 			switch (type)
