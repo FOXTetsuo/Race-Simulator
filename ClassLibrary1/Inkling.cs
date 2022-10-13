@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Driver : IParticipant
+    public class Inkling : IParticipant
     {
         public string Name { get; set; }
         public int Points { get; set; }
@@ -16,7 +16,7 @@ namespace Model
 		public int DistanceCovered { get; set; }
 		public int LoopsPassed { get; set; }
 
-		public Driver(string name, int points, IEquipment equipment, TeamColors teamcolor)
+		public Inkling(string name, int points, IEquipment equipment, TeamColors teamcolor)
         {
             Name = name;
             Points = points;

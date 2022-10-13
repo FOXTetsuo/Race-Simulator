@@ -40,22 +40,26 @@ namespace WPF_App
 		//somewhere, the positioning for the racers is going wrong, plms fix
 		private void CurrentRace_RaceFinished(object? sender, EventArgs e)
 		{
+			// Clear image cache
 			ImageHandler.Clear();
-
+			//Resubscribe to events and initialize visualizer
 			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
 			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
 			InitializeComponent();
 			WPFVisualizer.Initialize(Data.CurrentRace);
 
+			//Draw initial image
 			this.TrackImage.Dispatcher.BeginInvoke(
 			DispatcherPriority.Render,
 			new Action(() =>
 			{
+				TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
+				TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
 				this.TrackImage.Source = null;
 				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
 
 			}));
-
+			//start race
 			Data.CurrentRace.Start();
 		}
 
@@ -71,11 +75,6 @@ namespace WPF_App
 			}));
 
 		}
-
-        private void OpenMenu(object sender, RoutedEventArgs e)
-        {
-
-        }
 
 		private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
 		{

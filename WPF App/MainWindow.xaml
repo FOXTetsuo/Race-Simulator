@@ -15,7 +15,7 @@
         <Image x:Name="TrackImage" HorizontalAlignment="Left" Margin="0,20,0,0" Width="351" Height="240" VerticalAlignment="Top" Grid.ColumnSpan="3" OpacityMask="Black"/>
         <DockPanel LastChildFill="False" Margin="0,0,0,20" Grid.ColumnSpan="3">
             <Menu DockPanel.Dock="Top" Height="20" VerticalAlignment="Top">
-                <MenuItem Header="Menu" Click="OpenMenu">
+                <MenuItem Header="Menu">
                     <MenuItem x:Name="FirstWindowMenuItem" Header="Open first window" Click="OpenFirstWindow"/>
                     <MenuItem x:Name="SecondWindowMenuItem" Header="Open second window" Click="OpenSecondWindow"/>
                     <MenuItem x:Name="CloseApplication" Header="Close application" Click="MenuItem_Exit_Click"/>

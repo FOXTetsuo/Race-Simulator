@@ -117,29 +117,29 @@ namespace WPF_App
 
 			if (_direction == Direction.North || _direction == Direction.South)
 			{
-				if (side == "Left")
+				if (side.Equals("Left"))
 				{
 					yposition += (imageSize / 3);
 					xposition += (imageSize / 4);
 				}
-				else if (side == "Right")
+				else if (side.Equals("Right"))
 				{
 					yposition += (imageSize / 2);
-					xposition += ((imageSize / 4) * 2);
+					xposition += (imageSize / 2);
 				}
 			}
 
 			if (_direction == Direction.East || _direction == Direction.West)
 			{
-				if (side == "Left")
+				if (side.Equals("Left"))
 				{
 					xposition += (imageSize / 3);
 					yposition += (imageSize / 4);
 				}
-				else if (side == "Right")
+				else if (side.Equals("Right"))
 				{
 					xposition += (imageSize / 2);
-					yposition += ((imageSize / 2));
+					yposition += (imageSize / 2);
 				}
 			}
 
