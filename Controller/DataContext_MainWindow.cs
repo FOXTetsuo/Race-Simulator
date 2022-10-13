@@ -24,6 +24,7 @@ namespace Controller
 		public DataContext_MainWindow()
 		{
 			RaceTrackName = new Func<string>(() => Data.CurrentRace.Track.Name)();
+
 			Data.CurrentRace.DriversChanged += OnDriversChanged;
 			PropertyChanged += OnPropertyChanged;
 			Data.CurrentRace.RaceFinished += OnRaceFinished;

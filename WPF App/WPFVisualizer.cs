@@ -338,7 +338,7 @@ namespace WPF_App
 		#endregion
 
 		#region Graphics_Large_Local
-		private const String StartGrid = "WPF Images\\Road_L\\StraightL.png";
+		private const String StartGrid = "WPF Images\\Road_L\\StartGridL.png";
 		private const String CornerNE = "WPF Images\\Road_L\\CornerNEL.png";
 		private const String CornerNW = "WPF Images\\Road_L\\CornerNWL.png";
 		private const String CornerSE = "WPF Images\\Road_L\\CornerSEl.png";
