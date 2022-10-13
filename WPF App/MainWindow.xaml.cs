@@ -65,5 +65,15 @@ namespace WPF_App
 			}));
 
 		}
+
+        private void OpenMenu(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+		private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
 	}
 }

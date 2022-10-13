@@ -56,7 +56,7 @@ namespace RaceSimulatorTest
 		}
 
 		[Test]
-		public void PlaceContestants_ContestansOnTrack()
+		public void PlaceContestants_ContestantsOnTrack()
 		{
 			// Arrange
 			Data.Initialize();
@@ -72,33 +72,6 @@ namespace RaceSimulatorTest
 			else Assert.Fail();
 
 		}
-
-
-		//	[Test]
-		//	public void Start_StateUnderTest_ExpectedBehavior()
-		//	{
-		//		// Arrange
-		//		var race = new Race(TODO, TODO);
-
-		//		// Act
-		//		race.Start();
-
-		//		// Assert
-		//		Assert.Fail();
-		//	}
-
-		//	[Test]
-		//	public void CheckWhetherToMoveParticipants_StateUnderTest_ExpectedBehavior()
-		//	{
-		//		// Arrange
-		//		var race = new Race(TODO, TODO);
-
-		//		// Act
-		//		race.CheckWhetherToMoveParticipants();
-
-		//		// Assert
-		//		Assert.Fail();
-		//	}
 
 		//	[Test]
 		//	public void DetermineBroken_StateUnderTest_ExpectedBehavior()

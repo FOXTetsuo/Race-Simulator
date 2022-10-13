@@ -54,9 +54,6 @@ namespace WPF_App
 			
 			foreach (Section section in Race.Track.Sections)
 			{
-
-				//DrawDrivers(graphics, Race, section);
-
 				switch (section.SectionType)
 				{
 					case SectionTypes.StartGrid:
@@ -84,17 +81,13 @@ namespace WPF_App
 						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerSW), CalculateXDraw(), CalculateYDraw());
 						break;
 				}
-				DrawDrivers(graphics, Race, section);
+				DrawDriversInSection(graphics, Race, section);
 				DetermineDirection(section.SectionType, _direction);
 				moveImageCursor();
-				//DrawDrivers(graphics, Race, section);
 			}
-
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
-
-	
-		private static void DrawDrivers(Graphics graphics, Race race, Section section)
+		private static void DrawDriversInSection(Graphics graphics, Race race, Section section)
 		{
 			foreach (IParticipant participant in race.Participants)
 			{
@@ -112,11 +105,8 @@ namespace WPF_App
 
 			}
 		}
-
-
 		private static void DrawParticipant(Graphics graphics, IParticipant participant, string side)
 		{
-			// CALCULATION IS NOT WORKING CORRECTLY FOR THE SECTIONS
 			int xposition = CalculateXDraw();
 			int yposition = CalculateYDraw();
 			// match de participant aan de afbeelding

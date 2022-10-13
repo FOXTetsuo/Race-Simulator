@@ -5,14 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920">
+        Title="MainWindow" Height="1032" Width="1920">
     <Grid Background="#FF59C766">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="11*"/>
             <ColumnDefinition Width="363*"/>
         </Grid.ColumnDefinitions>
-        <Image x:Name="TrackImage" HorizontalAlignment="Left" Margin="0,10,0,0" Width="351" Height="241" VerticalAlignment="Top" Grid.ColumnSpan="3" OpacityMask="Black"/>
+        <Image x:Name="TrackImage" HorizontalAlignment="Left" Margin="0,20,0,0" Width="351" Height="240" VerticalAlignment="Top" Grid.ColumnSpan="3" OpacityMask="Black"/>
+        <DockPanel LastChildFill="False" Margin="0,0,0,20" Grid.ColumnSpan="3">
+            <Menu DockPanel.Dock="Top" Height="20" VerticalAlignment="Top">
+                <MenuItem Header="Menu" Click="OpenMenu">
+                    <MenuItem x:Name="OpenFirstWindow" Header="Open first window" Click="OpenFirstWindow"/>
+                    <MenuItem x:Name="OpenSecondWindow" Header="Open second window" Click="OpenSecondWindow"/>
+                    <MenuItem x:Name="CloseApplication" Header="Close application" Click="MenuItem_Exit_Click"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
 
     </Grid>
 </Window>
