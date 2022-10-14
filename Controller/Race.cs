@@ -49,47 +49,52 @@ namespace Controller
 			}
 		}
 
-		// plaats beginposities voor alle contestants
-		//TODO: Fix dat er per 1 mensen geplaced worden
 		public void PlaceContestants(Track track, List<IParticipant> participants)
+		// plaats beginposities voor alle contestants
 		{
 			// houdt bij waar in de lijst de foreach is
-			// index = -1 zodat het plaatsen begint 1 plek voor de start/finish
+			// index = -1 zodat het plaatsen 1 plek begint voor de start/finish
 			int index = -1;
 			foreach (Section section in track.Sections)
 			{
 				// als de start grid is gevonden begint het plaatsen
 				if (section.SectionType == SectionTypes.Finish)
 				{
-					// tempsection aanmaken die constant aangepast wordt
-					for (int i = 0; i < participants.Count; i += 2)
+					for (int i = 0; i < participants.Count; i += 1)
 					{
-						// zorgen dat er geen fucking outofbounds error komt :DDD
-						if ((index - i / 2) < 0)
+						// zorgt dat er geen out of bounds error kan komen, en zet de index naar de laatste track.	
+						// track.Sections.Count - 1 omdat dit 1 groter is dan de maximale array
+						// vervolgens + (i/2), omdat dit vervolgens in GetSectionData gebruikt wordt bij de volgende stap.
+						// zo garandeer je dat je altijd het laatste stuck section pakt.
+
+						if (index - (i/2) < 0)
 						{
-							index = track.Sections.Count;
+							index = track.Sections.Count -1 + (i/2);
 						}
+						
 						// maak / get sectiondata om aan te vullen
+						// i gedeeld door 2 zodat er 2 mensen per section geplaatst worden
+						// 0/2 == 0, 1/2 == 0;
+						
 						SectionData sectionData = GetSectionData(track.Sections.ElementAt(index - (i / 2)));
 						//checkt of dingen al gevuld zijn
 
 						if (sectionData.Left == null)
 						{
-							//eerste participant op linkerbaan
 							sectionData.Left = participants[i];
 
 							// onthoudt waar de participant is op dit moment
 							participants[i].CurrentSection = track.Sections.ElementAt(index - (i / 2));
 						}
 						// checkt of er wel nog twee participants zijn om toe te voegen m.b.v modulo
-						if (sectionData.Right == null && participants.Count % 2 == 0)
+						else if (sectionData.Right == null)
 						{
-							//tweede participant op rechterbaan
-							sectionData.Right = participants[i + 1];
+							sectionData.Right = participants[i];
 
 							// onthoudt waar de participant is op dit moment
-							participants[i + 1].CurrentSection = track.Sections.ElementAt(index - (i / 2));
+							participants[i].CurrentSection = track.Sections.ElementAt(index - (i / 2));
 						}
+						
 					}
 					return;
 				}
