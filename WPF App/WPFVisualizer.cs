@@ -241,24 +241,53 @@ namespace WPF_App
 		}
 
 		public static void CalculateTrackSize()
-		{
-			TrackWidth = 2;
-			TrackHeight = 2;
-			foreach (Section section in Race.Track.Sections)
 			{
-				DetermineDirection(section.SectionType, _direction);
+				int XCurrent = 0;
+				int YCurrent = 0;
+				int XMin = 0;
+				int YMin = 0;
+				int XMax = 0;
+				int YMax = 0;
 
-				if (_direction == Direction.East)
+				foreach (Section section in Race.Track.Sections)
 				{
-					TrackWidth++;
+					if (_direction == Direction.East)
+					{
+						XCurrent += 1;
+						if (XCurrent >= XMax)
+						{
+							XMax = XCurrent;
+						}
+					}
+					if (_direction == Direction.West)
+					{
+						XCurrent -= 1;
+						if (XCurrent <= XMin)
+						{
+							XMin = XCurrent;
+						}
+					}
+					if (_direction == Direction.North)
+					{
+						YCurrent += -1;
+						if (YCurrent <= YMin)
+						{
+							YMin = YCurrent;
+						}
+					}
+					if (_direction == Direction.South)
+					{
+						YCurrent += 1;
+						if (YCurrent >= YMax)
+						{
+							YMax = YCurrent;
+						}
+					}
+					DetermineDirection(section.SectionType, _direction);
 				}
-
-				else if (_direction == Direction.South)
-				{
-					TrackHeight++;
-				}
+				TrackWidth = (XMax - XMin + 1);
+				TrackHeight = (YMax - YMin + 1);
 			}
-		}
 
 		public static void DetermineDirection(SectionTypes type, Direction dir)
 		{

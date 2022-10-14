@@ -119,12 +119,8 @@ namespace Controller
 			}
 			else
 			{
-				// competition eds, pls call a function for it.
+				//TODO: competition ends, pls call a function for it.
 			}
 		}
-
-
 	}
-
-
 }
