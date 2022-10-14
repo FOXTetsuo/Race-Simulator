@@ -2,7 +2,9 @@
 using Model;
 using System;
 using System.Drawing;
+using System.Windows.Documents;
 using System.Windows.Media.Imaging;
+using Section = Model.Section;
 
 namespace WPF_App
 {
@@ -135,49 +137,47 @@ namespace WPF_App
 				}
 			}
 
-			if (_direction == Direction.East)
-			{
-				if (side == Side.Left)
-				{
-					xposition += ((participant.DistanceCovered/100) * imageSize);
-					yposition += (imageSize / 4);
-				}
-				else if (side == Side.Right)
-				{
-					xposition += ((participant.DistanceCovered / 100) * imageSize);
-					yposition += (imageSize / 2);
-				}
-			}
-
-			if (_direction == Direction.West)
-			{
-				if (side == Side.Left)
-				{
-					xposition -= ((participant.DistanceCovered / 100) * imageSize);
-					yposition += (imageSize / 4);
-				}
-				else if (side == Side.Right)
-				{
-					xposition -= ((participant.DistanceCovered / 100) * imageSize);
-					yposition += (imageSize / 2);
-				}
-			}
-
-
-
-			//if (_direction == Direction.East || _direction == Direction.West)
+			//if (_direction == Direction.East)
 			//{
 			//	if (side == Side.Left)
 			//	{
-			//		xposition += (imageSize / 3);
+			//		xposition += ((participant.DistanceCovered/100) * imageSize);
 			//		yposition += (imageSize / 4);
 			//	}
 			//	else if (side == Side.Right)
 			//	{
-			//		xposition += (imageSize / 2);
+			//		xposition += ((participant.DistanceCovered / 100) * imageSize);
 			//		yposition += (imageSize / 2);
 			//	}
 			//}
+
+			//if (_direction == Direction.West)
+			//{
+			//	if (side == Side.Left)
+			//	{
+			//		xposition -= ((participant.DistanceCovered / 100) * imageSize);
+			//		yposition += (imageSize / 4);
+			//	}
+			//	else if (side == Side.Right)
+			//	{
+			//		xposition -= ((participant.DistanceCovered / 100) * imageSize);
+			//		yposition += (imageSize / 2);
+			//	}
+			//}
+
+			if (_direction == Direction.East || _direction == Direction.West)
+			{
+				if (side == Side.Left)
+				{
+					xposition += (imageSize / 3);
+					yposition += (imageSize / 4);
+				}
+				else if (side == Side.Right)
+				{
+					xposition += (imageSize / 2);
+					yposition += (imageSize / 2);
+				}
+			}
 
 			//voeg hier mooie BROKE Squid art toe :DDD
 			if (participant.Equipment.IsBroken)
@@ -203,19 +203,38 @@ namespace WPF_App
 				switch (participant.Name)
 				{
 					case "Mike":
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid1), xposition, yposition);
+						graphics.DrawImage(rotateDriver(ImageHandler.CloneImageFromCache(Squid1)), xposition, yposition);
 						break;
 					case "Chrimst":
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid2), xposition, yposition);
+						graphics.DrawImage(rotateDriver(ImageHandler.CloneImageFromCache(Squid2)), xposition, yposition);
 						break;
 					case "Bruger":
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid3), xposition, yposition);
+						graphics.DrawImage(rotateDriver(ImageHandler.CloneImageFromCache(Squid3)), xposition, yposition);
 						break;
 					case "Pimpin":
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid4), xposition, yposition);
+						graphics.DrawImage(rotateDriver(ImageHandler.CloneImageFromCache(Squid4)), xposition, yposition);
 						break;
 				}
 			}
+			
+		}
+
+		public static Bitmap rotateDriver(Bitmap bitmap)
+		{
+			switch (_direction) 
+			{
+				case Direction.East:
+					bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
+					break;
+				case Direction.South:
+					bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
+					break;
+				case Direction.West:
+					bitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
+					break;
+			}
+
+			return bitmap;
 			
 		}
 
