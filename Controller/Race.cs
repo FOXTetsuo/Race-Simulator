@@ -102,7 +102,7 @@ namespace Controller
 			// dan advance je deze naar de volgende tracksection
 			
 			//Comment in case you're trying to fix bugs :')
-			DetermineBroken();
+			DetermineIfCarShouldBreak();
 			CheckWhetherToMoveParticipants();
 			DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
 		}
@@ -132,30 +132,14 @@ namespace Controller
 			//Timer.Start();
 		}
 
-		public void DetermineBroken()
+		public void DetermineIfCarShouldBreak()
 		{
 			foreach (IParticipant participant in Data.CurrentRace.Participants)
 			{
 				// 1 op 32 kans dat auto kapot gaat
 				if (participant.Equipment.IsBroken == false && (_random.Next(32) == 13))
 				{
-					participant.Equipment.IsBroken = true;
-					int determinePenalty = _random.Next(2);
-					switch (determinePenalty)
-					{
-						case 0:
-							if (participant.Equipment.Performance > 2)
-							{
-								participant.Equipment.Performance += -1;
-							}
-							break;
-						case 1:
-							if (participant.Equipment.Speed > 2)
-							{
-								participant.Equipment.Speed += -1;
-							}
-							break;
-					}
+					BreakCar(participant);
 				}
 				// recovery afhankelijk van quality
 				else if (participant.Equipment.Quality + _random.Next(30) >= 20)
@@ -164,6 +148,28 @@ namespace Controller
 				}
 			}
 		}
+
+		public void BreakCar(IParticipant participant)
+		{
+			participant.Equipment.IsBroken = true;
+			int determinePenalty = _random.Next(2);
+			switch (determinePenalty)
+			{
+				case 0:
+					if (participant.Equipment.Performance > 2)
+					{
+						participant.Equipment.Performance += -1;
+					}
+					break;
+				case 1:
+					if (participant.Equipment.Speed > 2)
+					{
+						participant.Equipment.Speed += -1;
+					}
+					break;
+			}
+		}
+		
 
 		public void AdvanceParticipant(IParticipant participant)
 		{
