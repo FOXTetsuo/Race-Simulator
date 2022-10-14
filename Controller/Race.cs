@@ -50,6 +50,7 @@ namespace Controller
 		}
 
 		// plaats beginposities voor alle contestants
+		//TODO: Fix dat er per 1 mensen geplaced worden
 		public void PlaceContestants(Track track, List<IParticipant> participants)
 		{
 			// houdt bij waar in de lijst de foreach is

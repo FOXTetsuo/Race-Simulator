@@ -219,6 +219,8 @@ namespace WPF_App
 			
 		}
 
+
+		
 		public static Bitmap rotateDriver(Bitmap bitmap)
 		{
 			switch (_direction) 
