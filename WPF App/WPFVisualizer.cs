@@ -116,7 +116,7 @@ namespace WPF_App
 		}
 		private static void DrawParticipant(Graphics graphics, IParticipant participant, Side side)
 		{
-			
+
 			int xposition = CalculateXDraw();
 			int yposition = CalculateYDraw();
 			// match de participant aan de afbeelding
@@ -135,19 +135,49 @@ namespace WPF_App
 				}
 			}
 
-			if (_direction == Direction.East || _direction == Direction.West)
+			if (_direction == Direction.East)
 			{
 				if (side == Side.Left)
 				{
-					xposition += (imageSize / 3);
+					xposition += ((participant.DistanceCovered/100) * imageSize);
 					yposition += (imageSize / 4);
 				}
 				else if (side == Side.Right)
 				{
-					xposition += (imageSize / 2);
+					xposition += ((participant.DistanceCovered / 100) * imageSize);
 					yposition += (imageSize / 2);
 				}
 			}
+
+			if (_direction == Direction.West)
+			{
+				if (side == Side.Left)
+				{
+					xposition -= ((participant.DistanceCovered / 100) * imageSize);
+					yposition += (imageSize / 4);
+				}
+				else if (side == Side.Right)
+				{
+					xposition -= ((participant.DistanceCovered / 100) * imageSize);
+					yposition += (imageSize / 2);
+				}
+			}
+
+
+
+			//if (_direction == Direction.East || _direction == Direction.West)
+			//{
+			//	if (side == Side.Left)
+			//	{
+			//		xposition += (imageSize / 3);
+			//		yposition += (imageSize / 4);
+			//	}
+			//	else if (side == Side.Right)
+			//	{
+			//		xposition += (imageSize / 2);
+			//		yposition += (imageSize / 2);
+			//	}
+			//}
 
 			//voeg hier mooie BROKE Squid art toe :DDD
 			if (participant.Equipment.IsBroken)
