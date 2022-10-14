@@ -266,16 +266,6 @@ namespace Controller
 			else return false;
 		}
 
-		//mogelijke leuke uitbreiding xdDDdd
-		public void OverTake(Section section)
-		{
-			// geef section mee die overgehaald moet worden
-			// pak de sectiondata, remove de racers.
-			// snellere racers vervolgens in deze sectiondata
-			// daarna de oude racers in het vorige stuck track
-
-		}
-
 		public void Cleaner()
 		{	
 
