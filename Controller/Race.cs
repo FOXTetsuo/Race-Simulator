@@ -169,7 +169,6 @@ namespace Controller
 					break;
 			}
 		}
-		
 
 		public void AdvanceParticipant(IParticipant participant)
 		{
