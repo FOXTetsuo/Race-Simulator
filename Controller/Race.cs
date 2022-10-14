@@ -53,11 +53,12 @@ namespace Controller
 		public void PlaceContestants(Track track, List<IParticipant> participants)
 		{
 			// houdt bij waar in de lijst de foreach is
-			int index = 0;
+			// index = -1 zodat het plaatsen begint 1 plek voor de start/finish
+			int index = -1;
 			foreach (Section section in track.Sections)
 			{
 				// als de start grid is gevonden begint het plaatsen
-				if (section.SectionType == SectionTypes.StartGrid)
+				if (section.SectionType == SectionTypes.Finish)
 				{
 					// tempsection aanmaken die constant aangepast wordt
 					for (int i = 0; i < participants.Count; i += 2)
@@ -88,8 +89,6 @@ namespace Controller
 							// onthoudt waar de participant is op dit moment
 							participants[i + 1].CurrentSection = track.Sections.ElementAt(index - (i / 2));
 						}
-						// voegt de participant(s) toe aan _positions.
-						//_positions.Add(track.Sections.ElementAt(index - (i)), sectionData);
 					}
 					return;
 				}
@@ -177,44 +176,22 @@ namespace Controller
 					{
 						i = -1;
 					}
-					SectionData NewData = GetSectionData(Track.Sections.ElementAt(i + 1));
+					SectionData newData = GetSectionData(Track.Sections.ElementAt(i + 1));
 
-					if (NewData.Left == null || NewData.Right == null)
+					if (newData.Left == null || newData.Right == null)
 					{
 						SectionData sectData = GetSectionData(section);
-
-						if (sectData.Left == participant)
-						{
-							sectData.Left = null;
-						}
-						else if (sectData.Right == participant)
-						{
-							sectData.Right = null;
-						}
-
-						if (NewData.Left == null)
-						{
-							NewData.Left = participant;
-						}
-						else if (NewData.Right == null)
-						{
-							NewData.Right = participant;
-						}
+						RemoveParticipantFromSectionData(sectData, participant);
+						PlaceParticipantOnSectionData(newData, participant);
 
 						participant.CurrentSection = Track.Sections.ElementAt(i + 1);
 
-						//hier breekkt somehow alles :DDD
 						if (CheckFinish(participant) == true)
 						{
 							participant.CurrentSection = null;
-							if (NewData.Left == participant)
-							{
-								NewData.Left = null;
-							}
-							else if (NewData.Right == participant)
-							{
-								NewData.Right = null;
-							}
+							
+							RemoveParticipantFromSectionData(newData, participant);
+
 							if (CheckRaceFinished() == true)
 							{
 								PrepareNextRace();
@@ -239,6 +216,29 @@ namespace Controller
 			Data.CurrentRace.Start();
 		}
 
+		public void RemoveParticipantFromSectionData(SectionData sectionData, IParticipant participant)
+		{
+			if (sectionData.Left == participant)
+			{
+				sectionData.Left = null;
+			}
+			else if (sectionData.Right == participant)
+			{
+				sectionData.Right = null;
+			}
+		}
+		public void PlaceParticipantOnSectionData(SectionData sectionData, IParticipant participant)
+		{
+			if (sectionData.Left == null)
+			{
+				sectionData.Left = participant;
+			}
+			else if (sectionData.Right == null)
+			{
+				sectionData.Right = participant;
+			}
+		}
+
 		public Boolean CheckRaceFinished()
 		{
 			foreach (Section section in Track.Sections)
@@ -257,7 +257,7 @@ namespace Controller
 			if (participant.CurrentSection.SectionType == SectionTypes.Finish)
 			{
 				participant.LoopsPassed += 1;
-				if (participant.LoopsPassed == 1)
+				if (participant.LoopsPassed == 2)
 				{
 					return true;
 				}

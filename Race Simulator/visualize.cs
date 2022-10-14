@@ -14,6 +14,7 @@ namespace Race_Simulator
 			xpos = 20;
 			ypos = 15;
 			Race = race;
+			_direction = Direction.East;
 			Data.CurrentRace.DriversChanged += OnDriversChanged;
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
 		}
@@ -111,11 +112,6 @@ namespace Race_Simulator
 					case SectionTypes.CornerSW:
 						DetermineDirection(SectionTypes.CornerSW, _direction);
 						PrintTrack(_SW, Race.GetSectionData(section));
-						break;
-					case SectionTypes.StartGrid:
-						// Hardcoded direction for now, can be changed by adding onto PrintTrack.
-						_direction = Direction.East;
-						PrintTrack(_start, Race.GetSectionData(section));
 						break;
 				}
 				// set where to draw the next part

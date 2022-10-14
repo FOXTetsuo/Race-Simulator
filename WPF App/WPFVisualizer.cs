@@ -16,6 +16,12 @@ namespace WPF_App
 			West = 270
 		}
 
+		public enum Side
+		{
+			Left,
+			Right
+		}
+		
 		public static Direction _direction { get; set; }
 		public static int TrackWidth { get; set; }
 		public static int TrackHeight { get; set; }
@@ -32,6 +38,7 @@ namespace WPF_App
 			xpos = 0;
 			ypos = 0;
 			Race = race;
+			_direction = Direction.East;
 			//DetermineTrackWidthAndHeight();
 			CalculateTrackSize();
 		}
@@ -57,9 +64,6 @@ namespace WPF_App
 			{
 				switch (section.SectionType)
 				{
-					case SectionTypes.StartGrid:
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(StartGrid), CalculateXDraw(), CalculateYDraw());
-						break;
 					case SectionTypes.Finish:
 						graphics.DrawImage(ImageHandler.CloneImageFromCache(Finish), CalculateXDraw(), CalculateYDraw());
 						break;
@@ -98,11 +102,11 @@ namespace WPF_App
 					{
 						if (race.GetSectionData(section).Left == participant)
 						{
-							DrawParticipant(graphics, participant, "Left");
+							DrawParticipant(graphics, participant, Side.Left);
 						}
 						if (race.GetSectionData(section).Right == participant)
 						{
-							DrawParticipant(graphics, participant, "Right");
+							DrawParticipant(graphics, participant, Side.Right);
 						}
 					}
 
@@ -110,20 +114,21 @@ namespace WPF_App
 			}
 			
 		}
-		private static void DrawParticipant(Graphics graphics, IParticipant participant, string side)
+		private static void DrawParticipant(Graphics graphics, IParticipant participant, Side side)
 		{
+			
 			int xposition = CalculateXDraw();
 			int yposition = CalculateYDraw();
 			// match de participant aan de afbeelding
 
 			if (_direction == Direction.North || _direction == Direction.South)
 			{
-				if (side.Equals("Left"))
+				if (side == Side.Left)
 				{
 					yposition += (imageSize / 3);
 					xposition += (imageSize / 4);
 				}
-				else if (side.Equals("Right"))
+				else if (side == Side.Right)
 				{
 					yposition += (imageSize / 2);
 					xposition += (imageSize / 2);
@@ -132,12 +137,12 @@ namespace WPF_App
 
 			if (_direction == Direction.East || _direction == Direction.West)
 			{
-				if (side.Equals("Left"))
+				if (side == Side.Left)
 				{
 					xposition += (imageSize / 3);
 					yposition += (imageSize / 4);
 				}
-				else if (side.Equals("Right"))
+				else if (side == Side.Right)
 				{
 					xposition += (imageSize / 2);
 					yposition += (imageSize / 2);
@@ -182,55 +187,6 @@ namespace WPF_App
 				}
 			}
 			
-		}
-
-		public static void DetermineTrackWidthAndHeight()
-		{
-			int XCurrent = 0;
-			int YCurrent = 1;
-			int XMin = 0;
-			int YMin = 0;
-			int XMax = 0;
-			int YMax = 0;
-
-			foreach (Section section in Race.Track.Sections)
-			{
-				if (_direction == Direction.East)
-				{
-					XCurrent += 1;
-					if (XCurrent >= XMax)
-					{
-						XMax = XCurrent;
-					}
-				}
-				if (_direction == Direction.West)
-				{
-					XCurrent -= 1;
-					if (XCurrent <= XMin)
-					{
-						XMin = XCurrent;
-					}
-				}
-				if (_direction == Direction.North)
-				{
-					YCurrent += -1;
-					if (YCurrent <= YMin)
-					{
-						YMin = YCurrent;
-					}
-				}
-				if (_direction == Direction.South)
-				{
-					YCurrent += 1;
-					if (YCurrent >= YMax)
-					{
-						YMax = YCurrent;
-					}
-				}
-				DetermineDirection(section.SectionType, _direction);
-			}
-			TrackWidth = (XMax - XMin + 1);
-			TrackHeight = (YMax - YMin + 1);
 		}
 
 		public static void CalculateTrackSize()
@@ -298,9 +254,6 @@ namespace WPF_App
 						_direction = Direction.South;
 					}
 					break;
-				case SectionTypes.StartGrid:
-					_direction = Direction.East;
-					break;
 			}
 
 		}
@@ -324,21 +277,7 @@ namespace WPF_App
 			}
 		}
 
-
-		#region XLGraphics
-		// Change to local reference?
-		//private const String StartGrid = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\HorizontalXL.png";
-		//private const String CornerNE = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\CornerNEXL.png";
-		//private const String CornerNW = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\CornerNWXL.png";
-		//private const String CornerSE = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\CornerSEXl.png";
-		//private const String CornerSW = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\CornerSWXL.png";
-		//private const String Straight = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\HorizontalXL.png";
-		//private const String StraightVertical = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\VerticalXL.png";
-		//private const String Finish = "C:\\Users\\Pownu\\source\\repos\\Race Simulator\\WPF App\\WPF Images\\Road\\FinishLineXL.png";
-		#endregion
-
 		#region Graphics_Large_Local
-		private const String StartGrid = "WPF Images\\Road_L\\StartGridL.png";
 		private const String CornerNE = "WPF Images\\Road_L\\CornerNEL.png";
 		private const String CornerNW = "WPF Images\\Road_L\\CornerNWL.png";
 		private const String CornerSE = "WPF Images\\Road_L\\CornerSEl.png";
