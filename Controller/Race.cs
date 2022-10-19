@@ -289,7 +289,7 @@ namespace Controller
 			else return false;
 		}
 
-		private void Cleaner()
+		public void Cleaner()
 		{	
 
 			foreach (IParticipant participant in Participants)

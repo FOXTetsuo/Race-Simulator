@@ -9,7 +9,7 @@
         Title="Competition Info" Height="450" Width="800" Icon="/Splatoon3_Overview_Splatted_Squid.png">
     <Grid>
         <Label Content="Leaderboard:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="148"/>
-        <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="0,41,425,10" IsReadOnly="True" >
+        <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="0,41,425,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Current Position - TODO"  Binding="{Binding }"/>
                 <DataGridTextColumn Header="Inkling Name" Binding="{Binding Name}" />

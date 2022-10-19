@@ -23,7 +23,6 @@ namespace WPF_App
 	{
 		public RaceInfoWindow()
 		{
-		
 			InitializeComponent();
 
 		}

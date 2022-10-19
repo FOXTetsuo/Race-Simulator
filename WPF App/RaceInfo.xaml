@@ -8,10 +8,24 @@
         mc:Ignorable="d"
         Title="Race information" Height="450" Width="800" Icon="/Splatoon3_Overview_Splatted_Squid.png">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="41*"/>
-            <ColumnDefinition Width="759*"/>
-        </Grid.ColumnDefinitions>
+        <Label Content="Inkling information:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="148"/>
+        <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="0,41,10,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" >
+            <DataGrid.DataContext>
+                <Controller:DataContext_CompetitionInfoWindow/>
+            </DataGrid.DataContext>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn></DataGridTemplateColumn>
+                <DataGridTextColumn Header="Inkling Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Laps done" Binding="{Binding LoopsPassed}" />
+                <DataGridTextColumn Header="Distance lapped in current section" Binding="{Binding DistanceCovered}" />
+                <DataGridTextColumn Header="Performance" Binding="{Binding Equipment.Performance}" />
+                <DataGridTextColumn Header="Equipment quality" Binding="{Binding Equipment.Quality}" />
+                <DataGridTextColumn Header="Speed" Binding="{Binding Equipment.Speed}" />
+                <DataGridCheckBoxColumn Header="Broken" Binding="{Binding Equipment.IsBroken}" />
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <Label Content="Tracks left in competition" HorizontalAlignment="Left" Margin="400,10,0,0" VerticalAlignment="Top" Width="148"/>
 
     </Grid>
 </Window>
