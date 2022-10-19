@@ -14,7 +14,13 @@
                 <Controller:DataContext_CompetitionInfoWindow/>
             </DataGrid.DataContext>
             <DataGrid.Columns>
-                <DataGridTemplateColumn></DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="/WPF Images/Squid1_S.png" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Inkling Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Laps done" Binding="{Binding LoopsPassed}" />
                 <DataGridTextColumn Header="Distance lapped in current section" Binding="{Binding DistanceCovered}" />
