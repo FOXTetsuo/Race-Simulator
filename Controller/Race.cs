@@ -7,9 +7,12 @@ namespace Controller
 {
 	public class Race
 	{
+		
 		public event EventHandler<DriversChangedEventArgs> DriversChanged;
 		
 		public event EventHandler<EventArgs> RaceFinished;
+		public int PointIndex { get; set; }
+		public int AmountOfLaps { get; set; }
 		private System.Timers.Timer Timer { get; set; }
 		private Random _random { get; set; }
 		public Track Track { get; set; }
@@ -29,6 +32,8 @@ namespace Controller
 		// constructor
 		public Race(Track track, List<IParticipant>? participants)
 		{
+			PointIndex = 1;
+			AmountOfLaps = 1;
 			Timer = new System.Timers.Timer(500);
 			Timer.Elapsed += OnTimedEvent;
 			_random = new Random(DateTime.Now.Millisecond);
@@ -132,7 +137,7 @@ namespace Controller
 				if (participant.DistanceCovered >= 100 && participant.Equipment.IsBroken == false)
 				{
 					participant.DistanceCovered += -100 ;
-					AdvanceParticipant(participant);
+					AdvanceParticipantIfPossible(participant);
 				}
 			}
 			//Timer.Start();
@@ -176,7 +181,7 @@ namespace Controller
 			}
 		}
 
-		public void AdvanceParticipant(IParticipant participant)
+		public void AdvanceParticipantIfPossible(IParticipant participant)
 		{
 			int i = 0;
 			foreach (Section section in Track.Sections)
@@ -210,14 +215,15 @@ namespace Controller
 						}
 						return;
 					}
-
-					else participant.DistanceCovered = 100;
+					// participant distancecovered terug naar wat hij was voordat de advanceparticipant functie gecallt werd
+					else participant.DistanceCovered += 100;
 				}
 				i++;
 				
 			}
 		}
 
+		//TODO: methods hieronder private, maar dan kan je ze natuurlijk ook niet meer testen
 		private void PrepareNextRace()
 		{
 			Cleaner();
@@ -227,7 +233,7 @@ namespace Controller
 			Data.CurrentRace.Start();
 		}
 
-		public void RemoveParticipantFromSectionData(SectionData sectionData, IParticipant participant)
+		private void RemoveParticipantFromSectionData(SectionData sectionData, IParticipant participant)
 		{
 			if (sectionData.Left == participant)
 			{
@@ -238,7 +244,7 @@ namespace Controller
 				sectionData.Right = null;
 			}
 		}
-		public void PlaceParticipantOnSectionData(SectionData sectionData, IParticipant participant)
+		private void PlaceParticipantOnSectionData(SectionData sectionData, IParticipant participant)
 		{
 			if (sectionData.Left == null)
 			{
@@ -250,7 +256,7 @@ namespace Controller
 			}
 		}
 
-		public Boolean CheckRaceFinished()
+		private Boolean CheckRaceFinished()
 		{
 			foreach (Section section in Track.Sections)
 			{
@@ -262,14 +268,21 @@ namespace Controller
 			return true;
 		}
 
-		// mogelijk parameter Track toevoegen, zodat elke race ander aantal rondjes heeft
-		public Boolean CheckFinish(IParticipant participant)
+		private Boolean CheckFinish(IParticipant participant)
 		{
 			if (participant.CurrentSection.SectionType == SectionTypes.Finish)
 			{
 				participant.LoopsPassed += 1;
-				if (participant.LoopsPassed == 2)
+				if (participant.LoopsPassed == AmountOfLaps+1)
+					// +1 omdat participants voor de finish beginnen en dus altijd 1 loop passen aan het begin van de race
 				{
+					participant.Points += ((6 / PointIndex) - 1);
+					// First to finish gets 6 points
+					// Second to finish gets 3 points
+					// Third gets 2 points
+					// Fourth/Fifth/Sixth gets 1 point
+					// Anything after gets nothing
+					PointIndex++;
 					return true;
 				}
 				else return false;
@@ -277,7 +290,7 @@ namespace Controller
 			else return false;
 		}
 
-		public void Cleaner()
+		private void Cleaner()
 		{	
 
 			foreach (IParticipant participant in Participants)

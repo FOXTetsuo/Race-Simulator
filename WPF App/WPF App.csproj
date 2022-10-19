@@ -101,6 +101,7 @@
 
   <ItemGroup>
     <Resource Include="Splatoon3_Overview_Splatted_Squid.png" />
+    <Resource Include="WPF Images\Splatoon3_Overview_Splatted_Squid.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,8 +14,8 @@ namespace WPF_App
 	
 	public partial class MainWindow : Window
 	{
-		private Window1 Window1;
-		private Window2 Window2;
+		private CompetitionInfoWindow CompetitionInfoWindow;
+		private RaceInfoWindow RaceInfoWindow;
 		public MainWindow()
 		{
 			// initialize window components and set the datacontext
@@ -52,16 +52,16 @@ namespace WPF_App
 			Application.Current.Shutdown();
 		}
 
-		private void OpenFirstWindow(object sender, RoutedEventArgs e)
+		private void OpenCompetitionInfoWindow(object sender, RoutedEventArgs e)
 		{
-			Window1 = new Window1();
-			Window1.Show();
+			CompetitionInfoWindow = new CompetitionInfoWindow();
+			CompetitionInfoWindow.Show();
 		}
 
-		private void OpenSecondWindow(object sender, RoutedEventArgs e)
+		private void OpenRaceInfoWindow(object sender, RoutedEventArgs e)
 		{
-			Window2 = new Window2();
-			Window2.Show();
+			RaceInfoWindow = new RaceInfoWindow();
+			RaceInfoWindow.Show();
 		}
 
 		private void InitializeRace()

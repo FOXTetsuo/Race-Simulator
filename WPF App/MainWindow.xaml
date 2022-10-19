@@ -6,7 +6,7 @@
 		xmlns:local="clr-namespace:WPF_App"
 		xmlns:Controller="clr-namespace:Controller;assembly=Controller" x:Class="WPF_App.MainWindow"
 		mc:Ignorable="d"
-		Title="MainWindow" Height="1080" Width="1920">
+		Title="Inkling Race Simulator" Height="1080" Width="1920" Icon="/Splatoon3_Overview_Splatted_Squid.png">
     <Window.DataContext>
         <Controller:DataContext_MainWindow/>
     </Window.DataContext>
@@ -20,8 +20,8 @@
         <DockPanel LastChildFill="False" Margin="0,0,0,20" Grid.ColumnSpan="3">
             <Menu DockPanel.Dock="Top" Height="20" VerticalAlignment="Top">
                 <MenuItem Header="Menu">
-                    <MenuItem x:Name="FirstWindowMenuItem" Header="Open first window" Click="OpenFirstWindow"/>
-                    <MenuItem x:Name="SecondWindowMenuItem" Header="Open second window" Click="OpenSecondWindow"/>
+                    <MenuItem x:Name="FirstWindowMenuItem" Header="Open competition information window" Click="OpenCompetitionInfoWindow"/>
+                    <MenuItem x:Name="SecondWindowMenuItem" Header="Open race information window" Click="OpenRaceInfoWindow"/>
                     <MenuItem x:Name="CloseApplication" Header="Close application" Click="MenuItem_Exit_Click"/>
                 </MenuItem>
             </Menu>

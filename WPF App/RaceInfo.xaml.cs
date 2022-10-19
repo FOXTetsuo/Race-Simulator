@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +19,14 @@ namespace WPF_App
 	/// <summary>
 	/// Interaction logic for Window2.xaml
 	/// </summary>
-	public partial class Window2 : Window
+	public partial class RaceInfoWindow : Window
 	{
-		public Window2()
+		public RaceInfoWindow()
 		{
+		
 			InitializeComponent();
+
 		}
+
 	}
 }

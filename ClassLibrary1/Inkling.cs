@@ -16,10 +16,10 @@ namespace Model
 		public int DistanceCovered { get; set; }
 		public int LoopsPassed { get; set; }
 
-		public Inkling(string name, int points, IEquipment equipment, TeamColors teamcolor)
+		public Inkling(string name, IEquipment equipment, TeamColors teamcolor)
         {
             Name = name;
-            Points = points;
+            Points = 0;
             Equipment = equipment;
             TeamColor = teamcolor;
 			DistanceCovered = 0;

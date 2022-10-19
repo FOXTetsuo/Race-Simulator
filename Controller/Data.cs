@@ -14,23 +14,21 @@ namespace Controller
 		}
 		public static void AddParticipants()
 		{
-			Competition.Participants.Add(new Inkling("Mike", 2, new Car(10, 5, 10, false), TeamColors.Blue));
-			Competition.Participants.Add(new Inkling("Chrimst", 2, new Car(1, 5, 10, false), TeamColors.Green));
-			Competition.Participants.Add(new Inkling("Bruger", 2, new Car(7, 10, 10, false), TeamColors.Yellow));
-			Competition.Participants.Add(new Inkling("Pimpin", 2, new Car(10, 10, 10, false), TeamColors.Red));
-			Competition.Participants.Add(new Inkling("Bruger", 2, new Car(7, 10, 10, false), TeamColors.Yellow));
-			Competition.Participants.Add(new Inkling("Bruger", 2, new Car(7, 10, 10, false), TeamColors.Yellow));
-			Competition.Participants.Add(new Inkling("Bruger", 2, new Car(7, 10, 10, false), TeamColors.Yellow));
+			Competition.Participants.Add(new Inkling("Mike", new Car(10, 5, 10, false), TeamColors.Blue));
+			Competition.Participants.Add(new Inkling("Chrimst", new Car(1, 5, 10, false), TeamColors.Green));
+			Competition.Participants.Add(new Inkling("Bruger",  new Car(7, 10, 10, false), TeamColors.Yellow));
+			Competition.Participants.Add(new Inkling("Pimpin", new Car(10, 10, 10, false), TeamColors.Red));
 		}
 		public static void AddTracks()
 		{
-		//	Competition.Tracks.Enqueue(new Track("STAROFDACOMPETITION", TrackBuilder("STAROFDACOMPETITION")));
+			Competition.Tracks.Enqueue(new Track("STAROFDACOMPETITION", TrackBuilder("STAROFDACOMPETITION")));
 			Competition.Tracks.Enqueue(new Track("MEWHENDARACEISBIG", TrackBuilder("MEWHENDARACEISBIG")));
-		//	Competition.Tracks.Enqueue(new Track("NYEEEEEEEEEEEEEEEEEEEOM", TrackBuilder("NYEEEEEEEEEEEEEEEEEEEOM")));
+			Competition.Tracks.Enqueue(new Track("NYEEEEEEEEEEEEEEEEEEEOM", TrackBuilder("NYEEEEEEEEEEEEEEEEEEEOM")));
 		}
+		
+		public static SectionTypes[] TrackBuilder(string trackName)
 		// Takes the tracknname and builds the track. 
 		// Tracks are stored here
-		public static SectionTypes[] TrackBuilder(string trackName)
 		{
 			if (trackName.Equals("STAROFDACOMPETITION"))
 			{
@@ -112,8 +110,9 @@ namespace Controller
 				return build;
 			}
 		}
-		// Makes a new race if it didn't exist, otherwise goes to the next race
+		
 		public static void NextRace()
+		// Makes a new track from the queue of races. If there are no races to be loaded, end the competition
 		{
 			Track newTrack = Competition.NextTrack();
 			if (newTrack != null)
@@ -123,7 +122,14 @@ namespace Controller
 			else
 			{
 				//TODO: competition ends, pls call a function for it.
+				EndCompetition();
 			}
+		}
+		private static void EndCompetition()
+		{
+			// TODO: remove all tracks, reset all drivers, collect points
+			// TODO: put drivers in leaderboard, show instead of other PNG
+			// TODO: add button to restart competition
 		}
 	}
 }
