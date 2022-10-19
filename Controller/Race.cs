@@ -277,10 +277,9 @@ namespace Controller
 					// +1 omdat participants voor de finish beginnen en dus altijd 1 loop passen aan het begin van de race
 				{
 					participant.Points += ((6 / PointIndex) - 1);
-					// First to finish gets 6 points
-					// Second to finish gets 3 points
-					// Third gets 2 points
-					// Fourth/Fifth/Sixth gets 1 point
+					// First to finish gets 5 points
+					// Second to finish gets 2 points
+					// Third gets 1 points
 					// Anything after gets nothing
 					PointIndex++;
 					return true;
