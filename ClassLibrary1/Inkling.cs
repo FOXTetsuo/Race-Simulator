@@ -25,7 +25,7 @@ namespace Model
 		public Random Random { get; set; }
 		public string FunFact { get; set; }
 
-		public List<String> FunFacts = new List<string> 
+		public static List<String> FunFacts = new List<string> 
 		{
 			"Loves the color purple",
 			"Believes in a secret government conspiracy",
