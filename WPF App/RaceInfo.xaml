@@ -9,7 +9,7 @@
         Title="Race information" Height="450" Width="800" Icon="/Splatoon3_Overview_Splatted_Squid.png">
     <Grid>
         <Label Content="Inkling information:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="148"/>
-        <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="0,41,10,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" >
+        <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="0,41,10,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" LoadingRow="Grid_OnLoadingRow" >
             <DataGrid.DataContext>
                 <Controller:DataContext_CompetitionInfoWindow/>
             </DataGrid.DataContext>
@@ -17,7 +17,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="/WPF Images/Squid1_S.png" />
+                            <Image Source="{Binding ImageSource}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -31,7 +31,6 @@
             </DataGrid.Columns>
 
         </DataGrid>
-        <Label Content="Tracks left in competition" HorizontalAlignment="Left" Margin="400,10,0,0" VerticalAlignment="Top" Width="148"/>
 
     </Grid>
 </Window>

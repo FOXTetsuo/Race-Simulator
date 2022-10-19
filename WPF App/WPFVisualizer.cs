@@ -3,6 +3,7 @@ using Model;
 using System;
 using System.Drawing;
 using System.Windows.Documents;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Section = Model.Section;
 
@@ -35,6 +36,7 @@ namespace WPF_App
 
 		public static void Initialize(Race race)
 		{
+			DetermineImageSources();
 			//TrackWidth = 10;
 			//TrackHeight = 10;
 			xpos = 0;
@@ -45,7 +47,31 @@ namespace WPF_App
 			CalculateTrackSize();
 		}
 
-
+		public static void DetermineImageSources()
+		{
+			foreach (IParticipant participant in Data.CurrentRace.Participants)
+			{
+				switch (participant.TeamColor)
+				{
+					case TeamColors.Orange:
+						participant.ImageSource = WPFVisualizer.Squid1;
+						participant.BrokeImageSource = WPFVisualizer.Squid1_Ink;
+						break;
+					case TeamColors.Green:
+						participant.ImageSource = WPFVisualizer.Squid2;
+						participant.BrokeImageSource = WPFVisualizer.Squid2_Ink;
+						break;
+					case TeamColors.Purple:
+						participant.ImageSource = WPFVisualizer.Squid3;
+						participant.BrokeImageSource = WPFVisualizer.Squid3_Ink;
+						break;
+					case TeamColors.Red:
+						participant.ImageSource = WPFVisualizer.Squid4;
+						participant.BrokeImageSource = WPFVisualizer.Squid4_Ink;
+						break;
+				}
+			}
+		}
 
 		public static int CalculateXDraw()
 		{
@@ -182,45 +208,15 @@ namespace WPF_App
 			//voeg hier mooie BROKE Squid art toe :DDD
 			if (participant.Equipment.IsBroken)
 			{
-				switch (participant.Name)
-				{
-					case "Mike":
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid1_Ink), xposition, yposition);
-						break;
-					case "Chrimst":
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid2_Ink), xposition, yposition);
-						break;
-					case "Bruger":
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid3_Ink), xposition, yposition);
-						break;
-					case "Pimpin":
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid4_Ink), xposition, yposition);
-						break;
-				}
+				graphics.DrawImage(rotateDriver(ImageHandler.CloneImageFromCache(participant.BrokeImageSource)), xposition, yposition);
 			}
 			else
 			{
-				switch (participant.Name)
-				{
-					case "Mike":
-						graphics.DrawImage(rotateDriver(ImageHandler.CloneImageFromCache(Squid1)), xposition, yposition);
-						break;
-					case "Chrimst":
-						graphics.DrawImage(rotateDriver(ImageHandler.CloneImageFromCache(Squid2)), xposition, yposition);
-						break;
-					case "Bruger":
-						graphics.DrawImage(rotateDriver(ImageHandler.CloneImageFromCache(Squid3)), xposition, yposition);
-						break;
-					case "Pimpin":
-						graphics.DrawImage(rotateDriver(ImageHandler.CloneImageFromCache(Squid4)), xposition, yposition);
-						break;
-				}
+				graphics.DrawImage(rotateDriver(ImageHandler.CloneImageFromCache(participant.ImageSource)), xposition, yposition);
 			}
 			
 		}
 
-
-		
 		public static Bitmap rotateDriver(Bitmap bitmap)
 		{
 			switch (_direction) 

@@ -14,10 +14,11 @@ namespace Controller
 		}
 		public static void AddParticipants()
 		{
-			Competition.Participants.Add(new Inkling("Mike", new Genetics(10, 5, 10, false), TeamColors.Blue));
+			Competition.Participants.Add(new Inkling("Mike", new Genetics(10, 5, 10, false), TeamColors.Orange));
 			Competition.Participants.Add(new Inkling("Chrimst", new Genetics(1, 5, 10, false), TeamColors.Green));
-			Competition.Participants.Add(new Inkling("Bruger",  new Genetics(7, 10, 10, false), TeamColors.Yellow));
+			Competition.Participants.Add(new Inkling("Bruger",  new Genetics(7, 10, 10, false), TeamColors.Purple));
 			Competition.Participants.Add(new Inkling("Pimpin", new Genetics(10, 10, 10, false), TeamColors.Red));
+
 		}
 		public static void AddTracks()
 		{
