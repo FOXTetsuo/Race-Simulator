@@ -38,7 +38,7 @@ namespace Model
 			"Has a garden where they grow hopes and dreams",
 			"Isn't actually an inkling...",
 			"Has a pet cat named Binky",
-			"Doesn't understand the difference between",
+			"Doesn't understand the difference between a skiff and a rowboat",
 			"Believes in fairies"
 		};
 
