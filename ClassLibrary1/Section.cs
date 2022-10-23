@@ -24,7 +24,6 @@ namespace Model
 		CornerSW,
         CornerNE,
 		CornerNW,
-		StartGrid,
         Finish
     }
 }

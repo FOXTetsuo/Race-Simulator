@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace Model
 {
 	//sectielengte = 100m
-	public interface IEquipment
+	public interface IEquipment : INotifyPropertyChanged
 	{
 		public int Quality { get; set; }
 		public int Performance { get; set; }

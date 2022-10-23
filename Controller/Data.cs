@@ -1,10 +1,11 @@
 ﻿ using Model;
+using System.Runtime.CompilerServices;
 
 namespace Controller
 {
 	public static class Data
 	{
-		static Competition? Competition { get; set; }
+		public static Competition? Competition { get; set; }
 		public static Race? CurrentRace { get; set; }
 		public static void Initialize()
 		{
@@ -14,10 +15,11 @@ namespace Controller
 		}
 		public static void AddParticipants()
 		{
-			Competition.Participants.Add(new Inkling("Mike", 2, new Car(10, 5, 10, false), TeamColors.Blue));
-			Competition.Participants.Add(new Inkling("Chrimst", 2, new Car(1, 5, 10, false), TeamColors.Green));
-			Competition.Participants.Add(new Inkling("Bruger", 2, new Car(7, 10, 10, false), TeamColors.Yellow));
-			Competition.Participants.Add(new Inkling("Pimpin", 2, new Car(10, 10, 10, false), TeamColors.Red));
+			Competition.Participants.Add(new Inkling("Mike", new Genetics(10, 5, 10, false), TeamColors.Orange));
+			Competition.Participants.Add(new Inkling("Chrimst", new Genetics(1, 5, 10, false), TeamColors.Green));
+			Competition.Participants.Add(new Inkling("Bruger",  new Genetics(7, 10, 10, false), TeamColors.Purple));
+			Competition.Participants.Add(new Inkling("Pimpin", new Genetics(10, 10, 10, false), TeamColors.Red));
+
 		}
 		public static void AddTracks()
 		{
@@ -25,9 +27,10 @@ namespace Controller
 			Competition.Tracks.Enqueue(new Track("MEWHENDARACEISBIG", TrackBuilder("MEWHENDARACEISBIG")));
 			Competition.Tracks.Enqueue(new Track("NYEEEEEEEEEEEEEEEEEEEOM", TrackBuilder("NYEEEEEEEEEEEEEEEEEEEOM")));
 		}
+		
+		public static SectionTypes[] TrackBuilder(string trackName)
 		// Takes the tracknname and builds the track. 
 		// Tracks are stored here
-		public static SectionTypes[] TrackBuilder(string trackName)
 		{
 			if (trackName.Equals("STAROFDACOMPETITION"))
 			{
@@ -35,7 +38,7 @@ namespace Controller
 				{
 						SectionTypes.CornerNW,
 						SectionTypes.Finish,
-						SectionTypes.StartGrid,
+						SectionTypes.Straight,
 						SectionTypes.CornerNE,
 						SectionTypes.StraightVertical,
 						SectionTypes.CornerSE,
@@ -52,8 +55,8 @@ namespace Controller
 				SectionTypes[] build = new SectionTypes[]
 				{
 						SectionTypes.CornerNW,
+						SectionTypes.Straight,
 						SectionTypes.Finish,
-						SectionTypes.StartGrid,
 						SectionTypes.CornerNE,
 						SectionTypes.StraightVertical,
 						SectionTypes.StraightVertical,
@@ -73,11 +76,11 @@ namespace Controller
 				SectionTypes[] build = new SectionTypes[]
 				{
 						SectionTypes.CornerNW,
-						SectionTypes.StartGrid,
 						SectionTypes.Straight,
 						SectionTypes.Straight,
 						SectionTypes.Straight,
 						SectionTypes.Straight,
+						SectionTypes.Finish,
 						SectionTypes.CornerNE,
 						SectionTypes.StraightVertical,
 						SectionTypes.CornerSW,
@@ -92,7 +95,7 @@ namespace Controller
 						SectionTypes.StraightVertical,
 						SectionTypes.CornerSE,
 						SectionTypes.Straight,
-						SectionTypes.Finish,
+						SectionTypes.Straight,
 						SectionTypes.CornerSW,
 						SectionTypes.StraightVertical,
 						SectionTypes.StraightVertical,
@@ -104,27 +107,28 @@ namespace Controller
 			{
 				SectionTypes[] build = new SectionTypes[]
 				{
-					SectionTypes.StartGrid,
+					SectionTypes.Finish,
 				};
 				return build;
 			}
 		}
-		// Makes a new race if it didn't exist, otherwise goes to the next race
-		public static void NextRace()
+		
+		public static bool NextRace()
+		// Makes a new track from the queue of races. If there are no races to be loaded, end the competition
 		{
 			Track newTrack = Competition.NextTrack();
 			if (newTrack != null)
 			{
 				CurrentRace = new Race(newTrack, Competition.Participants);
+				return true;
 			}
 			else
-			{
-				// competition eds, pls call a function for it.
+			{		
+				Competition.EndCompetition();
+				return false;
 			}
 		}
 
-
 	}
-
-
 }
+

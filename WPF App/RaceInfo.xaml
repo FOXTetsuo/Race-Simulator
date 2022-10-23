@@ -1,12 +1,35 @@
-﻿<Window x:Class="WPF_App.Window2"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_App"
+        xmlns:Controller="clr-namespace:Controller;assembly=Controller" x:Class="WPF_App.RaceInfoWindow"
         mc:Ignorable="d"
-        Title="Window2" Height="450" Width="800">
+        Title="Race information" Height="450" Width="695" Icon="/Splatoon3_Overview_Splatted_Squid.png" ResizeMode="NoResize">
     <Grid>
-        
+        <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="10,10,10,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" LoadingRow="Grid_OnLoadingRow" Width="Auto" >
+            <DataGrid.DataContext>
+                <Controller:DataContext_CompetitionInfoWindow/>
+            </DataGrid.DataContext>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImageSource}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Inkling Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Laps done" Binding="{Binding LoopsPassed}" />
+                <DataGridTextColumn Header="Distance lapped in current section" Binding="{Binding DistanceCovered}" />
+                <DataGridTextColumn Header="Performance" Binding="{Binding Equipment.Performance}" />
+                <DataGridTextColumn Header="Equipment quality" Binding="{Binding Equipment.Quality}" />
+                <DataGridTextColumn Header="Speed" Binding="{Binding Equipment.Speed}" />
+                <DataGridCheckBoxColumn Header="Broken" Binding="{Binding Equipment.IsBroken}" />
+            </DataGrid.Columns>
+
+        </DataGrid>
+
     </Grid>
 </Window>

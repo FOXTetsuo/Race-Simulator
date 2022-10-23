@@ -2,6 +2,7 @@
 using Model;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace WPF_App
@@ -14,24 +15,45 @@ namespace WPF_App
 	
 	public partial class MainWindow : Window
 	{
-		private Window1 Window1;
-		private Window2 Window2;
+		private CompetitionInfoWindow CompetitionInfoWindow;
+		private RaceInfoWindow RaceInfoWindow;
 		public MainWindow()
 		{
 			// initialize window components and set the datacontext
+			StartCompetition();
+		}
+
+		public void StartCompetition()
+		{
 			Data.Initialize();
 			Data.NextRace();
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
 			InitializeRace();
+			RaceNameLabel.Visibility = Visibility.Visible;
 			RaceNameLabel.FontSize = 30;
 			RaceNameLabel.FontFamily = new System.Windows.Media.FontFamily("Informal Roman");
 		}
-		//somewhere, the positioning for the racers is going wrong, plms fix
+
 		private void CurrentRace_RaceFinished(object? sender, EventArgs e)
 		{
 			// Clear image cache
 			ImageHandler.Clear();
 			InitializeRace();
+		}
+
+		private void OnCompetitionOver(object? sender, EventArgs e)
+		{
+			//Delete trackimage
+			this.TrackImage.Dispatcher.BeginInvoke(
+			DispatcherPriority.Render,
+			new Action(() =>
+			{
+				TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
+				TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
+				this.TrackImage.Source = null;
+				this.TrackImage.Source = WPFVisualizer.DrawBackground();
+				RaceNameLabel.Visibility = Visibility.Hidden;
+			}));
 		}
 
 		private void CurrentRace_DriversChanged(object? sender, DriversChangedEventArgs e)
@@ -52,22 +74,23 @@ namespace WPF_App
 			Application.Current.Shutdown();
 		}
 
-		private void OpenFirstWindow(object sender, RoutedEventArgs e)
+		private void OpenCompetitionInfoWindow(object sender, RoutedEventArgs e)
 		{
-			Window1 = new Window1();
-			Window1.Show();
+			CompetitionInfoWindow = new CompetitionInfoWindow();
+			CompetitionInfoWindow.Show();
 		}
 
-		private void OpenSecondWindow(object sender, RoutedEventArgs e)
+		private void OpenRaceInfoWindow(object sender, RoutedEventArgs e)
 		{
-			Window2 = new Window2();
-			Window2.Show();
+			RaceInfoWindow = new RaceInfoWindow();
+			RaceInfoWindow.Show();
 		}
 
 		private void InitializeRace()
 		{
 			InitializeComponent();
 			//Resubscribe to events and initialize visualizer
+			Data.Competition.CompetitionFinished += OnCompetitionOver;
 			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
 			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
 			WPFVisualizer.Initialize(Data.CurrentRace);
@@ -85,6 +108,11 @@ namespace WPF_App
 			}));
 			//start race
 			Data.CurrentRace.Start();
+		}
+
+		private void Grid_OnLoadingRow(object sender, DataGridRowEventArgs e)
+		{
+			e.Row.Header = (e.Row.GetIndex() + 1).ToString();
 		}
 	}
 }

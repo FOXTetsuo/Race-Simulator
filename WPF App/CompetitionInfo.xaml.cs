@@ -17,11 +17,16 @@ namespace WPF_App
 	/// <summary>
 	/// Interaction logic for Window1.xaml
 	/// </summary>
-	public partial class Window1 : Window
+	public partial class CompetitionInfoWindow : Window
 	{
-		public Window1()
+		public CompetitionInfoWindow()
 		{
 			InitializeComponent();
+		}
+
+		private void Grid_OnLoadingRow(object sender, DataGridRowEventArgs e)
+		{
+			e.Row.Header = (e.Row.GetIndex() + 1).ToString();
 		}
 	}
 }

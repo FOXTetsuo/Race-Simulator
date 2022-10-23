@@ -1,12 +1,45 @@
-﻿<Window x:Class="WPF_App.Window1"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_App"
+        xmlns:Controller="clr-namespace:Controller;assembly=Controller" x:Class="WPF_App.CompetitionInfoWindow"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="Competition Info" Height="450" Width="1000" Icon="/Splatoon3_Overview_Splatted_Squid.png">
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="115*"/>
+            <RowDefinition Height="102*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Leaderboard:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="148"/>
+
+        <DataGrid Width="Auto" x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="10,41,326,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" LoadingRow="Grid_OnLoadingRow" Grid.RowSpan="2"  CanUserResizeColumns="False" CanUserResizeRows="False" HorizontalAlignment="Left">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImageSource}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Inkling Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Points" Binding="{Binding Points}" />
+                <DataGridTextColumn Header="Fun fact" Binding="{Binding FunFact}" />
+            </DataGrid.Columns>
+            <DataGrid.DataContext>
+                <Controller:DataContext_CompetitionInfoWindow/>
+            </DataGrid.DataContext>
+        </DataGrid>
+        <Label Content="Tracks left in competition" Margin="567,10,0,0" VerticalAlignment="Top" Width="148" HorizontalAlignment="Right"/>
+        <DataGrid ItemsSource="{Binding Path = Tracks}" CanUserResizeColumns="False" CanUserResizeRows="False" Margin="497,41,10,10" AutoGenerateColumns="False" LoadingRow="Grid_OnLoadingRow" HorizontalAlignment="Right" Width="150">
+            <DataGrid.DataContext>
+                <Controller:DataContext_CompetitionInfoWindow/>
+            </DataGrid.DataContext>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Track Name" Binding="{Binding Name}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

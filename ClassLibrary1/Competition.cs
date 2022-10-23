@@ -9,6 +9,7 @@ namespace Model
 {
 	public class Competition
 	{
+		public event EventHandler<EventArgs> CompetitionFinished;
 		public Queue<Track> Tracks { get; set; }
 		public List<IParticipant>? Participants { get; set; }
 		public IParticipant Winner {get; set;}
@@ -22,6 +23,12 @@ namespace Model
 			}
 			return null;
 		}
+
+		public void EndCompetition()
+		{
+			CompetitionFinished.Invoke(this, new EventArgs());
+		}
+
 		public Competition()
 		{
 			Participants = new List<IParticipant>();
