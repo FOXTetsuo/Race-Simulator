@@ -47,8 +47,8 @@ namespace Controller
 		{
 			foreach (IParticipant participant in Participants)
 			{
-				participant.Equipment.Quality = _random.Next(4, 11);
-				participant.Equipment.Performance = _random.Next(5, 11);
+				participant.Equipment.Quality = _random.Next(6, 11);
+				participant.Equipment.Performance = _random.Next(4, 11);
 				participant.Equipment.Speed = participant.Equipment.Quality * participant.Equipment.Performance;
 			}
 		}
@@ -163,11 +163,11 @@ namespace Controller
 		}
 
 		public void BreakEquipment(IParticipant participant)
-		//sets participants equipment to broken, and then deducts from their stats
-		//unless the stats would become so low that the race would barely progress.
+		//sets participants equipment to broken, and then deducts from their performance
+		//unless the performance would become so low that the race would barely progress.
 		{
 			participant.Equipment.IsBroken = true;
-			if (participant.Equipment.Performance > 3)
+			if (participant.Equipment.Performance > 4)
 			{
 				participant.Equipment.Performance += -1;
 				UpdateSpeed(participant);
