@@ -20,6 +20,7 @@ namespace Controller
 		public DataContext_CompetitionInfoWindow()
 		{
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
+			Data.Competition.CompetitionFinished += OnRaceFinished;
 			//Bind tracks and inklingdata
 			
 			Tracks = new Func<Queue<Track>>(() => Data.Competition.Tracks)();

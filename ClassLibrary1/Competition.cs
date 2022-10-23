@@ -9,7 +9,7 @@ namespace Model
 {
 	public class Competition
 	{
-		public event EventHandler<EventArgs> CompetitionOver;
+		public event EventHandler<EventArgs> CompetitionFinished;
 		public Queue<Track> Tracks { get; set; }
 		public List<IParticipant>? Participants { get; set; }
 		public IParticipant Winner {get; set;}
@@ -26,7 +26,7 @@ namespace Model
 
 		public void EndCompetition()
 		{
-			CompetitionOver.Invoke(this, new EventArgs());
+			CompetitionFinished.Invoke(this, new EventArgs());
 			// TODO: remove all tracks, reset all drivers, collect points
 			// TODO: put drivers in leaderboard, show instead of other PNG
 			// TODO: add button to restart competition

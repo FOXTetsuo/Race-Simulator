@@ -2,6 +2,7 @@
 using Model;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace WPF_App
@@ -19,13 +20,20 @@ namespace WPF_App
 		public MainWindow()
 		{
 			// initialize window components and set the datacontext
+			StartCompetition();
+		}
+
+		public void StartCompetition()
+		{
 			Data.Initialize();
 			Data.NextRace();
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
 			InitializeRace();
+			RaceNameLabel.Visibility = Visibility.Visible;
 			RaceNameLabel.FontSize = 30;
 			RaceNameLabel.FontFamily = new System.Windows.Media.FontFamily("Informal Roman");
 		}
+
 		private void CurrentRace_RaceFinished(object? sender, EventArgs e)
 		{
 			// Clear image cache
@@ -44,7 +52,7 @@ namespace WPF_App
 				TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
 				this.TrackImage.Source = null;
 				this.TrackImage.Source = WPFVisualizer.DrawBackground();
-
+				RaceNameLabel.Visibility = Visibility.Hidden;
 			}));
 		}
 
@@ -82,7 +90,7 @@ namespace WPF_App
 		{
 			InitializeComponent();
 			//Resubscribe to events and initialize visualizer
-			Data.Competition.CompetitionOver += OnCompetitionOver;
+			Data.Competition.CompetitionFinished += OnCompetitionOver;
 			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
 			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
 			WPFVisualizer.Initialize(Data.CurrentRace);
@@ -100,6 +108,11 @@ namespace WPF_App
 			}));
 			//start race
 			Data.CurrentRace.Start();
+		}
+
+		private void Grid_OnLoadingRow(object sender, DataGridRowEventArgs e)
+		{
+			e.Row.Header = (e.Row.GetIndex() + 1).ToString();
 		}
 	}
 }
