@@ -121,11 +121,13 @@ namespace WPF_App
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
 		
-		public static BitmapSource DrawBackground()
+		public static BitmapSource DrawBackground(string winner)
 		{
-			Bitmap canvas = new Bitmap(1366, 768);
+			Bitmap canvas = new Bitmap(1200, 800);
 			Graphics graphics = Graphics.FromImage(canvas);
-			graphics.DrawImage(ImageHandler.CloneImageFromCache(Background), 0, 0);
+			//TODO FIX HARDCODED NUMBERS - actualy center image - Implement specific winner - show text - open compwindow
+			graphics.DrawImage(ImageHandler.CloneImageFromCache(Background), 400, 200);
+			graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid1L), 480, 265);
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
 		
@@ -346,11 +348,15 @@ namespace WPF_App
 		private const String Squid2 = "WPF Images\\Squid2_S.png";
 		private const String Squid3 = "WPF Images\\Squid3_S.png";
 		private const String Squid4 = "WPF Images\\Squid4_S.png";
+		private const String Squid1L = "WPF Images\\Squid1.png";
+		private const String Squid2L = "WPF Images\\Squid2.png";
+		private const String Squid3L = "WPF Images\\Squid3.png";
+		private const String Squid4L = "WPF Images\\Squid4.png";
 		private const String Squid1_Ink = "WPF Images\\Squid1_Ink.png";
 		private const String Squid2_Ink = "WPF Images\\Squid2_Ink.png";
 		private const String Squid3_Ink = "WPF Images\\Squid3_Ink.png";
 		private const String Squid4_Ink = "WPF Images\\Squid4_Ink.png";
-		private const String Background = "Splatoon3_Overview_Splatted_Squid.png";
+		private const String Background = "WPF IMAGES\\WinnerFrame.png";
 		#endregion
 	}
 }

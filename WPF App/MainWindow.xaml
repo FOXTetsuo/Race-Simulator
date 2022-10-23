@@ -6,15 +6,13 @@
 		xmlns:local="clr-namespace:WPF_App"
 		xmlns:Controller="clr-namespace:Controller;assembly=Controller" x:Class="WPF_App.MainWindow"
 		mc:Ignorable="d"
-		Title="Inkling Race Simulator" Height="800" Width="800" Icon="/Splatoon3_Overview_Splatted_Squid.png">
+		Title="Inkling Race Simulator" Height="800" Width="1200" Icon="/Splatoon3_Overview_Splatted_Squid.png">
     <Window.DataContext>
         <Controller:DataContext_MainWindow/>
     </Window.DataContext>
     <Grid Background="#FF59C766">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="11*"/>
-            <ColumnDefinition Width="363*"/>
+
         </Grid.ColumnDefinitions>
         <Image x:Name="TrackImage" HorizontalAlignment="Left" Margin="0,20,0,0" Width="351" Height="240" VerticalAlignment="Top" Grid.ColumnSpan="3" OpacityMask="Black"/>
         <DockPanel LastChildFill="False" Margin="0,0,0,20" Grid.ColumnSpan="3">

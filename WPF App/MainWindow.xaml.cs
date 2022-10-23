@@ -48,10 +48,11 @@ namespace WPF_App
 			DispatcherPriority.Render,
 			new Action(() =>
 			{
-				TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
-				TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
+				this.TrackImage.HorizontalAlignment = HorizontalAlignment.Center;
+				this.TrackImage.VerticalAlignment = VerticalAlignment.Top;
 				this.TrackImage.Source = null;
-				this.TrackImage.Source = WPFVisualizer.DrawBackground();
+				this.TrackImage.Source = WPFVisualizer.DrawBackground("Jemoeder");
+				
 				RaceNameLabel.Visibility = Visibility.Hidden;
 			}));
 		}

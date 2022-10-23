@@ -37,6 +37,7 @@
     <None Remove="WPF Images\Squid4.png" />
     <None Remove="WPF Images\Squid4_Ink.png" />
     <None Remove="WPF Images\Squid4_S.png" />
+    <None Remove="WPF Images\WinnerFrame_S.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -69,28 +70,36 @@
     <Content Include="WPF Images\Road_L\VerticalL.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="WPF Images\Squid1.png" />
+    <Content Include="WPF Images\Squid1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="WPF Images\Squid1_Ink.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="WPF Images\Squid1_S.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="WPF Images\Squid2.png" />
+    <Content Include="WPF Images\Squid2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="WPF Images\Squid2_Ink.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="WPF Images\Squid2_S.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="WPF Images\Squid3.png" />
+    <Content Include="WPF Images\Squid3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="WPF Images\Squid3_Ink.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="WPF Images\Squid3_S.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="WPF Images\Squid4.png" />
+    <Content Include="WPF Images\Squid4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="WPF Images\Squid4_Ink.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -103,6 +112,9 @@
     <Content Include="Splatoon3_Overview_Splatted_Squid.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="WPF Images\WinnerFrame_S.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="WPF Images\Splatoon3_Overview_Splatted_Squid.png" />
   </ItemGroup>
 
@@ -113,6 +125,12 @@
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary1\Model.csproj" />
     <ProjectReference Include="..\Controller\Controller.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="WPF Images\WinnerFrame.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
