@@ -109,16 +109,12 @@ namespace Controller
 
 		public void OnTimedEvent(object sender, EventArgs args)
 		{
-			// kijk naar speed / tracklength etc, als een driver over de lengte heen is
-			// dan advance je deze naar de volgende tracksection
-			
 			//Comment in case you're trying to fix bugs :')
 			DetermineIfCarShouldBreak();
 			CheckWhetherToMoveParticipants();
 			DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
 		}
 
-		//start de timer
 		public void Start()
 		{
 			Timer.Start();
@@ -133,11 +129,13 @@ namespace Controller
 			//Timer.Stop();
 			foreach (IParticipant participant in Participants)
 			{
-				participant.DistanceCovered += (participant.Equipment.Performance * participant.Equipment.Speed);
-				if (participant.DistanceCovered >= 100 && participant.Equipment.IsBroken == false)
+				if (participant.Equipment.IsBroken == false)
 				{
-					participant.DistanceCovered += -100 ;
-					AdvanceParticipantIfPossible(participant);
+					participant.DistanceCovered += (participant.Equipment.Performance * participant.Equipment.Speed);
+					if (participant.DistanceCovered >= 100)
+					{
+						AdvanceParticipantIfPossible(participant);
+					}
 				}
 			}
 			//Timer.Start();
@@ -161,6 +159,8 @@ namespace Controller
 		}
 
 		public void BreakCar(IParticipant participant)
+		//sets participant to broken, and then deducts from their stats
+		//unless the stats would become so low that the race would barely progress.
 		{
 			participant.Equipment.IsBroken = true;
 			int determinePenalty = _random.Next(2);
@@ -196,6 +196,7 @@ namespace Controller
 
 					if (newData.Left == null || newData.Right == null)
 					{
+						participant.DistanceCovered -= 100;
 						SectionData sectData = GetSectionData(section);
 						RemoveParticipantFromSectionData(sectData, participant);
 						PlaceParticipantOnSectionData(newData, participant);
@@ -204,8 +205,10 @@ namespace Controller
 
 						if (CheckFinish(participant) == true)
 						{
+							//Stops participants from moving.
+							participant.Equipment.Performance = 0;
 							participant.CurrentSection = null;
-							
+
 							RemoveParticipantFromSectionData(newData, participant);
 
 							if (CheckRaceFinished() == true)
@@ -216,7 +219,7 @@ namespace Controller
 						return;
 					}
 					// participant distancecovered terug naar wat hij was voordat de advanceparticipant functie gecallt werd
-					else participant.DistanceCovered += 100;
+					else participant.DistanceCovered = 100;
 				}
 				i++;
 				
@@ -298,8 +301,9 @@ namespace Controller
 				participant.DistanceCovered = 0;
 				participant.LoopsPassed = 0;
 			}
-			//unsubscribe, timer = null might be unnesessacary 
-			Timer = null;
+			//stop timer, unsubscribe to events
+			Timer.Stop();
+			Timer.Elapsed -= OnTimedEvent;
 			DriversChanged = null;
 			GC.Collect(0);
 		}

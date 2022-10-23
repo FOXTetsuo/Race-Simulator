@@ -163,34 +163,6 @@ namespace WPF_App
 				}
 			}
 
-			//if (_direction == Direction.East)
-			//{
-			//	if (side == Side.Left)
-			//	{
-			//		xposition += ((participant.DistanceCovered/100) * imageSize);
-			//		yposition += (imageSize / 4);
-			//	}
-			//	else if (side == Side.Right)
-			//	{
-			//		xposition += ((participant.DistanceCovered / 100) * imageSize);
-			//		yposition += (imageSize / 2);
-			//	}
-			//}
-
-			//if (_direction == Direction.West)
-			//{
-			//	if (side == Side.Left)
-			//	{
-			//		xposition -= ((participant.DistanceCovered / 100) * imageSize);
-			//		yposition += (imageSize / 4);
-			//	}
-			//	else if (side == Side.Right)
-			//	{
-			//		xposition -= ((participant.DistanceCovered / 100) * imageSize);
-			//		yposition += (imageSize / 2);
-			//	}
-			//}
-
 			if (_direction == Direction.East || _direction == Direction.West)
 			{
 				if (side == Side.Left)
