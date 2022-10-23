@@ -26,7 +26,6 @@ namespace WPF_App
 			RaceNameLabel.FontSize = 30;
 			RaceNameLabel.FontFamily = new System.Windows.Media.FontFamily("Informal Roman");
 		}
-		//somewhere, the positioning for the racers is going wrong, plms fix
 		private void CurrentRace_RaceFinished(object? sender, EventArgs e)
 		{
 			// Clear image cache

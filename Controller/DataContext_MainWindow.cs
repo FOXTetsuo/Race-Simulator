@@ -21,7 +21,6 @@ namespace Controller
 		// serieus, benoem me aub 1 reden dat ik niet gewoon
 		// public string RaceTrackName = Data.CurrentRace.Track.Name;
 		// kan doen
-		// en Func is een soort delegate???
 
 		public DataContext_MainWindow()
 		{

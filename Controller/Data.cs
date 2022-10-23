@@ -4,7 +4,8 @@ namespace Controller
 {
 	public static class Data
 	{
-		static Competition? Competition { get; set; }
+		public static List<IParticipant> ParticipantLeaderboard;
+		public static Competition? Competition { get; set; }
 		public static Race? CurrentRace { get; set; }
 		public static void Initialize()
 		{
@@ -128,7 +129,16 @@ namespace Controller
 		}
 		private static void EndCompetition()
 		{
+			ParticipantLeaderboard = new List<IParticipant>();
 			CurrentRace.Cleaner();
+
+			foreach (IParticipant participant in Competition.Participants)
+			{
+				ParticipantLeaderboard.Add(participant);
+			}
+
+			ParticipantLeaderboard.Sort((x, y) => y.Points.CompareTo(x.Points));
+			
 			// TODO: remove all tracks, reset all drivers, collect points
 			// TODO: put drivers in leaderboard, show instead of other PNG
 			// TODO: add button to restart competition

@@ -21,7 +21,6 @@ namespace WPF_App
 	{
 		public CompetitionInfoWindow()
 		{
-			//TODO: Implement CollectionViewSource
 			InitializeComponent();
 		}
 
