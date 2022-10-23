@@ -8,8 +8,7 @@
         mc:Ignorable="d"
         Title="Race information" Height="450" Width="695" Icon="/Splatoon3_Overview_Splatted_Squid.png" ResizeMode="NoResize">
     <Grid>
-        <Label Content="Inkling information:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="148"/>
-        <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="0,41,10,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" LoadingRow="Grid_OnLoadingRow" >
+        <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="10,10,10,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" LoadingRow="Grid_OnLoadingRow" Width="Auto" >
             <DataGrid.DataContext>
                 <Controller:DataContext_CompetitionInfoWindow/>
             </DataGrid.DataContext>

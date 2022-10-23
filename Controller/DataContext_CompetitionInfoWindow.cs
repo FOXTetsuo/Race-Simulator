@@ -8,10 +8,6 @@ namespace Controller
 		private BindingList<IParticipant> _inklingData { get; set; }
 		public BindingList<IParticipant> InklingData { get { return _inklingData; } set { _inklingData = value; OnPropertyChanged(); } }
 
-
-
-
-
 		
 		public Queue<Track> Tracks { get; set; } // get / set are ESSENTIAL
 		public event PropertyChangedEventHandler? PropertyChanged;
