@@ -33,7 +33,7 @@
             </DataGrid.DataContext>
         </DataGrid>
         <Label Content="Tracks left in competition" Margin="567,10,0,0" VerticalAlignment="Top" Width="148" HorizontalAlignment="Right"/>
-        <DataGrid ItemsSource="{Binding Path = Tracks}" CanUserResizeColumns="False" CanUserResizeRows="False" Margin="497,41,10,10" AutoGenerateColumns="False" LoadingRow="Grid_OnLoadingRow" HorizontalAlignment="Right" Width="150">
+        <DataGrid ItemsSource="{Binding Path = Tracks}" CanUserResizeColumns="False" CanUserResizeRows="False" Margin="497,41,10,10" AutoGenerateColumns="False" LoadingRow="Grid_OnLoadingRow" HorizontalAlignment="Right" MinWidth="150">
             <DataGrid.DataContext>
                 <Controller:DataContext_CompetitionInfoWindow/>
             </DataGrid.DataContext>
