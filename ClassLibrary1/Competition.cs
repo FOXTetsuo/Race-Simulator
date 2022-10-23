@@ -27,9 +27,6 @@ namespace Model
 		public void EndCompetition()
 		{
 			CompetitionFinished.Invoke(this, new EventArgs());
-			// TODO: remove all tracks, reset all drivers, collect points
-			// TODO: put drivers in leaderboard, show instead of other PNG
-			// TODO: add button to restart competition
 		}
 
 		public Competition()

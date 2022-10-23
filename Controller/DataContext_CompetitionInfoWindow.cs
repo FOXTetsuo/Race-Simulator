@@ -46,6 +46,7 @@ namespace Controller
 			{
 				UnsortedInklingData.Add(participant);
 			}
+			//LINQ statement om data te orderen
 			InklingData = new BindingList<IParticipant>(UnsortedInklingData.OrderByDescending(x => x.Points).ToList());
 		}
 	}
