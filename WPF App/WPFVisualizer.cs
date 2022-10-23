@@ -120,6 +120,15 @@ namespace WPF_App
 			}
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
+		
+		public static BitmapSource DrawBackground()
+		{
+			Bitmap canvas = new Bitmap(1366, 768);
+			Graphics graphics = Graphics.FromImage(canvas);
+			graphics.DrawImage(ImageHandler.CloneImageFromCache(Background), 0, 0);
+			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
+		}
+		
 		private static void DrawDriversInSection(Graphics graphics, Race race, Section section)
 		{
 			if(race.GetSectionData(section).Left is not null || race.GetSectionData(section).Right is not null)
@@ -341,6 +350,7 @@ namespace WPF_App
 		private const String Squid2_Ink = "WPF Images\\Squid2_Ink.png";
 		private const String Squid3_Ink = "WPF Images\\Squid3_Ink.png";
 		private const String Squid4_Ink = "WPF Images\\Squid4_Ink.png";
+		private const String Background = "Splatoon3_Overview_Splatted_Squid.png";
 		#endregion
 	}
 }

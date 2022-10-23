@@ -33,6 +33,21 @@ namespace WPF_App
 			InitializeRace();
 		}
 
+		private void OnCompetitionOver(object? sender, EventArgs e)
+		{
+			//Delete trackimage
+			this.TrackImage.Dispatcher.BeginInvoke(
+			DispatcherPriority.Render,
+			new Action(() =>
+			{
+				TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
+				TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
+				this.TrackImage.Source = null;
+				this.TrackImage.Source = WPFVisualizer.DrawBackground();
+
+			}));
+		}
+
 		private void CurrentRace_DriversChanged(object? sender, DriversChangedEventArgs e)
 		{
 			this.TrackImage.Dispatcher.BeginInvoke(
@@ -67,6 +82,7 @@ namespace WPF_App
 		{
 			InitializeComponent();
 			//Resubscribe to events and initialize visualizer
+			Data.Competition.CompetitionOver += OnCompetitionOver;
 			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
 			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
 			WPFVisualizer.Initialize(Data.CurrentRace);

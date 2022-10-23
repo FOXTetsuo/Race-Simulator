@@ -8,6 +8,11 @@ namespace Controller
 		private BindingList<IParticipant> _inklingData { get; set; }
 		public BindingList<IParticipant> InklingData { get { return _inklingData; } set { _inklingData = value; OnPropertyChanged(); } }
 
+
+
+
+
+		
 		public Queue<Track> Tracks { get; set; } // get / set are ESSENTIAL
 		public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -20,9 +25,11 @@ namespace Controller
 		{
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
 			//Bind tracks and inklingdata
+			
 			Tracks = new Func<Queue<Track>>(() => Data.Competition.Tracks)();
 
 			List<IParticipant> UnsortedInklingData = new List<IParticipant>();
+			//TODO: verangen met LINQ
 			foreach (IParticipant participant in Data.CurrentRace.Participants)
 			{
 				UnsortedInklingData.Add(participant);

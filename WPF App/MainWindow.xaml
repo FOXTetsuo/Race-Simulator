@@ -27,6 +27,6 @@
             </Menu>
 
         </DockPanel>
-        <Label x:Name="RaceNameLabel" Margin="0,20,0,0" Content="{Binding RaceTrackName, FallbackValue=Fucked}" HorizontalAlignment="Left" Width="424" Height="40" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
+        <Label x:Name="RaceNameLabel" Margin="0,20,0,0" Content="{Binding RaceTrackName, FallbackValue=NONAMEAVAILABLE}" HorizontalAlignment="Left" Width="424" Height="40" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
     </Grid>
 </Window>

@@ -7,11 +7,15 @@
         xmlns:Controller="clr-namespace:Controller;assembly=Controller" x:Class="WPF_App.CompetitionInfoWindow"
         mc:Ignorable="d"
         Title="Competition Info" Height="450" Width="800" Icon="/Splatoon3_Overview_Splatted_Squid.png">
-    
+
     <Grid>
-        <Label Content="Leaderboard:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="148"/>
-        
-        <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="0,41,326,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" LoadingRow="Grid_OnLoadingRow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="115*"/>
+            <RowDefinition Height="102*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Leaderboard:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="148"/>
+
+        <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="10,41,326,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" LoadingRow="Grid_OnLoadingRow" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -28,8 +32,8 @@
                 <Controller:DataContext_CompetitionInfoWindow/>
             </DataGrid.DataContext>
         </DataGrid>
-        <Label Content="Tracks left in competition" HorizontalAlignment="Left" Margin="567,10,0,0" VerticalAlignment="Top" Width="148"/>
-        <DataGrid ItemsSource="{Binding Path = Tracks}" Margin="497,41,10,10" AutoGenerateColumns="False" LoadingRow="Grid_OnLoadingRow">
+        <Label Content="Tracks left in competition:" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="148"/>
+        <DataGrid HorizontalAlignment="Right" ItemsSource="{Binding Path = Tracks}" Margin="497,41,10,10" AutoGenerateColumns="False" LoadingRow="Grid_OnLoadingRow" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" Grid.RowSpan="2">
             <DataGrid.DataContext>
                 <Controller:DataContext_CompetitionInfoWindow/>
             </DataGrid.DataContext>

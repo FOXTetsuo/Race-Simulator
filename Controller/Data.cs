@@ -1,10 +1,10 @@
 ﻿ using Model;
+using System.Runtime.CompilerServices;
 
 namespace Controller
 {
 	public static class Data
 	{
-		public static List<IParticipant> ParticipantLeaderboard;
 		public static Competition? Competition { get; set; }
 		public static Race? CurrentRace { get; set; }
 		public static void Initialize()
@@ -25,7 +25,7 @@ namespace Controller
 		{
 			Competition.Tracks.Enqueue(new Track("STAROFDACOMPETITION", TrackBuilder("STAROFDACOMPETITION")));
 			Competition.Tracks.Enqueue(new Track("MEWHENDARACEISBIG", TrackBuilder("MEWHENDARACEISBIG")));
-			Competition.Tracks.Enqueue(new Track("NYEEEEEEEEEEEEEEEEEEEOM", TrackBuilder("NYEEEEEEEEEEEEEEEEEEEOM")));
+			//Competition.Tracks.Enqueue(new Track("NYEEEEEEEEEEEEEEEEEEEOM", TrackBuilder("NYEEEEEEEEEEEEEEEEEEEOM")));
 		}
 		
 		public static SectionTypes[] TrackBuilder(string trackName)
@@ -113,35 +113,22 @@ namespace Controller
 			}
 		}
 		
-		public static void NextRace()
+		public static bool NextRace()
 		// Makes a new track from the queue of races. If there are no races to be loaded, end the competition
 		{
 			Track newTrack = Competition.NextTrack();
 			if (newTrack != null)
 			{
 				CurrentRace = new Race(newTrack, Competition.Participants);
+				return true;
 			}
 			else
-			{
-				//TODO: competition ends, pls call a function for it.
-				EndCompetition();
+			{		
+				Competition.EndCompetition();
+				return false;
 			}
 		}
-		private static void EndCompetition()
-		{
-			ParticipantLeaderboard = new List<IParticipant>();
-			CurrentRace.Cleaner();
 
-			foreach (IParticipant participant in Competition.Participants)
-			{
-				ParticipantLeaderboard.Add(participant);
-			}
-
-			ParticipantLeaderboard.Sort((x, y) => y.Points.CompareTo(x.Points));
-			
-			// TODO: remove all tracks, reset all drivers, collect points
-			// TODO: put drivers in leaderboard, show instead of other PNG
-			// TODO: add button to restart competition
-		}
 	}
 }
+
