@@ -23,6 +23,7 @@ namespace Controller
 			Tracks = new Func<Queue<Track>>(() => Data.Competition.Tracks)();
 
 			List<IParticipant> UnsortedInklingData = new List<IParticipant>();
+			//TODO: verangen met LINQ
 			foreach (IParticipant participant in Data.CurrentRace.Participants)
 			{
 				UnsortedInklingData.Add(participant);

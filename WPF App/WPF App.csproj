@@ -100,7 +100,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Splatoon3_Overview_Splatted_Squid.png" />
+    <Content Include="Splatoon3_Overview_Splatted_Squid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="WPF Images\Splatoon3_Overview_Splatted_Squid.png" />
   </ItemGroup>
 

@@ -230,10 +230,13 @@ namespace Controller
 		private void PrepareNextRace()
 		{
 			Cleaner();
-			Data.NextRace();
-			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
-			RaceFinished.Invoke(this, new EventArgs());
-			Data.CurrentRace.Start();
+			if (Data.NextRace() == true)
+			{
+				Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+				RaceFinished.Invoke(this, new EventArgs());
+				Data.CurrentRace.Start();
+			}
+			
 		}
 
 		private void RemoveParticipantFromSectionData(SectionData sectionData, IParticipant participant)
