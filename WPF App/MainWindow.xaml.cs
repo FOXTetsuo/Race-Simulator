@@ -107,7 +107,7 @@ namespace WPF_App
 				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
 
 			}));
-			//start race
+			//Start race
 			Data.CurrentRace.Start();
 		}
 

@@ -14,12 +14,12 @@ namespace Model
 		private int _loopsPassed;
 		private int _points;
 		public string Name { get; set; }
-		public int Points { get { return _points; } set { _points = value; OnPropertyChanged(); } }
 		public IEquipment Equipment { get; set; }
 		public TeamColors TeamColor { get; set; }
 		public string ImageSource { get; set; }
 		public string BrokeImageSource { get; set; }
 		public Section CurrentSection { get; set; }
+		public int Points { get { return _points; } set { _points = value; OnPropertyChanged(); } }
 		public int DistanceCovered { get { return _distanceCovered; } set { _distanceCovered = value; OnPropertyChanged(); } }
 		public int LoopsPassed { get { return _loopsPassed; } set { _loopsPassed = value; OnPropertyChanged(); } }
 		public Random Random { get; set; }
