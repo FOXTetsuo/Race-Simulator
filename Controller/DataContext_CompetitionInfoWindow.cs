@@ -9,13 +9,12 @@ namespace Controller
 		public BindingList<IParticipant> InklingData { get { return _inklingData; } set { _inklingData = value; OnPropertyChanged(); } }
 		private BindingList<Track> _tracks { get; set; }
 		public BindingList<Track> Tracks { get { return _tracks; } set { _tracks = value; OnPropertyChanged(); } }
-		//public Queue<Track> Tracks { get; set; } // get / set are ESSENTIAL
+
 		public event PropertyChangedEventHandler? PropertyChanged;
 
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-			//ReOrderLeaderboard();
 		}
 		public DataContext_CompetitionInfoWindow()
 		{
