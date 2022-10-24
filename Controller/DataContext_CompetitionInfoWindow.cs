@@ -37,7 +37,7 @@ namespace Controller
 			{
 				UnsortedInklingData.Add(participant);
 			}
-			InklingData = new BindingList<IParticipant>(UnsortedInklingData.OrderBy(x => x.Name).ToList());
+			InklingData = new BindingList<IParticipant>(UnsortedInklingData.OrderBy(x => x.Points).ToList());
 		}
 
 		private void OnRaceFinished(object? sender, EventArgs e)

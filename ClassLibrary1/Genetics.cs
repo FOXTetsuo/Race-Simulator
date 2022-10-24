@@ -24,14 +24,6 @@ namespace Model
 		public int Speed { get { return _speed; } set { _speed = value; OnPropertyChanged(); } }
 		public bool IsBroken { get { return isBroken; } set { isBroken = value; OnPropertyChanged(); } }
 
-		public Genetics(int quality, int perf, int speed, bool isBroken)
-		{
-			Quality = quality;
-			Performance = perf;
-			Speed = speed;
-			IsBroken = isBroken;
-		}
-
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

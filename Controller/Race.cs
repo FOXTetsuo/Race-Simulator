@@ -42,13 +42,20 @@ namespace Controller
 			RandomizeEquipment();
 		}
 
+		public void UpdateSpeed(IParticipant participant)
+		{
+			participant.Equipment.Speed = new Func<int>(() => participant.Equipment.Quality * participant.Equipment.Performance)();
+		}
+
+
 		// randomizes the equipment of the racers
 		public void RandomizeEquipment()
 		{
 			foreach (IParticipant participant in Participants)
 			{
-				participant.Equipment.Quality = _random.Next(1, 11);
-				participant.Equipment.Performance = _random.Next(3, 11);
+				participant.Equipment.Quality = _random.Next(5, 11);
+				participant.Equipment.Performance = _random.Next(4, 11);
+				UpdateSpeed(participant);
 			}
 		}
 
@@ -127,7 +134,7 @@ namespace Controller
 			{
 				if (participant.Equipment.IsBroken == false && participant.Equipment.Performance > 0)
 				{
-					participant.DistanceCovered += (participant.Equipment.Performance * participant.Equipment.Speed);
+					participant.DistanceCovered += (participant.Equipment.Speed);
 					if (participant.DistanceCovered >= 100)
 					{
 						AdvanceParticipantIfPossible(participant);
@@ -140,8 +147,8 @@ namespace Controller
 		{
 			foreach (IParticipant participant in Data.CurrentRace.Participants)
 			{
-				// 1 op 32 kans dat auto kapot gaat
-				if (participant.Equipment.IsBroken == false && (_random.Next(32) == 13))
+				// 1 op 64 kans dat auto kapot gaat
+				if (participant.Equipment.IsBroken == false && (_random.Next(64) == 13))
 				{
 					BreakCar(participant);
 				}
@@ -158,21 +165,11 @@ namespace Controller
 		//unless the stats would become so low that the race would barely progress.
 		{
 			participant.Equipment.IsBroken = true;
-			int determinePenalty = _random.Next(2);
-			switch (determinePenalty)
+
+			if (participant.Equipment.Performance > 4)
 			{
-				case 0:
-					if (participant.Equipment.Performance > 2)
-					{
-						participant.Equipment.Performance += -1;
-					}
-					break;
-				case 1:
-					if (participant.Equipment.Speed > 2)
-					{
-						participant.Equipment.Speed += -1;
-					}
-					break;
+				participant.Equipment.Performance += -1;
+				UpdateSpeed(participant);
 			}
 		}
 
