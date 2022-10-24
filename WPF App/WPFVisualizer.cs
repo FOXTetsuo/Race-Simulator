@@ -340,7 +340,7 @@ namespace WPF_App
 			}
 		}
 
-		#region Graphics_Large_Local
+		#region Graphics
 		private const String CornerNE = "WPF Images\\Road_L\\CornerNEL.png";
 		private const String CornerNW = "WPF Images\\Road_L\\CornerNWL.png";
 		private const String CornerSE = "WPF Images\\Road_L\\CornerSEl.png";
@@ -360,7 +360,7 @@ namespace WPF_App
 		private const String Squid2_Ink = "WPF Images\\Squid2_Ink.png";
 		private const String Squid3_Ink = "WPF Images\\Squid3_Ink.png";
 		private const String Squid4_Ink = "WPF Images\\Squid4_Ink.png";
-		private const String Background = "WPF IMAGES\\WinnerFrame.png";
+		private const String Background = "WPF Images\\WinnerFrame.png";
 		#endregion
 	}
 }
