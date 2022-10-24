@@ -51,8 +51,8 @@ namespace WPF_App
 				this.TrackImage.HorizontalAlignment = HorizontalAlignment.Center;
 				this.TrackImage.VerticalAlignment = VerticalAlignment.Top;
 				this.TrackImage.Source = null;
-				this.TrackImage.Source = WPFVisualizer.DrawBackground("Jemoeder");
-				
+				this.TrackImage.Source = WPFVisualizer.DrawBackground(Data.Competition.Winner.ImageSourceWinner);
+				this.
 				RaceNameLabel.Visibility = Visibility.Hidden;
 			}));
 		}

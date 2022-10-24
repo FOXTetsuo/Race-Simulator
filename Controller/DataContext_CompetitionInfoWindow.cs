@@ -42,7 +42,6 @@ namespace Controller
 
 		private void OnRaceFinished(object? sender, EventArgs e)
 		{
-			Tracks[0] = null;
 			ReOrderLeaderboard();
 		}
 

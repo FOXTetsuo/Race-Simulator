@@ -55,18 +55,22 @@ namespace WPF_App
 				{
 					case TeamColors.Orange:
 						participant.ImageSource = WPFVisualizer.Squid1;
+						participant.ImageSourceWinner = WPFVisualizer.Squid1L;
 						participant.BrokeImageSource = WPFVisualizer.Squid1_Ink;
 						break;
 					case TeamColors.Green:
 						participant.ImageSource = WPFVisualizer.Squid2;
+						participant.ImageSourceWinner = WPFVisualizer.Squid2L;
 						participant.BrokeImageSource = WPFVisualizer.Squid2_Ink;
 						break;
 					case TeamColors.Purple:
 						participant.ImageSource = WPFVisualizer.Squid3;
+						participant.ImageSourceWinner = WPFVisualizer.Squid3L;
 						participant.BrokeImageSource = WPFVisualizer.Squid3_Ink;
 						break;
 					case TeamColors.Red:
 						participant.ImageSource = WPFVisualizer.Squid4;
+						participant.ImageSourceWinner = WPFVisualizer.Squid4L;
 						participant.BrokeImageSource = WPFVisualizer.Squid4_Ink;
 						break;
 				}
@@ -127,7 +131,7 @@ namespace WPF_App
 			Graphics graphics = Graphics.FromImage(canvas);
 			//TODO FIX HARDCODED NUMBERS - actualy center image - Implement specific winner - show text - open compwindow
 			graphics.DrawImage(ImageHandler.CloneImageFromCache(Background), 400, 200);
-			graphics.DrawImage(ImageHandler.CloneImageFromCache(Squid1L), 480, 265);
+			graphics.DrawImage(ImageHandler.CloneImageFromCache(winner), 480, 265);
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
 		

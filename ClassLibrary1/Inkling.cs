@@ -24,6 +24,7 @@ namespace Model
 		public int LoopsPassed { get { return _loopsPassed; } set { _loopsPassed = value; OnPropertyChanged(); } }
 		public Random Random { get; set; }
 		public string FunFact { get; set; }
+		public string ImageSourceWinner { get; set; }
 
 		public static List<String> FunFacts = new List<string> 
 		{

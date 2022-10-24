@@ -125,7 +125,7 @@ namespace Controller
 		{
 			foreach (IParticipant participant in Participants)
 			{
-				if (participant.Equipment.IsBroken == false)
+				if (participant.Equipment.IsBroken == false && participant.Equipment.Performance > 0)
 				{
 					participant.DistanceCovered += (participant.Equipment.Performance * participant.Equipment.Speed);
 					if (participant.DistanceCovered >= 100)
