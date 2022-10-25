@@ -5,15 +5,13 @@ namespace Controller
 {
 	public class DataContext_CompetitionInfoWindow : INotifyPropertyChanged
 	{
-		private string _winnerString = "The winner is: ";
-		private BindingList<IParticipant> _inklingData { get; set; }
-		public BindingList<IParticipant> InklingData { get { return _inklingData; } set { _inklingData = value; OnPropertyChanged(); } }
-		private BindingList<Track> _tracks { get; set; }
-		public BindingList<Track> Tracks { get { return _tracks; } set { _tracks = value; OnPropertyChanged(); } }
-		public String WinnerString { get { return _winnerString; } set { _winnerString = value; OnPropertyChanged(); } }
-			
 		public event PropertyChangedEventHandler? PropertyChanged;
-
+		private BindingList<IParticipant> _inklingData;
+		private BindingList<Track> _tracks;
+		private string _winnerString = "The winner is: ";
+		public BindingList<IParticipant> InklingData { get { return _inklingData; } set { _inklingData = value; OnPropertyChanged(); } }
+		public BindingList<Track> Tracks { get { return _tracks; } set { _tracks = value; OnPropertyChanged(); } }
+		public string WinnerString { get { return _winnerString; } set { _winnerString = value; OnPropertyChanged(); } }
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
@@ -31,7 +29,7 @@ namespace Controller
 
 			ReOrderLeaderboard();
 		}
-
+		
 		private void OnRaceFinished(object? sender, EventArgs e)
 		{
 			ReOrderLeaderboard();
