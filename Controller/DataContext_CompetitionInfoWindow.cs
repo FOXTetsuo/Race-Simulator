@@ -1,6 +1,8 @@
 ﻿using Model;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
+
 namespace Controller
 {
 	public class DataContext_CompetitionInfoWindow : INotifyPropertyChanged
@@ -11,6 +13,7 @@ namespace Controller
 		private string _winnerString = "The winner is: ";
 		public BindingList<IParticipant> InklingData { get { return _inklingData; } set { _inklingData = value; OnPropertyChanged(); } }
 		public BindingList<Track> Tracks { get { return _tracks; } set { _tracks = value; OnPropertyChanged(); } }
+			
 		public string WinnerString { get { return _winnerString; } set { _winnerString = value; OnPropertyChanged(); } }
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
@@ -32,6 +35,13 @@ namespace Controller
 		
 		private void OnRaceFinished(object? sender, EventArgs e)
 		{
+			BindingList<Track> newTracks = new BindingList<Track>();
+			//Tracks = new BindingList<Track>();
+			foreach (Track track in Data.Competition.Tracks)
+			{
+				Tracks.Add(track);
+			}
+			//Tracks = newTracks;
 			ReOrderLeaderboard();
 		}
 
@@ -40,6 +50,7 @@ namespace Controller
 			ReOrderLeaderboard();
 			WinnerString += InklingData.First().Name;
 			WinnerString += "!";
+			Tracks = null;
 		}
 
 		public void ReOrderLeaderboard()

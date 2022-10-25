@@ -24,9 +24,10 @@ namespace Controller
 		}
 
 		private void OnRaceFinished(object? sender, EventArgs e)
-			// Indicate that name has changed && rebind ondriverschanged
 		{
 			RaceTrackName = new Func<string>(() => Data.CurrentRace.Track.Name)();
+			//Rebind onRaceFinished
+			Data.CurrentRace.RaceFinished += OnRaceFinished;
 		}
 
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
