@@ -3,6 +3,7 @@ using Model;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace WPF_App
@@ -32,6 +33,7 @@ namespace WPF_App
 			RaceNameLabel.Visibility = Visibility.Visible;
 			RaceNameLabel.FontSize = 30;
 			RaceNameLabel.FontFamily = new System.Windows.Media.FontFamily("Informal Roman");
+			
 		}
 
 		private void CurrentRace_RaceFinished(object? sender, EventArgs e)
@@ -43,6 +45,7 @@ namespace WPF_App
 
 		private void OnCompetitionOver(object? sender, EventArgs e)
 		{
+
 			//Delete trackimage
 			this.TrackImage.Dispatcher.BeginInvoke(
 			DispatcherPriority.Render,
@@ -51,9 +54,11 @@ namespace WPF_App
 				this.TrackImage.HorizontalAlignment = HorizontalAlignment.Center;
 				this.TrackImage.VerticalAlignment = VerticalAlignment.Top;
 				this.TrackImage.Source = null;
-				this.TrackImage.Source = WPFVisualizer.DrawBackground(Data.Competition.Winner.ImageSourceWinner);
-				this.
+				this.TrackImage.Source = WPFVisualizer.DrawWinnerFrame(Data.Competition.Winner.ImageSourceWinner);
+				CurtainWindow.Visibility = Visibility.Visible;
+				MainWindowGrid.Background = new SolidColorBrush(Colors.CadetBlue);
 				RaceNameLabel.Visibility = Visibility.Hidden;
+				Victorylabel.Visibility = Visibility.Visible;
 			}));
 		}
 

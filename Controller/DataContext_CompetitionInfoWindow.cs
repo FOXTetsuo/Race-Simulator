@@ -5,11 +5,13 @@ namespace Controller
 {
 	public class DataContext_CompetitionInfoWindow : INotifyPropertyChanged
 	{
+		private string _winnerString = "The winner is: ";
 		private BindingList<IParticipant> _inklingData { get; set; }
 		public BindingList<IParticipant> InklingData { get { return _inklingData; } set { _inklingData = value; OnPropertyChanged(); } }
 		private BindingList<Track> _tracks { get; set; }
 		public BindingList<Track> Tracks { get { return _tracks; } set { _tracks = value; OnPropertyChanged(); } }
-
+		public String WinnerString { get { return _winnerString; } set { _winnerString = value; OnPropertyChanged(); } }
+			
 		public event PropertyChangedEventHandler? PropertyChanged;
 
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -19,24 +21,15 @@ namespace Controller
 		public DataContext_CompetitionInfoWindow()
 		{
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
-			Data.Competition.CompetitionFinished += OnRaceFinished;
-			//Bind tracks and inklingdata
+			Data.Competition.CompetitionFinished += OnCompetitionFinished;
 			
 			Tracks = new BindingList<Track>();
-			
-			//TODO: fix illegale operatie
 			foreach (Track track in Data.Competition.Tracks)
 			{
 				Tracks.Add(track);
 			}
 
-			List<IParticipant> UnsortedInklingData = new List<IParticipant>();
-			//TODO: verangen met LINQ
-			foreach (IParticipant participant in Data.CurrentRace.Participants)
-			{
-				UnsortedInklingData.Add(participant);
-			}
-			InklingData = new BindingList<IParticipant>(UnsortedInklingData.OrderBy(x => x.Points).ToList());
+			ReOrderLeaderboard();
 		}
 
 		private void OnRaceFinished(object? sender, EventArgs e)
@@ -44,15 +37,16 @@ namespace Controller
 			ReOrderLeaderboard();
 		}
 
+		private void OnCompetitionFinished(object? sender, EventArgs e)
+		{
+			ReOrderLeaderboard();
+			WinnerString += InklingData.First().Name;
+			WinnerString += "!";
+		}
+
 		public void ReOrderLeaderboard()
 		{
 			List<IParticipant> UnsortedInklingData = new List<IParticipant>();
-			//TODO: For 
-			//foreach (IParticipant participant in Data.CurrentRace.Participants)
-			//{
-			//	UnsortedInklingData.Add(participant);
-			//}
-			//lambda van wat hierboven staat
 			Data.CurrentRace.Participants.ForEach((item) => UnsortedInklingData.Add(item));
 			//LINQ statement om data te orderen
 			InklingData = new BindingList<IParticipant>(UnsortedInklingData.OrderByDescending(x => x.Points).ToList());

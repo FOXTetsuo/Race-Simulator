@@ -37,6 +37,7 @@
     <None Remove="WPF Images\Squid4.png" />
     <None Remove="WPF Images\Squid4_Ink.png" />
     <None Remove="WPF Images\Squid4_S.png" />
+    <None Remove="WPF Images\WinnerCurtain.png" />
     <None Remove="WPF Images\WinnerFrame_S.png" />
   </ItemGroup>
 
@@ -110,6 +111,9 @@
 
   <ItemGroup>
     <Content Include="Splatoon3_Overview_Splatted_Squid.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WPF Images\WinnerCurtain.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="WPF Images\WinnerFrame_S.png">

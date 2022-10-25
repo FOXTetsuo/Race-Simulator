@@ -125,13 +125,13 @@ namespace WPF_App
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
 		
-		public static BitmapSource DrawBackground(string winner)
+		public static BitmapSource DrawWinnerFrame(string winner)
 		{
 			Bitmap canvas = new Bitmap(1200, 800);
 			Graphics graphics = Graphics.FromImage(canvas);
 			//TODO FIX HARDCODED NUMBERS - actualy center image - Implement specific winner - show text - open compwindow
-			graphics.DrawImage(ImageHandler.CloneImageFromCache(Background), 400, 200);
-			graphics.DrawImage(ImageHandler.CloneImageFromCache(winner), 480, 265);
+			graphics.DrawImage(ImageHandler.CloneImageFromCache(WinnerFrame), 400, 240);
+			graphics.DrawImage(ImageHandler.CloneImageFromCache(winner), 480, 305);
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
 		
@@ -348,19 +348,23 @@ namespace WPF_App
 		private const String Straight = "WPF Images\\Road_L\\StraightL.png";
 		private const String StraightVertical = "WPF Images\\Road_L\\VerticalL.png";
 		private const String Finish = "WPF Images\\Road_L\\FinishLineL.png";
+
 		private const String Squid1 = "WPF Images\\Squid1_S.png";
 		private const String Squid2 = "WPF Images\\Squid2_S.png";
 		private const String Squid3 = "WPF Images\\Squid3_S.png";
 		private const String Squid4 = "WPF Images\\Squid4_S.png";
+
 		private const String Squid1L = "WPF Images\\Squid1.png";
 		private const String Squid2L = "WPF Images\\Squid2.png";
 		private const String Squid3L = "WPF Images\\Squid3.png";
 		private const String Squid4L = "WPF Images\\Squid4.png";
+		
 		private const String Squid1_Ink = "WPF Images\\Squid1_Ink.png";
 		private const String Squid2_Ink = "WPF Images\\Squid2_Ink.png";
 		private const String Squid3_Ink = "WPF Images\\Squid3_Ink.png";
 		private const String Squid4_Ink = "WPF Images\\Squid4_Ink.png";
-		private const String Background = "WPF Images\\WinnerFrame.png";
+		
+		private const String WinnerFrame = "WPF Images\\WinnerFrame.png";
 		#endregion
 	}
 }
