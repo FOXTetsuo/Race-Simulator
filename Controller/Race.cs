@@ -31,7 +31,7 @@ namespace Controller
 		public Race(Track track, List<IParticipant>? participants)
 		{
 			PointIndex = 1;
-			AmountOfLaps = 4;
+			AmountOfLaps = 0;
 			Timer = new System.Timers.Timer(500);
 			Timer.Elapsed += OnTimedEvent;
 			_random = new Random(DateTime.Now.Millisecond);

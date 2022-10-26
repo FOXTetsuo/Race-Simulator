@@ -129,7 +129,7 @@ namespace WPF_App
 		{
 			Bitmap canvas = new Bitmap(1200, 800);
 			Graphics graphics = Graphics.FromImage(canvas);
-			//TODO FIX HARDCODED NUMBERS - actualy center image - Implement specific winner - show text - open compwindow
+			
 			graphics.DrawImage(ImageHandler.CloneImageFromCache(WinnerFrame), 400, 240);
 			graphics.DrawImage(ImageHandler.CloneImageFromCache(winner), 480, 305);
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));

@@ -6,7 +6,7 @@
 		xmlns:local="clr-namespace:WPF_App"
 		xmlns:Controller="clr-namespace:Controller;assembly=Controller" x:Class="WPF_App.MainWindow"
 		mc:Ignorable="d"
-		Title="Inkling Race Simulator" WindowState="Maximized" Height="800" Width="1200" Icon="/Splatoon3_Overview_Splatted_Squid.png" Closing="OnClose">
+		Title="Inkling Race Simulator" WindowState="Maximized" ResizeMode="NoResize" Height="800" Width="1200" Icon="/Splatoon3_Overview_Splatted_Squid.png" Closing="OnClose">
     <Window.DataContext>
         <Controller:DataContext_MainWindow/>
     </Window.DataContext>
@@ -14,7 +14,7 @@
     <Grid Name ="MainWindowGrid" Background="#a0c070">
         <Image Source="/WPF Images/WinnerCurtain.png" Stretch="Fill" Visibility="Hidden" x:Name="CurtainWindow"/>
         <Image x:Name="TrackImage" Margin="0,70,0,50"/>
-        <Image x:Name="WinnerImage" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,300"/>
+        <Image x:Name="WinnerImage" Margin="0,0,0,300"/>
         <DockPanel LastChildFill="False" Margin="0,0,0,20" Grid.ColumnSpan="3">
             <Menu DockPanel.Dock="Top" Height="20" VerticalAlignment="Top">
                 <MenuItem Header="Menu">
@@ -27,7 +27,7 @@
 
         </DockPanel>
         <Label x:Name="RaceNameLabel" HorizontalContentAlignment="Center"  Margin="0,23,0,0" Content="{Binding RaceTrackName, FallbackValue=NONAMEAVAILABLE}" HorizontalAlignment="Center" Width="424" Height="50" VerticalAlignment="Top" FontFamily="Arial Rounded MT Bold" FontSize="32"/>
-        <Label x:Name="Victorylabel" Visibility="Hidden" Foreground="Gold" Content="{Binding WinnerString}" Margin="0,500,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontStyle="Normal" FontSize="140" FontFamily="Vladimir Script" Height="194">
+        <Label x:Name="Victorylabel" Visibility="Hidden" Foreground="Gold" Content="{Binding WinnerString}" Margin="0,500,0,0" HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontStyle="Normal" FontSize="140" FontFamily="Vladimir Script" Height="194">
             <Label.DataContext>
                 <Controller:DataContext_CompetitionInfoWindow/>
             </Label.DataContext>
