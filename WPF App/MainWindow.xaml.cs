@@ -18,6 +18,7 @@ namespace WPF_App
 	{
 		private CompetitionInfoWindow CompetitionInfoWindow;
 		private RaceInfoWindow RaceInfoWindow;
+		private NewCompetitionWindow NewCompetitionWindow;
 		public MainWindow()
 		{
 
@@ -27,6 +28,8 @@ namespace WPF_App
 
 			RaceInfoWindow = new RaceInfoWindow();
 			CompetitionInfoWindow = new CompetitionInfoWindow();
+			NewCompetitionWindow = new NewCompetitionWindow();
+			NewCompetitionWindow.Show();
 		}
 
 		public void StartCompetition()
