@@ -13,16 +13,20 @@ namespace WPF_App
 	/// </summary>
 	/// 
 
-	
+
 	public partial class MainWindow : Window
 	{
 		private CompetitionInfoWindow CompetitionInfoWindow;
 		private RaceInfoWindow RaceInfoWindow;
 		public MainWindow()
 		{
-			
+
 			// initialize window components and set the datacontext
 			StartCompetition();
+
+
+			RaceInfoWindow = new RaceInfoWindow();
+			CompetitionInfoWindow = new CompetitionInfoWindow();
 		}
 
 		public void StartCompetition()
@@ -56,7 +60,6 @@ namespace WPF_App
 			DispatcherPriority.Normal,
 			new Action(() =>
 			{
-				CompetitionInfoWindow = new CompetitionInfoWindow();
 				CompetitionInfoWindow.Show();
 			}));
 
@@ -92,12 +95,11 @@ namespace WPF_App
 		{
 			this.Close();
 			Application.Current.Shutdown();
-
 		}
 
 		private void OpenCompetitionInfoWindow(object sender, RoutedEventArgs e)
 		{
-			CompetitionInfoWindow = new CompetitionInfoWindow();
+			//CompetitionInfoWindow = new CompetitionInfoWindow();
 			CompetitionInfoWindow.Show();
 		}
 
@@ -133,6 +135,11 @@ namespace WPF_App
 		private void Grid_OnLoadingRow(object sender, DataGridRowEventArgs e)
 		{
 			e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+		}
+
+		private void OnClose(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			Application.Current.Shutdown();
 		}
 	}
 }

@@ -28,5 +28,11 @@ namespace WPF_App
 		{
 			e.Row.Header = (e.Row.GetIndex() + 1).ToString();
 		}
+
+		private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			e.Cancel = true;
+			this.Hide();
+		}
 	}
 }

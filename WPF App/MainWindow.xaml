@@ -6,7 +6,7 @@
 		xmlns:local="clr-namespace:WPF_App"
 		xmlns:Controller="clr-namespace:Controller;assembly=Controller" x:Class="WPF_App.MainWindow"
 		mc:Ignorable="d"
-		Title="Inkling Race Simulator" WindowState="Maximized" ResizeMode="NoResize" Height="800" Width="1200" Icon="/Splatoon3_Overview_Splatted_Squid.png">
+		Title="Inkling Race Simulator" WindowState="Maximized" ResizeMode="NoResize" Height="800" Width="1200" Icon="/Splatoon3_Overview_Splatted_Squid.png" Closing="OnClose">
     <Window.DataContext>
         <Controller:DataContext_MainWindow/>
     </Window.DataContext>
