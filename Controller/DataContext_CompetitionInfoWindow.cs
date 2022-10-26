@@ -32,16 +32,16 @@ namespace Controller
 
 			ReOrderLeaderboard();
 		}
-		
+
+		//TODO: This is a bit of a hack, but it works for now.
 		private void OnRaceFinished(object? sender, EventArgs e)
 		{
 			BindingList<Track> newTracks = new BindingList<Track>();
-			//Tracks = new BindingList<Track>();
 			foreach (Track track in Data.Competition.Tracks)
 			{
-				Tracks.Add(track);
+				newTracks.Add(track);
 			}
-			//Tracks = newTracks;
+			Tracks = newTracks;
 			ReOrderLeaderboard();
 		}
 
