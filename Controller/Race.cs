@@ -1,15 +1,13 @@
 ﻿using Model;
-using System.Linq.Expressions;
-using static System.Collections.Specialized.BitVector32;
 using Section = Model.Section;
 
 namespace Controller
 {
 	public class Race
 	{
-		
+
 		public event EventHandler<DriversChangedEventArgs> DriversChanged;
-		
+
 		public event EventHandler<EventArgs> RaceFinished;
 		public int PointIndex { get; set; }
 		public int AmountOfLaps { get; set; }
@@ -33,7 +31,7 @@ namespace Controller
 		public Race(Track track, List<IParticipant>? participants)
 		{
 			PointIndex = 1;
-			AmountOfLaps = 1;
+			AmountOfLaps = 0;
 			Timer = new System.Timers.Timer(500);
 			Timer.Elapsed += OnTimedEvent;
 			_random = new Random(DateTime.Now.Millisecond);
@@ -44,13 +42,20 @@ namespace Controller
 			RandomizeEquipment();
 		}
 
+		public void UpdateSpeed(IParticipant participant)
+		{
+			participant.Equipment.Speed = new Func<int>(() => participant.Equipment.Quality * participant.Equipment.Performance)();
+		}
+
+
 		// randomizes the equipment of the racers
 		public void RandomizeEquipment()
 		{
 			foreach (IParticipant participant in Participants)
 			{
-				participant.Equipment.Quality = _random.Next(1, 11);
-				participant.Equipment.Performance = _random.Next(3, 11);
+				participant.Equipment.Quality = _random.Next(5, 11);
+				participant.Equipment.Performance = _random.Next(4, 11);
+				UpdateSpeed(participant);
 			}
 		}
 
@@ -72,15 +77,15 @@ namespace Controller
 						// vervolgens + (i/2), omdat dit vervolgens in GetSectionData gebruikt wordt bij de volgende stap.
 						// zo garandeer je dat je altijd het laatste stuck section pakt.
 
-						if (index - (i/2) < 0)
+						if (index - (i / 2) < 0)
 						{
-							index = track.Sections.Count -1 + (i/2);
+							index = track.Sections.Count - 1 + (i / 2);
 						}
-						
+
 						// maak / get sectiondata om aan te vullen
 						// i gedeeld door 2 zodat er 2 mensen per section geplaatst worden
 						// 0/2 == 0, 1/2 == 0;
-						
+
 						SectionData sectionData = GetSectionData(track.Sections.ElementAt(index - (i / 2)));
 						//checkt of dingen al gevuld zijn
 
@@ -99,7 +104,7 @@ namespace Controller
 							// onthoudt waar de participant is op dit moment
 							participants[i].CurrentSection = track.Sections.ElementAt(index - (i / 2));
 						}
-						
+
 					}
 					return;
 				}
@@ -125,28 +130,25 @@ namespace Controller
 		// en beweeg de driver naar het volgende stuck track
 		public void CheckWhetherToMoveParticipants()
 		{
-			//Timer.Stop zodat de thread niet verder gaat in de berekening.
-			//Timer.Stop();
 			foreach (IParticipant participant in Participants)
 			{
-				if (participant.Equipment.IsBroken == false)
+				if (participant.Equipment.IsBroken == false && participant.Equipment.Performance > 0)
 				{
-					participant.DistanceCovered += (participant.Equipment.Performance * participant.Equipment.Speed);
+					participant.DistanceCovered += (participant.Equipment.Speed);
 					if (participant.DistanceCovered >= 100)
 					{
 						AdvanceParticipantIfPossible(participant);
 					}
 				}
 			}
-			//Timer.Start();
 		}
 
 		public void DetermineIfCarShouldBreak()
 		{
 			foreach (IParticipant participant in Data.CurrentRace.Participants)
 			{
-				// 1 op 32 kans dat auto kapot gaat
-				if (participant.Equipment.IsBroken == false && (_random.Next(32) == 13))
+				// 1 op 64 kans dat auto kapot gaat
+				if (participant.Equipment.IsBroken == false && (_random.Next(64) == 13))
 				{
 					BreakCar(participant);
 				}
@@ -163,21 +165,11 @@ namespace Controller
 		//unless the stats would become so low that the race would barely progress.
 		{
 			participant.Equipment.IsBroken = true;
-			int determinePenalty = _random.Next(2);
-			switch (determinePenalty)
+
+			if (participant.Equipment.Performance > 4)
 			{
-				case 0:
-					if (participant.Equipment.Performance > 2)
-					{
-						participant.Equipment.Performance += -1;
-					}
-					break;
-				case 1:
-					if (participant.Equipment.Speed > 2)
-					{
-						participant.Equipment.Speed += -1;
-					}
-					break;
+				participant.Equipment.Performance += -1;
+				UpdateSpeed(participant);
 			}
 		}
 
@@ -222,7 +214,7 @@ namespace Controller
 					else participant.DistanceCovered = 100;
 				}
 				i++;
-				
+
 			}
 		}
 
@@ -236,7 +228,7 @@ namespace Controller
 				RaceFinished.Invoke(this, new EventArgs());
 				Data.CurrentRace.Start();
 			}
-			
+
 		}
 
 		private void RemoveParticipantFromSectionData(SectionData sectionData, IParticipant participant)
@@ -267,7 +259,7 @@ namespace Controller
 			foreach (Section section in Track.Sections)
 			{
 				if (GetSectionData(section).Left != null || (GetSectionData(section).Right != null))
-				{ 
+				{
 					return false;
 				}
 			}
@@ -279,10 +271,13 @@ namespace Controller
 			if (participant.CurrentSection.SectionType == SectionTypes.Finish)
 			{
 				participant.LoopsPassed += 1;
-				if (participant.LoopsPassed == AmountOfLaps+1)
-					// +1 omdat participants voor de finish beginnen en dus altijd 1 loop passen aan het begin van de race
+				if (participant.LoopsPassed == AmountOfLaps + 1)
+				// +1 omdat participants voor de finish beginnen en dus altijd 1 loop passen aan het begin van de race
 				{
-					participant.Points += ((6 / PointIndex) - 1);
+					if (((6 / PointIndex) - 1) > 0)
+					{
+						participant.Points += ((6 / PointIndex) - 1);
+					}
 					// First to finish gets 5 points
 					// Second to finish gets 2 points
 					// Third gets 1 points
@@ -296,8 +291,7 @@ namespace Controller
 		}
 
 		public void Cleaner()
-		{	
-
+		{
 			foreach (IParticipant participant in Participants)
 			{
 				participant.CurrentSection = null;

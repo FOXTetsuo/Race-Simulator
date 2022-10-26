@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF_App"
         xmlns:Controller="clr-namespace:Controller;assembly=Controller" x:Class="WPF_App.RaceInfoWindow"
         mc:Ignorable="d"
-        Title="Race information" Height="450" Width="695" Icon="/Splatoon3_Overview_Splatted_Squid.png" ResizeMode="NoResize">
+        Title="Race information" Height="450" Width="695" Icon="/Splatoon3_Overview_Splatted_Squid.png" ResizeMode="NoResize" Closing="WindowClosing">
     <Grid>
         <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="10,10,10,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" LoadingRow="Grid_OnLoadingRow" Width="Auto" >
             <DataGrid.DataContext>

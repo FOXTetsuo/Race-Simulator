@@ -17,11 +17,6 @@ namespace Controller
 		private string _raceTrackName;
 		public string RaceTrackName { get { return _raceTrackName; } set { _raceTrackName = value; OnPropertyChanged(); } }
 
-		// swereld's meest nutteloze lambda statement voor geen enkele goeie reden
-		// serieus, benoem me aub 1 reden dat ik niet gewoon
-		// public string RaceTrackName = Data.CurrentRace.Track.Name;
-		// kan doen
-
 		public DataContext_MainWindow()
 		{
 			RaceTrackName = new Func<string>(() => Data.CurrentRace.Track.Name)();
@@ -29,9 +24,10 @@ namespace Controller
 		}
 
 		private void OnRaceFinished(object? sender, EventArgs e)
-			// Indicate that name has changed && rebind ondriverschanged
 		{
 			RaceTrackName = new Func<string>(() => Data.CurrentRace.Track.Name)();
+			//Rebind onRaceFinished
+			Data.CurrentRace.RaceFinished += OnRaceFinished;
 		}
 
 		protected void OnPropertyChanged([CallerMemberName] string name = null)

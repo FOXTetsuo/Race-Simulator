@@ -3,6 +3,7 @@ using Model;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace WPF_App
@@ -12,26 +13,37 @@ namespace WPF_App
 	/// </summary>
 	/// 
 
-	
+
 	public partial class MainWindow : Window
 	{
 		private CompetitionInfoWindow CompetitionInfoWindow;
 		private RaceInfoWindow RaceInfoWindow;
 		public MainWindow()
 		{
+
 			// initialize window components and set the datacontext
 			StartCompetition();
+
+
+			RaceInfoWindow = new RaceInfoWindow();
+			CompetitionInfoWindow = new CompetitionInfoWindow();
 		}
 
 		public void StartCompetition()
 		{
+
 			Data.Initialize();
 			Data.NextRace();
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+
+			//Subscribe to OnCompetitionOver
+			Data.Competition.CompetitionFinished += OnCompetitionOver;
+
 			InitializeRace();
 			RaceNameLabel.Visibility = Visibility.Visible;
 			RaceNameLabel.FontSize = 30;
 			RaceNameLabel.FontFamily = new System.Windows.Media.FontFamily("Informal Roman");
+			
 		}
 
 		private void CurrentRace_RaceFinished(object? sender, EventArgs e)
@@ -43,16 +55,27 @@ namespace WPF_App
 
 		private void OnCompetitionOver(object? sender, EventArgs e)
 		{
+			//Open competition info when race is over
+			this.Dispatcher.Invoke(
+			DispatcherPriority.Normal,
+			new Action(() =>
+			{
+				CompetitionInfoWindow.Show();
+			}));
+
 			//Delete trackimage
 			this.TrackImage.Dispatcher.BeginInvoke(
 			DispatcherPriority.Render,
 			new Action(() =>
 			{
-				TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
-				TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
+				this.TrackImage.HorizontalAlignment = HorizontalAlignment.Center;
+				this.TrackImage.VerticalAlignment = VerticalAlignment.Top;
 				this.TrackImage.Source = null;
-				this.TrackImage.Source = WPFVisualizer.DrawBackground();
+				this.TrackImage.Source = WPFVisualizer.DrawWinnerFrame(Data.Competition.Winner.ImageSourceWinner);
+				CurtainWindow.Visibility = Visibility.Visible;
+				MainWindowGrid.Background = new SolidColorBrush(Colors.CadetBlue);
 				RaceNameLabel.Visibility = Visibility.Hidden;
+				Victorylabel.Visibility = Visibility.Visible;
 			}));
 		}
 
@@ -76,7 +99,7 @@ namespace WPF_App
 
 		private void OpenCompetitionInfoWindow(object sender, RoutedEventArgs e)
 		{
-			CompetitionInfoWindow = new CompetitionInfoWindow();
+			//CompetitionInfoWindow = new CompetitionInfoWindow();
 			CompetitionInfoWindow.Show();
 		}
 
@@ -90,7 +113,6 @@ namespace WPF_App
 		{
 			InitializeComponent();
 			//Resubscribe to events and initialize visualizer
-			Data.Competition.CompetitionFinished += OnCompetitionOver;
 			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
 			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
 			WPFVisualizer.Initialize(Data.CurrentRace);
@@ -106,13 +128,18 @@ namespace WPF_App
 				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
 
 			}));
-			//start race
+			//Start race
 			Data.CurrentRace.Start();
 		}
 
 		private void Grid_OnLoadingRow(object sender, DataGridRowEventArgs e)
 		{
 			e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+		}
+
+		private void OnClose(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			Application.Current.Shutdown();
 		}
 	}
 }

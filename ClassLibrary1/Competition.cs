@@ -26,6 +26,7 @@ namespace Model
 
 		public void EndCompetition()
 		{
+			Winner = Participants.OrderByDescending(x => x.Points).First();
 			CompetitionFinished.Invoke(this, new EventArgs());
 		}
 

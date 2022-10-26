@@ -55,18 +55,22 @@ namespace WPF_App
 				{
 					case TeamColors.Orange:
 						participant.ImageSource = WPFVisualizer.Squid1;
+						participant.ImageSourceWinner = WPFVisualizer.Squid1L;
 						participant.BrokeImageSource = WPFVisualizer.Squid1_Ink;
 						break;
 					case TeamColors.Green:
 						participant.ImageSource = WPFVisualizer.Squid2;
+						participant.ImageSourceWinner = WPFVisualizer.Squid2L;
 						participant.BrokeImageSource = WPFVisualizer.Squid2_Ink;
 						break;
 					case TeamColors.Purple:
 						participant.ImageSource = WPFVisualizer.Squid3;
+						participant.ImageSourceWinner = WPFVisualizer.Squid3L;
 						participant.BrokeImageSource = WPFVisualizer.Squid3_Ink;
 						break;
 					case TeamColors.Red:
 						participant.ImageSource = WPFVisualizer.Squid4;
+						participant.ImageSourceWinner = WPFVisualizer.Squid4L;
 						participant.BrokeImageSource = WPFVisualizer.Squid4_Ink;
 						break;
 				}
@@ -121,11 +125,13 @@ namespace WPF_App
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
 		
-		public static BitmapSource DrawBackground()
+		public static BitmapSource DrawWinnerFrame(string winner)
 		{
-			Bitmap canvas = new Bitmap(1366, 768);
+			Bitmap canvas = new Bitmap(1200, 800);
 			Graphics graphics = Graphics.FromImage(canvas);
-			graphics.DrawImage(ImageHandler.CloneImageFromCache(Background), 0, 0);
+			//TODO FIX HARDCODED NUMBERS - actualy center image - Implement specific winner - show text - open compwindow
+			graphics.DrawImage(ImageHandler.CloneImageFromCache(WinnerFrame), 400, 240);
+			graphics.DrawImage(ImageHandler.CloneImageFromCache(winner), 480, 305);
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
 		
@@ -334,7 +340,7 @@ namespace WPF_App
 			}
 		}
 
-		#region Graphics_Large_Local
+		#region Graphics
 		private const String CornerNE = "WPF Images\\Road_L\\CornerNEL.png";
 		private const String CornerNW = "WPF Images\\Road_L\\CornerNWL.png";
 		private const String CornerSE = "WPF Images\\Road_L\\CornerSEl.png";
@@ -342,15 +348,23 @@ namespace WPF_App
 		private const String Straight = "WPF Images\\Road_L\\StraightL.png";
 		private const String StraightVertical = "WPF Images\\Road_L\\VerticalL.png";
 		private const String Finish = "WPF Images\\Road_L\\FinishLineL.png";
+
 		private const String Squid1 = "WPF Images\\Squid1_S.png";
 		private const String Squid2 = "WPF Images\\Squid2_S.png";
 		private const String Squid3 = "WPF Images\\Squid3_S.png";
 		private const String Squid4 = "WPF Images\\Squid4_S.png";
+
+		private const String Squid1L = "WPF Images\\Squid1.png";
+		private const String Squid2L = "WPF Images\\Squid2.png";
+		private const String Squid3L = "WPF Images\\Squid3.png";
+		private const String Squid4L = "WPF Images\\Squid4.png";
+		
 		private const String Squid1_Ink = "WPF Images\\Squid1_Ink.png";
 		private const String Squid2_Ink = "WPF Images\\Squid2_Ink.png";
 		private const String Squid3_Ink = "WPF Images\\Squid3_Ink.png";
 		private const String Squid4_Ink = "WPF Images\\Squid4_Ink.png";
-		private const String Background = "Splatoon3_Overview_Splatted_Squid.png";
+		
+		private const String WinnerFrame = "WPF Images\\WinnerFrame.png";
 		#endregion
 	}
 }

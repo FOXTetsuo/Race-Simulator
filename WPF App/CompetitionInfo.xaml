@@ -6,16 +6,21 @@
         xmlns:local="clr-namespace:WPF_App"
         xmlns:Controller="clr-namespace:Controller;assembly=Controller" x:Class="WPF_App.CompetitionInfoWindow"
         mc:Ignorable="d"
-        Title="Competition Info" Height="450" Width="1000" Icon="/Splatoon3_Overview_Splatted_Squid.png">
-
+        Title="Competition Info" Height="450" Width="700" Icon="/Splatoon3_Overview_Splatted_Squid.png" Closing="WindowClosing">
+        
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="115*"/>
-            <RowDefinition Height="102*"/>
-        </Grid.RowDefinitions>
-        <Label Content="Leaderboard:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="148"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
 
-        <DataGrid Width="Auto" x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="10,41,326,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" LoadingRow="Grid_OnLoadingRow" Grid.RowSpan="2"  CanUserResizeColumns="False" CanUserResizeRows="False" HorizontalAlignment="Left">
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="281*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Leaderboard:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="148"/>
+
+        <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="10,31,0,20" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" LoadingRow="Grid_OnLoadingRow"  CanUserResizeColumns="False" CanUserResizeRows="False" HorizontalAlignment="Left" Width="Auto" MaxWidth="450" Grid.RowSpan="3">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -32,8 +37,8 @@
                 <Controller:DataContext_CompetitionInfoWindow/>
             </DataGrid.DataContext>
         </DataGrid>
-        <Label Content="Tracks left in competition" Margin="567,10,0,0" VerticalAlignment="Top" Width="148" HorizontalAlignment="Right"/>
-        <DataGrid ItemsSource="{Binding Path = Tracks}" CanUserResizeColumns="False" CanUserResizeRows="False" Margin="497,41,10,10" AutoGenerateColumns="False" LoadingRow="Grid_OnLoadingRow" HorizontalAlignment="Right" Width="150">
+        <Label Content="Tracks left in competition:" VerticalAlignment="Top" Width="148" HorizontalAlignment="Right" Margin="0,0,15,0"/>
+        <DataGrid ItemsSource="{Binding Path = Tracks}" HorizontalAlignment="Left" CanUserResizeColumns="False" CanUserResizeRows="False" Margin="479,31,0,20" AutoGenerateColumns="False" LoadingRow="Grid_OnLoadingRow" MinWidth="150" Width="Auto" Grid.RowSpan="3">
             <DataGrid.DataContext>
                 <Controller:DataContext_CompetitionInfoWindow/>
             </DataGrid.DataContext>

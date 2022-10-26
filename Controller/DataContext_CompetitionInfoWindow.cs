@@ -1,51 +1,62 @@
 ﻿using Model;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
+
 namespace Controller
 {
 	public class DataContext_CompetitionInfoWindow : INotifyPropertyChanged
 	{
-		private BindingList<IParticipant> _inklingData { get; set; }
-		public BindingList<IParticipant> InklingData { get { return _inklingData; } set { _inklingData = value; OnPropertyChanged(); } }
-
-		
-		public Queue<Track> Tracks { get; set; } // get / set are ESSENTIAL
 		public event PropertyChangedEventHandler? PropertyChanged;
-
+		private BindingList<IParticipant> _inklingData;
+		private BindingList<Track> _tracks;
+		private string _winnerString = "The winner is: ";
+		public BindingList<IParticipant> InklingData { get { return _inklingData; } set { _inklingData = value; OnPropertyChanged(); } }
+		public BindingList<Track> Tracks { get { return _tracks; } set { _tracks = value; OnPropertyChanged(); } }
+			
+		public string WinnerString { get { return _winnerString; } set { _winnerString = value; OnPropertyChanged(); } }
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-			//ReOrderLeaderboard();
 		}
 		public DataContext_CompetitionInfoWindow()
 		{
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
-			Data.Competition.CompetitionFinished += OnRaceFinished;
-			//Bind tracks and inklingdata
+			Data.Competition.CompetitionFinished += OnCompetitionFinished;
 			
-			Tracks = new Func<Queue<Track>>(() => Data.Competition.Tracks)();
-
-			List<IParticipant> UnsortedInklingData = new List<IParticipant>();
-			//TODO: verangen met LINQ
-			foreach (IParticipant participant in Data.CurrentRace.Participants)
+			Tracks = new BindingList<Track>();
+			foreach (Track track in Data.Competition.Tracks)
 			{
-				UnsortedInklingData.Add(participant);
+				Tracks.Add(track);
 			}
-			InklingData = new BindingList<IParticipant>(UnsortedInklingData.OrderBy(x => x.Name).ToList());
+
+			ReOrderLeaderboard();
 		}
 
+		//TODO: This is a bit of a hack, but it works for now.
 		private void OnRaceFinished(object? sender, EventArgs e)
 		{
+			BindingList<Track> newTracks = new BindingList<Track>();
+			foreach (Track track in Data.Competition.Tracks)
+			{
+				newTracks.Add(track);
+			}
+			Tracks = newTracks;
 			ReOrderLeaderboard();
+		}
+
+		private void OnCompetitionFinished(object? sender, EventArgs e)
+		{
+			ReOrderLeaderboard();
+			WinnerString += InklingData.First().Name;
+			WinnerString += "!";
+			Tracks = null;
 		}
 
 		public void ReOrderLeaderboard()
 		{
 			List<IParticipant> UnsortedInklingData = new List<IParticipant>();
-			foreach (IParticipant participant in Data.CurrentRace.Participants)
-			{
-				UnsortedInklingData.Add(participant);
-			}
+			Data.CurrentRace.Participants.ForEach((item) => UnsortedInklingData.Add(item));
 			//LINQ statement om data te orderen
 			InklingData = new BindingList<IParticipant>(UnsortedInklingData.OrderByDescending(x => x.Points).ToList());
 		}
