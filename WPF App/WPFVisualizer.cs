@@ -268,7 +268,7 @@ namespace WPF_App
 					}
 					DetermineDirection(section.SectionType, _direction);
 				}
-				TrackWidth = (XMax - XMin + 1);
+				TrackWidth = (XMax - XMin);
 				TrackHeight = (YMax - YMin + 1);
 			}
 

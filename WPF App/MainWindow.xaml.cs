@@ -44,8 +44,6 @@ namespace WPF_App
 
 			InitializeRace();
 			RaceNameLabel.Visibility = Visibility.Visible;
-			RaceNameLabel.FontSize = 30;
-			RaceNameLabel.FontFamily = new System.Windows.Media.FontFamily("Informal Roman");
 			
 		}
 
@@ -66,15 +64,13 @@ namespace WPF_App
 				CompetitionInfoWindow.Show();
 			}));
 
-			//Delete trackimage
+			//Delete trackimage, replace with winner screen
 			this.TrackImage.Dispatcher.BeginInvoke(
 			DispatcherPriority.Render,
 			new Action(() =>
 			{
-				this.TrackImage.HorizontalAlignment = HorizontalAlignment.Center;
-				this.TrackImage.VerticalAlignment = VerticalAlignment.Top;
 				this.TrackImage.Source = null;
-				this.TrackImage.Source = WPFVisualizer.DrawWinnerFrame(Data.Competition.Winner.ImageSourceWinner);
+				this.WinnerImage.Source = WPFVisualizer.DrawWinnerFrame(Data.Competition.Winner.ImageSourceWinner);
 				CurtainWindow.Visibility = Visibility.Visible;
 				MainWindowGrid.Background = new SolidColorBrush(Colors.CadetBlue);
 				RaceNameLabel.Visibility = Visibility.Hidden;
@@ -125,8 +121,9 @@ namespace WPF_App
 			DispatcherPriority.Render,
 			new Action(() =>
 			{
-				TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
-				TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
+				//TODO: maybe not
+				//TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
+				//TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
 				this.TrackImage.Source = null;
 				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
 
