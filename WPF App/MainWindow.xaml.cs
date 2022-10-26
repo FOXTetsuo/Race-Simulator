@@ -45,6 +45,14 @@ namespace WPF_App
 
 		private void OnCompetitionOver(object? sender, EventArgs e)
 		{
+			//Open competition info when race is over
+			this.Dispatcher.Invoke(
+			DispatcherPriority.Render,
+			new Action(() =>
+			{
+				CompetitionInfoWindow = new CompetitionInfoWindow();
+				CompetitionInfoWindow.Show();
+			}));
 
 			//Delete trackimage
 			this.TrackImage.Dispatcher.BeginInvoke(
@@ -78,6 +86,7 @@ namespace WPF_App
 		{
 			this.Close();
 			Application.Current.Shutdown();
+
 		}
 
 		private void OpenCompetitionInfoWindow(object sender, RoutedEventArgs e)

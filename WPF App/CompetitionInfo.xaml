@@ -7,7 +7,7 @@
         xmlns:Controller="clr-namespace:Controller;assembly=Controller" x:Class="WPF_App.CompetitionInfoWindow"
         mc:Ignorable="d"
         Title="Competition Info" Height="450" Width="700" Icon="/Splatoon3_Overview_Splatted_Squid.png">
-
+        
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
