@@ -20,15 +20,21 @@ namespace WPF_App
 		private RaceInfoWindow RaceInfoWindow;
 		public MainWindow()
 		{
+			
 			// initialize window components and set the datacontext
 			StartCompetition();
 		}
 
 		public void StartCompetition()
 		{
+
 			Data.Initialize();
 			Data.NextRace();
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+
+			//Subscribe to OnCompetitionOver
+			Data.Competition.CompetitionFinished += OnCompetitionOver;
+
 			InitializeRace();
 			RaceNameLabel.Visibility = Visibility.Visible;
 			RaceNameLabel.FontSize = 30;
@@ -47,7 +53,7 @@ namespace WPF_App
 		{
 			//Open competition info when race is over
 			this.Dispatcher.Invoke(
-			DispatcherPriority.Render,
+			DispatcherPriority.Normal,
 			new Action(() =>
 			{
 				CompetitionInfoWindow = new CompetitionInfoWindow();
@@ -105,7 +111,6 @@ namespace WPF_App
 		{
 			InitializeComponent();
 			//Resubscribe to events and initialize visualizer
-			Data.Competition.CompetitionFinished += OnCompetitionOver;
 			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
 			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
 			WPFVisualizer.Initialize(Data.CurrentRace);
