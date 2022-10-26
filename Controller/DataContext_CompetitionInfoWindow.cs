@@ -36,6 +36,9 @@ namespace Controller
 		//TODO: This is a bit of a hack, but it works for now.
 		private void OnRaceFinished(object? sender, EventArgs e)
 		{
+			//Resub to racefinishedevent, because race has now changed:
+			Data.CurrentRace.RaceFinished += OnRaceFinished;
+
 			BindingList<Track> newTracks = new BindingList<Track>();
 			foreach (Track track in Data.Competition.Tracks)
 			{

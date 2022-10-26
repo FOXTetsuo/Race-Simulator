@@ -45,10 +45,9 @@ namespace RaceSimulatorTest
 			// Assert
 			foreach (IParticipant participant in Data.CurrentRace.Participants)
 			{
-				if (participant.Equipment.Performance == 0 || participant.Equipment.Quality == 0 || participant.Equipment.Speed != 0)
+				if (participant.Equipment.Performance == 0 || participant.Equipment.Quality == 0 || participant.Equipment.Speed == 0)
 				{
 					randomized = false;
-
 				}
 			}
 

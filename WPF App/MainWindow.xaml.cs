@@ -20,13 +20,16 @@ namespace WPF_App
 		private RaceInfoWindow RaceInfoWindow;
 		public MainWindow()
 		{
-
 			// initialize window components and set the datacontext
 			StartCompetition();
 
-
-			RaceInfoWindow = new RaceInfoWindow();
-			CompetitionInfoWindow = new CompetitionInfoWindow();
+			this.Dispatcher.Invoke(
+			DispatcherPriority.Normal,
+			new Action(() =>
+			{
+				RaceInfoWindow = new RaceInfoWindow();
+				CompetitionInfoWindow = new CompetitionInfoWindow();
+			}));
 		}
 
 		public void StartCompetition()
@@ -105,7 +108,7 @@ namespace WPF_App
 
 		private void OpenRaceInfoWindow(object sender, RoutedEventArgs e)
 		{
-			RaceInfoWindow = new RaceInfoWindow();
+			//RaceInfoWindow = new RaceInfoWindow();
 			RaceInfoWindow.Show();
 		}
 
