@@ -22,7 +22,21 @@
         </Grid.RowDefinitions>
         <Label Content="Leaderboard:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="148"/>
 
-        <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="10,31,0,20" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" LoadingRow="Grid_OnLoadingRow"  CanUserResizeColumns="False" CanUserResizeRows="False" HorizontalAlignment="Left" Width="Auto" MaxWidth="450" Grid.RowSpan="3">
+        <DataGrid TextBlock.TextAlignment="Center" x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="10,31,0,20" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" LoadingRow="Grid_OnLoadingRow"  CanUserResizeColumns="False" CanUserResizeRows="False" HorizontalAlignment="Left" Width="Auto" MaxWidth="450" Grid.RowSpan="3">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.CellStyle>
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>

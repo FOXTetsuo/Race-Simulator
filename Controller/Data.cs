@@ -25,7 +25,7 @@ namespace Controller
 		{
 			Competition.Tracks.Enqueue(new Track("Skifftastic race", TrackBuilder("Skifftastic race")));
 			Competition.Tracks.Enqueue(new Track("Splat city", TrackBuilder("Splat city")));
-			//Competition.Tracks.Enqueue(new Track("NYEEEEEEEEEEEEEEEEEEEOM", TrackBuilder("NYEEEEEEEEEEEEEEEEEEEOM")));
+			Competition.Tracks.Enqueue(new Track("NYEEEEEEEEEEEEEEEEEEEOM", TrackBuilder("NYEEEEEEEEEEEEEEEEEEEOM")));
 		}
 		
 		public static SectionTypes[] TrackBuilder(string trackName)

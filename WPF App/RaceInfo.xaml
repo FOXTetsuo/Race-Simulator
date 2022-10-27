@@ -9,6 +9,20 @@
         Title="Race information" Height="450" Width="695" Icon="/Splatoon3_Overview_Splatted_Squid.png" ResizeMode="NoResize" Closing="WindowClosing">
     <Grid>
         <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="10,10,10,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" LoadingRow="Grid_OnLoadingRow" Width="Auto" >
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.CellStyle>
             <DataGrid.DataContext>
                 <Controller:DataContext_CompetitionInfoWindow/>
             </DataGrid.DataContext>
@@ -20,7 +34,9 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Inkling Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Inkling Name" Binding="{Binding Name}">
+  
+                </DataGridTextColumn> 
                 <DataGridTextColumn Header="Laps done" Binding="{Binding LoopsPassed}" />
                 <DataGridTextColumn Header="Distance lapped in current section" Binding="{Binding DistanceCovered}" />
                 <DataGridTextColumn Header="Performance" Binding="{Binding Equipment.Performance}" />
