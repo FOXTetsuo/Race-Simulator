@@ -226,52 +226,56 @@ namespace WPF_App
 		}
 
 		public static void CalculateTrackSize()
+			//Calculate the size of the track with maths.
+			//Walks through the track and calculates the highest and lowest X&Y positions
+			//Then takes the absolute of Highest X - Lowest X, and Highest Y - Lowest Y
+			//and sets the size of the track to them
 			{
-				int XCurrent = 0;
-				int YCurrent = 0;
-				int XMin = 0;
-				int YMin = 0;
-				int XMax = 0;
-				int YMax = 0;
+				int xCurrent = 0;
+				int yCurrent = 0;
+				int xMin = 0;
+				int yMin = 0;
+				int xMax = 0;
+				int yMax = 0;
 
 				foreach (Section section in Race.Track.Sections)
 				{
 					if (_direction == Direction.East)
 					{
-						XCurrent += 1;
-						if (XCurrent >= XMax)
+						xCurrent += 1;
+						if (xCurrent >= xMax)
 						{
-							XMax = XCurrent;
+							xMax = xCurrent;
 						}
 					}
 					if (_direction == Direction.West)
 					{
-						XCurrent -= 1;
-						if (XCurrent <= XMin)
+						xCurrent -= 1;
+						if (xCurrent <= xMin)
 						{
-							XMin = XCurrent;
+							xMin = xCurrent;
 						}
 					}
 					if (_direction == Direction.North)
 					{
-						YCurrent += -1;
-						if (YCurrent <= YMin)
+						yCurrent += -1;
+						if (yCurrent <= yMin)
 						{
-							YMin = YCurrent;
+							yMin = yCurrent;
 						}
 					}
 					if (_direction == Direction.South)
 					{
-						YCurrent += 1;
-						if (YCurrent >= YMax)
+						yCurrent += 1;
+						if (yCurrent >= yMax)
 						{
-							YMax = YCurrent;
+							yMax = yCurrent;
 						}
 					}
 					DetermineDirection(section.SectionType, _direction);
 				}
-				TrackWidth = (XMax - XMin);
-				TrackHeight = (YMax - YMin + 1);
+				TrackWidth = (xMax - xMin);
+				TrackHeight = (yMax - yMin + 1);
 			}
 
 		public static void DetermineDirection(SectionTypes type, Direction dir)

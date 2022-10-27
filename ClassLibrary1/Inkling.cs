@@ -8,12 +8,14 @@ namespace Model
 		private int _distanceCovered;
 		private int _loopsPassed;
 		private int _points;
+		private double _lapTime;
 		public string Name { get; set; }
 		public IEquipment Equipment { get; set; }
 		public TeamColors TeamColor { get; set; }
 		public string ImageSource { get; set; }
 		public string BrokeImageSource { get; set; }
 		public Section CurrentSection { get; set; }
+		public double LapTime { get { return _lapTime; } set { _lapTime = value; OnPropertyChanged(); } }
 		public int Points { get { return _points; } set { _points = value; OnPropertyChanged(); } }
 		public int DistanceCovered { get { return _distanceCovered; } set { _distanceCovered = value; OnPropertyChanged(); } }
 		public int LoopsPassed { get { return _loopsPassed; } set { _loopsPassed = value; OnPropertyChanged(); } }
@@ -45,7 +47,8 @@ namespace Model
 			Equipment = equipment;
 			TeamColor = teamcolor;
 			DistanceCovered = 0;
-			LoopsPassed = 0;
+			LoopsPassed = -1;
+			LapTime = 0;
 			Random = new Random();
 			FunFact = FunFacts[Random.Next(FunFacts.Count)];
 		}

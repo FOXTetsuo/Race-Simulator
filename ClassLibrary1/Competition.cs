@@ -14,8 +14,8 @@ namespace Model
 		public List<IParticipant>? Participants { get; set; }
 		public IParticipant Winner {get; set;}
 
-		// Gets the next track in the queue
 		public Track NextTrack()
+		// Gets the next track in the queue
 		{
 			if (Tracks.Count > 0)
 			{
@@ -26,7 +26,7 @@ namespace Model
 
 		public void EndCompetition()
 		{
-			Winner = Participants.OrderByDescending(x => x.Points).First();
+			Winner = Participants.OrderByDescending(x => x.Points).ThenBy(x => x.LapTime).First();
 			CompetitionFinished.Invoke(this, new EventArgs());
 		}
 

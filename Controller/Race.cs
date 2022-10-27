@@ -5,7 +5,7 @@ namespace Controller
 {
 	public class Race
 	{
-
+		const int SectionLength = 100;
 		public event EventHandler<DriversChangedEventArgs> DriversChanged;
 
 		public event EventHandler<EventArgs> RaceFinished;
@@ -36,7 +36,7 @@ namespace Controller
 			_random = new Random(DateTime.Now.Millisecond);
 			Track = track;
 			Participants = participants;
-			StartTime = new DateTime();
+			StartTime = DateTime.Now;
 			_positions = new Dictionary<Section, SectionData>();
 			RandomizeEquipment();
 		}
@@ -113,7 +113,7 @@ namespace Controller
 		public void OnTimedEvent(object sender, EventArgs args)
 		{
 			//Timer.stop to prevent desynchronization issues in case of
-			//PC hanging / drawing taking longer than expected.
+			//software hanging / drawing taking longer than expected.
 			Timer.Stop();
 			BreakAndRecover();
 			CheckWhetherToMoveParticipants();
@@ -136,7 +136,7 @@ namespace Controller
 				if (participant.Equipment.IsBroken == false && participant.Equipment.Performance > 0)
 				{
 					participant.DistanceCovered += (participant.Equipment.Speed);
-					if (participant.DistanceCovered >= 100)
+					if (participant.DistanceCovered >= SectionLength)
 					{
 						AdvanceParticipantIfPossible(participant);
 					}
@@ -196,7 +196,7 @@ namespace Controller
 					{
 						//remove the participant from the old sectiondata
 						//and place the participant on the new sectiondata
-						participant.DistanceCovered -= 100;
+						participant.DistanceCovered -= SectionLength;
 						SectionData sectData = GetSectionData(section);
 						RemoveParticipantFromSectionData(sectData, participant);
 						PlaceParticipantOnSectionData(newData, participant);
@@ -223,11 +223,12 @@ namespace Controller
 						}
 						return;
 					}
-					// participant distancecovered terug naar wat hij was voordat de advanceparticipant functie gecallt werd
-					else participant.DistanceCovered = 100;
+					//TODO: Decide if behavior below is wanted. As of right now 
+					//momentum is conserved.
+					// participant distancecovered back to what it was before function was called
+					//else participant.DistanceCovered = Sectionlength;
 				}
 				index++;
-
 			}
 		}
 
@@ -255,6 +256,7 @@ namespace Controller
 				sectionData.Right = null;
 			}
 		}
+
 		private void PlaceParticipantOnSectionData(SectionData sectionData, IParticipant participant)
 		{
 			if (sectionData.Left == null)
@@ -296,6 +298,7 @@ namespace Controller
 					// Third gets 1 points
 					// Anything after gets nothing
 					PointIndex++;
+					participant.LapTime = Math.Truncate((DateTime.Now - StartTime).TotalSeconds * 100) / 100;
 					return true;
 				}
 				else return false;
@@ -310,6 +313,7 @@ namespace Controller
 				participant.CurrentSection = null;
 				participant.DistanceCovered = 0;
 				participant.LoopsPassed = 0;
+				participant.LapTime = 0;
 			}
 			//stop timer, unsubscribe to events
 			Timer.Stop();

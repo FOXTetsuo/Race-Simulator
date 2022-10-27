@@ -1,31 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Model
+﻿namespace Model
 {
-    public class Track
-    {
-        public string Name { get; set; }
-        public LinkedList<Section> Sections { get; set; }
+	public class Track
+	{
+		public string Name { get; set; }
+		public LinkedList<Section> Sections { get; set; }
 
 		public Track(string name, SectionTypes[] sections)
-        {
-            Name = name;
+		{
+			Name = name;
 			Sections = SectionTypeToLinkedList(sections);
-        }
+		}
 
-		//turns an array of sectiontypes into a linkedlist of sections.
-		public LinkedList<Section> SectionTypeToLinkedList (SectionTypes[] sectionParemeter)
+		//Turns an array of sectiontypes into a linkedlist of sections.
+		public LinkedList<Section> SectionTypeToLinkedList(SectionTypes[] sectionParameter)
 		{
 			LinkedList<Section> sectionlist = new LinkedList<Section>();
-			foreach (SectionTypes sectionType in sectionParemeter)
+			foreach (SectionTypes sectionType in sectionParameter)
 			{
 				sectionlist.AddLast(new Section(sectionType));
 			}
 			return sectionlist;
 		}
-    }
+	}
 }

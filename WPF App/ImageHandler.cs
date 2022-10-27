@@ -14,8 +14,6 @@ namespace WPF_App
 	{
 		private static Dictionary<string, Bitmap> _imageCache = new Dictionary<string, Bitmap>();
 
-		//public static Dictionary<string, BitmapSource> _trackImageCache = new Dictionary<string, BitmapSource>();
-		// possible cache to redraw the track without calculations
 		public static Bitmap GetBitmap(String strng)
 		{
 			if (!_imageCache.ContainsKey(strng))

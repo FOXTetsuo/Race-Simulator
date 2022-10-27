@@ -54,8 +54,11 @@ namespace Controller
 		{
 			List<IParticipant> UnsortedInklingData = new List<IParticipant>();
 			Data.CurrentRace.Participants.ForEach((item) => UnsortedInklingData.Add(item));
-			//LINQ statement om data te orderen
-			InklingData = new BindingList<IParticipant>(UnsortedInklingData.OrderByDescending(x => x.Points).ToList());
+			//LINQ statement om data te orderen. Eerst gesorteerd door punten, daarna door laptime van de laatste race.
+			//Stel dat er twee mensen zijn met een even aantal punten, wint dus de snelste racer in de laatste race,
+			//en staat deze hier ook bovenaan.
+			//de echte winner wordt beslist in Competition
+			InklingData = new BindingList<IParticipant>(UnsortedInklingData.OrderByDescending(x => x.Points).ThenBy(x => x.LapTime).ToList());
 		}
 		private void OnPropertyChanged([CallerMemberName] string name = null)
 		{

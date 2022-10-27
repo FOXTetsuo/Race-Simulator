@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Model
 {
-	//sectielengte = 100m
 	public interface IEquipment : INotifyPropertyChanged
 	{
 		public int Quality { get; set; }

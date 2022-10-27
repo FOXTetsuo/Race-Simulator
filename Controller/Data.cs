@@ -23,9 +23,9 @@ namespace Controller
 		}
 		public static void AddTracks()
 		{
-			//Competition.Tracks.Enqueue(new Track("Skifftastic race", TrackBuilder("Skifftastic race")));
-			//Competition.Tracks.Enqueue(new Track("Splat city", TrackBuilder("Splat city")));
-			Competition.Tracks.Enqueue(new Track("Inktopia", TrackBuilder("Inktopia")));
+			Competition.Tracks.Enqueue(new Track("Skifftastic race", TrackBuilder("Skifftastic race")));
+			Competition.Tracks.Enqueue(new Track("Splat city", TrackBuilder("Splat city")));
+			//Competition.Tracks.Enqueue(new Track("Inktopia", TrackBuilder("Inktopia")));
 		}
 		
 		public static SectionTypes[] TrackBuilder(string trackName)

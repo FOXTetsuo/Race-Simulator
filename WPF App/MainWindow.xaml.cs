@@ -8,12 +8,6 @@ using System.Windows.Threading;
 
 namespace WPF_App
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	/// 
-
-
 	public partial class MainWindow : Window
 	{
 		private CompetitionInfoWindow CompetitionInfoWindow;
@@ -23,28 +17,22 @@ namespace WPF_App
 			// initialize window components and set the datacontext
 			StartCompetition();
 
-			this.Dispatcher.Invoke(
-			DispatcherPriority.Normal,
-			new Action(() =>
-			{
-				RaceInfoWindow = new RaceInfoWindow();
-				CompetitionInfoWindow = new CompetitionInfoWindow();
-			}));
+			//Create windows, which are hidden by default
+			RaceInfoWindow = new RaceInfoWindow();
+			CompetitionInfoWindow = new CompetitionInfoWindow();
 		}
 
 		public void StartCompetition()
 		{
-
 			Data.Initialize();
 			Data.NextRace();
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
 
 			//Subscribe to OnCompetitionOver
 			Data.Competition.CompetitionFinished += OnCompetitionOver;
-
+			InitializeComponent();
 			InitializeRace();
 			RaceNameLabel.Visibility = Visibility.Visible;
-			
 		}
 
 		private void CurrentRace_RaceFinished(object? sender, EventArgs e)
@@ -79,18 +67,19 @@ namespace WPF_App
 		}
 
 		private void CurrentRace_DriversChanged(object? sender, DriversChangedEventArgs e)
+			//Replaces the TrackImage when the drivers change.
 		{
 			this.TrackImage.Dispatcher.BeginInvoke(
 			DispatcherPriority.Render,
 			new Action(() =>
 			{
-				this.TrackImage.Source = null;
 				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
 			}));
 
 		}
 
 		private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+			//Calls shutdown for the app, so that all windows close (even the hidden ones)
 		{
 			this.Close();
 			Application.Current.Shutdown();
@@ -98,30 +87,27 @@ namespace WPF_App
 
 		private void OpenCompetitionInfoWindow(object sender, RoutedEventArgs e)
 		{
-			//CompetitionInfoWindow = new CompetitionInfoWindow();
 			CompetitionInfoWindow.Show();
 		}
 
 		private void OpenRaceInfoWindow(object sender, RoutedEventArgs e)
 		{
-			//RaceInfoWindow = new RaceInfoWindow();
 			RaceInfoWindow.Show();
 		}
 
 		private void InitializeRace()
 		{
-			InitializeComponent();
 			//Resubscribe to events and initialize visualizer
 			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
 			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
 			WPFVisualizer.Initialize(Data.CurrentRace);
 
-			//Draw initial image
+			//Draw the initial image. If this function is missing, the first "tick"
+			//of the race won't be displayed.
 			this.TrackImage.Dispatcher.BeginInvoke(
 			DispatcherPriority.Render,
 			new Action(() =>
 			{
-				this.TrackImage.Source = null;
 				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
 
 			}));
@@ -129,12 +115,9 @@ namespace WPF_App
 			Data.CurrentRace.Start();
 		}
 
-		private void Grid_OnLoadingRow(object sender, DataGridRowEventArgs e)
-		{
-			e.Row.Header = (e.Row.GetIndex() + 1).ToString();
-		}
-
 		private void OnClose(object sender, System.ComponentModel.CancelEventArgs e)
+			//Calls shutdown when main window is closed via X-button in topright corner.
+			//(or through any other means)
 		{
 			Application.Current.Shutdown();
 		}

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF_App"
         xmlns:Controller="clr-namespace:Controller;assembly=Controller" x:Class="WPF_App.RaceInfoWindow"
         mc:Ignorable="d"
-        Title="Race information" Height="450" Width="695" Icon="/Splatoon3_Overview_Splatted_Squid.png" ResizeMode="NoResize" Closing="WindowClosing">
+        Title="Race information" Height="450" Width="728" Icon="/WPF Images/Splatoon3_Overview_Splatted_Squid.png" ResizeMode="NoResize" Closing="WindowClosing">
     <Grid>
         <DataGrid x:Name="DG1" ItemsSource="{Binding Path=InklingData}" AutoGenerateColumns="False" Margin="10,10,10,10" IsReadOnly="True" CanUserSortColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" LoadingRow="Grid_OnLoadingRow" Width="Auto" >
             <DataGrid.CellStyle>
@@ -38,7 +38,8 @@
   
                 </DataGridTextColumn> 
                 <DataGridTextColumn Header="Laps done" Binding="{Binding LoopsPassed}" />
-                <DataGridTextColumn Header="Distance lapped in current section" Binding="{Binding DistanceCovered}" />
+                <DataGridTextColumn Header="Distance in section" Binding="{Binding DistanceCovered}" />
+                <DataGridTextColumn Header="Lap time in seconds" Binding="{Binding LapTime}" />
                 <DataGridTextColumn Header="Performance" Binding="{Binding Equipment.Performance}" />
                 <DataGridTextColumn Header="Equipment quality" Binding="{Binding Equipment.Quality}" />
                 <DataGridTextColumn Header="Speed" Binding="{Binding Equipment.Speed}" />

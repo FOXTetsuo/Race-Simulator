@@ -23,54 +23,54 @@ namespace RaceSimulatorTest
 		//	Assert.Fail();
 		//}
 
-		[Test]
-		public void RandomizeEquipment_EquipmentRandomized()
-		{
-			// Arrange
-			Data.Initialize();
-			Data.NextRace();
-			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+		//[Test]
+		//public void RandomizeEquipment_EquipmentRandomized()
+		//{
+		//	// Arrange
+		//	Data.Initialize();
+		//	Data.NextRace();
+		//	Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
 
-			foreach (IParticipant participant in Data.CurrentRace.Participants)
-			{
-				participant.Equipment.Performance = 0;
-				participant.Equipment.Quality = 0;
-				participant.Equipment.Speed = 0;
-			}
-			Boolean randomized = true;
+		//	foreach (IParticipant participant in Data.CurrentRace.Participants)
+		//	{
+		//		participant.Equipment.Performance = 0;
+		//		participant.Equipment.Quality = 0;
+		//		participant.Equipment.Speed = 0;
+		//	}
+		//	Boolean randomized = true;
 
-			// Act
-			Data.CurrentRace.RandomizeEquipment();
+		//	// Act
+		//	Data.CurrentRace.RandomizeEquipment();
 
-			// Assert
-			foreach (IParticipant participant in Data.CurrentRace.Participants)
-			{
-				if (participant.Equipment.Performance == 0 || participant.Equipment.Quality == 0 || participant.Equipment.Speed == 0)
-				{
-					randomized = false;
-				}
-			}
+		//	// Assert
+		//	foreach (IParticipant participant in Data.CurrentRace.Participants)
+		//	{
+		//		if (participant.Equipment.Performance == 0 || participant.Equipment.Quality == 0 || participant.Equipment.Speed == 0)
+		//		{
+		//			randomized = false;
+		//		}
+		//	}
 
-			Assert.That(randomized == true);
-		}
+		//	Assert.That(randomized == true);
+		//}
 
-		[Test]
-		public void PlaceContestants_ContestantsOnTrack()
-		{
-			// Arrange
-			Data.Initialize();
-			Data.NextRace();
+		//[Test]
+		//public void PlaceContestants_ContestantsOnTrack()
+		//{
+		//	// Arrange
+		//	Data.Initialize();
+		//	Data.NextRace();
 
 
-			// Act
-			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+		//	// Act
+		//	Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
 
-			// Assert
-			if (Data.CurrentRace.Participants.Count > 0)
-				Assert.Pass();
-			else Assert.Fail();
+		//	// Assert
+		//	if (Data.CurrentRace.Participants.Count > 0)
+		//		Assert.Pass();
+		//	else Assert.Fail();
 
-		}
+		//}
 
 		//	[Test]
 		//	public void AdvanceParticipant_StateUnderTest_ExpectedBehavior()

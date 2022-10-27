@@ -17,6 +17,15 @@ namespace Race_Simulator
 			_direction = Direction.East;
 			Data.CurrentRace.DriversChanged += OnDriversChanged;
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
+			Data.Competition.CompetitionFinished += OnCompetitionFinished;
+		}
+
+		private static void OnCompetitionFinished(object? sender, EventArgs e)
+		{
+			Console.Clear();
+			Console.SetCursorPosition(0, 0);
+			Console.WriteLine("Competition finished!");
+			Console.WriteLine("Competition winner is: " + Data.Competition.Winner.Name);
 		}
 
 		public enum Direction
@@ -125,8 +134,6 @@ namespace Race_Simulator
 			{
 				string temp = s;
 				// if drivers exist - replace 1/2 with their initals
-				//pakt sectiondata van trackl
-				// kijkt naar of de 
 				if (data.Right != null && data.Left != null)
 				{
 					temp = ReplaceString(s,data.Left,data.Right);
@@ -140,7 +147,7 @@ namespace Race_Simulator
 					temp = ReplaceString(s, data.Right);
 				}
 				Console.SetCursorPosition(xpos, ypos);
-				// replace leftover "1"/"2" with space
+				// replace leftover "1"/"2" with empty space
 				Console.Write(temp.Replace("1", " ").Replace("2", " "));
 				ypos += 1;
 			}
