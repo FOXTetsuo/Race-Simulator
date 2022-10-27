@@ -121,9 +121,6 @@ namespace WPF_App
 			DispatcherPriority.Render,
 			new Action(() =>
 			{
-				//TODO: maybe not
-				//TrackImage.Width = WPFVisualizer.TrackWidth * WPFVisualizer.imageSize;
-				//TrackImage.Height = WPFVisualizer.TrackHeight * WPFVisualizer.imageSize;
 				this.TrackImage.Source = null;
 				this.TrackImage.Source = WPFVisualizer.DrawTrack(Data.CurrentRace.Track);
 
