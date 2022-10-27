@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model
 {
@@ -26,7 +21,7 @@ namespace Model
 		public string FunFact { get; set; }
 		public string ImageSourceWinner { get; set; }
 
-		public static List<String> FunFacts = new List<string> 
+		public static List<String> FunFacts = new List<string>
 		{
 			"Loves the color purple",
 			"Believes in a secret government conspiracy",
@@ -43,19 +38,17 @@ namespace Model
 			"Believes in fairies"
 		};
 
-		
-
 		public Inkling(string name, IEquipment equipment, TeamColors teamcolor)
-        {
-            Name = name;
-            Points = 0;
-            Equipment = equipment;
-            TeamColor = teamcolor;
+		{
+			Name = name;
+			Points = 0;
+			Equipment = equipment;
+			TeamColor = teamcolor;
 			DistanceCovered = 0;
 			LoopsPassed = 0;
 			Random = new Random();
 			FunFact = FunFacts[Random.Next(FunFacts.Count)];
-        }
+		}
 
 		public event PropertyChangedEventHandler? PropertyChanged;
 

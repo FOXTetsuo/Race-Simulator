@@ -13,7 +13,8 @@ namespace Controller
 	public class DataContext_MainWindow : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler? PropertyChanged;
-
+		private string _winnerString;
+		public string WinnerString { get { return _winnerString; } set { _winnerString = value; OnPropertyChanged(); } }
 		private string _raceTrackName;
 		public string RaceTrackName { get { return _raceTrackName; } set { _raceTrackName = value; OnPropertyChanged(); } }
 
@@ -21,6 +22,7 @@ namespace Controller
 		{
 			RaceTrackName = new Func<string>(() => Data.CurrentRace.Track.Name)();
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
+			Data.Competition.CompetitionFinished += OnCompetitionFinished;
 		}
 
 		private void OnRaceFinished(object? sender, EventArgs e)
@@ -28,6 +30,11 @@ namespace Controller
 			RaceTrackName = new Func<string>(() => Data.CurrentRace.Track.Name)();
 			//Rebind onRaceFinished
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
+		}
+
+		private void OnCompetitionFinished(object? sender, EventArgs e)
+		{
+			WinnerString = new Func<string>(() => "The winner is: " + Data.Competition.Winner.Name)();
 		}
 
 		protected void OnPropertyChanged([CallerMemberName] string name = null)

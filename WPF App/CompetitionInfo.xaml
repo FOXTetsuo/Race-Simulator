@@ -7,7 +7,9 @@
         xmlns:Controller="clr-namespace:Controller;assembly=Controller" x:Class="WPF_App.CompetitionInfoWindow"
         mc:Ignorable="d"
         Title="Competition Info" Height="450" Width="700" Icon="/Splatoon3_Overview_Splatted_Squid.png" Closing="WindowClosing">
-        
+    <Window.DataContext>
+        <Controller:DataContext_CompetitionInfoWindow/>
+    </Window.DataContext>    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -33,15 +35,9 @@
                 <DataGridTextColumn Header="Points" Binding="{Binding Points}" />
                 <DataGridTextColumn Header="Fun fact" Binding="{Binding FunFact}" />
             </DataGrid.Columns>
-            <DataGrid.DataContext>
-                <Controller:DataContext_CompetitionInfoWindow/>
-            </DataGrid.DataContext>
         </DataGrid>
         <Label Content="Tracks left in competition:" VerticalAlignment="Top" Width="148" HorizontalAlignment="Right" Margin="0,0,15,0"/>
         <DataGrid ItemsSource="{Binding Path = Tracks}" HorizontalAlignment="Left" CanUserResizeColumns="False" CanUserResizeRows="False" Margin="479,31,0,20" AutoGenerateColumns="False" LoadingRow="Grid_OnLoadingRow" MinWidth="150" Width="Auto" Grid.RowSpan="3">
-            <DataGrid.DataContext>
-                <Controller:DataContext_CompetitionInfoWindow/>
-            </DataGrid.DataContext>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Track Name" Binding="{Binding Name}" />
             </DataGrid.Columns>
