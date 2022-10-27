@@ -133,7 +133,7 @@ namespace WPF_App
 			graphics.DrawImage(ImageHandler.CloneImageFromCache(WinnerFrame), 0, 0);
 			
 			int x = (400 - ImageHandler.CloneImageFromCache(winner).Width) / 2;
-			graphics.DrawImage(ImageHandler.CloneImageFromCache(winner), x, x);
+			graphics.DrawImage(ImageHandler.CloneImageFromCache(winner), x, x-9);
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
 		
