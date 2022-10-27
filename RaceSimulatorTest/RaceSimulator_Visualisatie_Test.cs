@@ -75,8 +75,3 @@ namespace RaceSimulatorTest
 	}
 
 }
-//public void NextTrack_EmptyQueue_ReturnNull()
-//{
-//Track result = Competition.NextTrack();
-//Assert.IsNull(result);
-//}

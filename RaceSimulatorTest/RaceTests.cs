@@ -73,19 +73,6 @@ namespace RaceSimulatorTest
 		}
 
 		//	[Test]
-		//	public void DetermineBroken_StateUnderTest_ExpectedBehavior()
-		//	{
-		//		// Arrange
-		//		var race = new Race(TODO, TODO);
-
-		//		// Act
-		//		race.DetermineBroken();
-
-		//		// Assert
-		//		Assert.Fail();
-		//	}
-
-		//	[Test]
 		//	public void AdvanceParticipant_StateUnderTest_ExpectedBehavior()
 		//	{
 		//		// Arrange
