@@ -2,8 +2,6 @@
 using Model;
 using System;
 using System.Drawing;
-using System.Windows.Documents;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Section = Model.Section;
 
@@ -24,30 +22,28 @@ namespace WPF_App
 			Left,
 			Right
 		}
-		
+
 		public static Direction _direction { get; set; }
 		public static int TrackWidth { get; set; }
 		public static int TrackHeight { get; set; }
-		public static int xpos { get; set; }
-		public static int ypos { get; set; }
+		public static int Xposition { get; set; }
+		public static int Yposition { get; set; }
 
-		public const int imageSize = 128;
+		public const int ImageSize = 128;
 		public static Race Race { get; set; }
 
 		public static void Initialize(Race race)
 		{
 			DetermineImageSources();
-			//TrackWidth = 10;
-			//TrackHeight = 10;
-			xpos = 0;
-			ypos = 0;
+			Xposition = 0;
+			Yposition = 0;
 			Race = race;
 			_direction = Direction.East;
-			//DetermineTrackWidthAndHeight();
 			CalculateTrackSize();
 		}
 
 		public static void DetermineImageSources()
+		//Gives each participant the correct image sources based on their teamcolor
 		{
 			foreach (IParticipant participant in Data.CurrentRace.Participants)
 			{
@@ -77,70 +73,79 @@ namespace WPF_App
 			}
 		}
 
-		public static int CalculateXDraw()
+		public static int CalculateXPosition()
+		//Incorporates imagesize in calculations
 		{
-			return xpos * imageSize;
+			return Xposition * ImageSize;
 		}
 
-		public static int CalculateYDraw()
+		public static int CalculateYPosition()
+		//Incorporates imagesize in calculations
 		{
-			return ypos * imageSize;
+			return Yposition * ImageSize;
 		}
 
 		public static BitmapSource DrawTrack(Track track)
+		//Draws the entire track by looping through it.
 		{
-			Bitmap canvas = new Bitmap(TrackWidth * imageSize, TrackHeight * imageSize);
+			Bitmap canvas = new Bitmap(TrackWidth * ImageSize, TrackHeight * ImageSize);
 			Graphics graphics = Graphics.FromImage(canvas);
-			
+
 			foreach (Section section in Race.Track.Sections)
 			{
 				switch (section.SectionType)
 				{
 					case SectionTypes.Finish:
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Finish), CalculateXDraw(), CalculateYDraw());
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Finish), CalculateXPosition(), CalculateYPosition());
 						break;
 					case SectionTypes.Straight:
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(Straight), CalculateXDraw(), CalculateYDraw());
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(Straight), CalculateXPosition(), CalculateYPosition());
 						break;
 					case SectionTypes.StraightVertical:
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(StraightVertical), CalculateXDraw(), CalculateYDraw());
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(StraightVertical), CalculateXPosition(), CalculateYPosition());
 						break;
 					case SectionTypes.CornerNE:
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerNE), CalculateXDraw(), CalculateYDraw());
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerNE), CalculateXPosition(), CalculateYPosition());
 						break;
 					case SectionTypes.CornerNW:
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerNW), CalculateXDraw(), CalculateYDraw());
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerNW), CalculateXPosition(), CalculateYPosition());
 						break;
 					case SectionTypes.CornerSE:
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerSE), CalculateXDraw(), CalculateYDraw());
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerSE), CalculateXPosition(), CalculateYPosition());
 						break;
 					case SectionTypes.CornerSW:
-						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerSW), CalculateXDraw(), CalculateYDraw());
+						graphics.DrawImage(ImageHandler.CloneImageFromCache(CornerSW), CalculateXPosition(), CalculateYPosition());
 						break;
 				}
-				DrawDriversInSection(graphics, Race, section);
+				//Draws all of the participants over the track in the correct places
+				DrawParticipantssInSection(graphics, Race, section);
 				DetermineDirection(section.SectionType, _direction);
-				moveImageCursor();
+				MoveImageCursor();
 			}
+			//Returns the entire track
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
-		
+
 		public static BitmapSource DrawWinnerFrame(string winner)
 		{
-			Bitmap canvas = new Bitmap(400,400);
+			Bitmap canvas = new Bitmap(400, 400);
 			Graphics graphics = Graphics.FromImage(canvas);
-			//TODO FIX HARDCODED NUMBERS - actualy center image - Implement specific winner - show text - open compwindow
+			//Draws the frame to place the participant in
 			graphics.DrawImage(ImageHandler.CloneImageFromCache(WinnerFrame), 0, 0);
-			
+
+			//Draws the participant in the middle of the frame
 			int x = (400 - ImageHandler.CloneImageFromCache(winner).Width) / 2;
-			graphics.DrawImage(ImageHandler.CloneImageFromCache(winner), x, x-9);
+			graphics.DrawImage(ImageHandler.CloneImageFromCache(winner), x, x - 9);
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
-		
-		private static void DrawDriversInSection(Graphics graphics, Race race, Section section)
+
+		private static void DrawParticipantssInSection(Graphics graphics, Race race, Section section)
+			//Draws all of the participants in a given section
 		{
-			if(race.GetSectionData(section).Left is not null || race.GetSectionData(section).Right is not null)
+			if (race.GetSectionData(section).Left is not null || race.GetSectionData(section).Right is not null)
+				//Only draws if there are participants in the section.
 			{
+				//Draws the correct participant for each section
 				foreach (IParticipant participant in race.Participants)
 				{
 					if (participant.CurrentSection == section)
@@ -157,58 +162,60 @@ namespace WPF_App
 
 				}
 			}
-			
+
 		}
 		private static void DrawParticipant(Graphics graphics, IParticipant participant, Side side)
+			//Draws a single participant, on the side of the track that is given
 		{
+			int xposition = CalculateXPosition();
+			int yposition = CalculateYPosition();
 
-			int xposition = CalculateXDraw();
-			int yposition = CalculateYDraw();
-			// match de participant aan de afbeelding
-
+			//The two code blocks below determine where the image of the participant should be drawn
+			//To make it look like it is properly moving over the track (instead of over the grass)
 			if (_direction == Direction.North || _direction == Direction.South)
 			{
 				if (side == Side.Left)
 				{
-					yposition += (imageSize / 3);
-					xposition += (imageSize / 4);
+					yposition += (ImageSize / 3);
+					xposition += (ImageSize / 4);
 				}
 				else if (side == Side.Right)
 				{
-					yposition += (imageSize / 2);
-					xposition += (imageSize / 2);
+					yposition += (ImageSize / 2);
+					xposition += (ImageSize / 2);
 				}
 			}
-
+			
 			if (_direction == Direction.East || _direction == Direction.West)
 			{
 				if (side == Side.Left)
 				{
-					xposition += (imageSize / 3);
-					yposition += (imageSize / 4);
+					xposition += (ImageSize / 3);
+					yposition += (ImageSize / 4);
 				}
 				else if (side == Side.Right)
 				{
-					xposition += (imageSize / 2);
-					yposition += (imageSize / 2);
+					xposition += (ImageSize / 2);
+					yposition += (ImageSize / 2);
 				}
 			}
-
-			//voeg hier mooie BROKE Squid art toe :DDD
+			//Depending on the equipment status, a certain image is drawn. The image is rotated to fit the direction the
+			//Participants are going in
 			if (participant.Equipment.IsBroken)
 			{
-				graphics.DrawImage(rotateDriver(ImageHandler.CloneImageFromCache(participant.BrokeImageSource)), xposition, yposition);
+				graphics.DrawImage(RotateParticipant(ImageHandler.CloneImageFromCache(participant.BrokeImageSource)), xposition, yposition);
 			}
 			else
 			{
-				graphics.DrawImage(rotateDriver(ImageHandler.CloneImageFromCache(participant.ImageSource)), xposition, yposition);
+				graphics.DrawImage(RotateParticipant(ImageHandler.CloneImageFromCache(participant.ImageSource)), xposition, yposition);
 			}
-			
+
 		}
 
-		public static Bitmap rotateDriver(Bitmap bitmap)
+		public static Bitmap RotateParticipant(Bitmap bitmap)
+			//Rotates a participant based on their direction.
 		{
-			switch (_direction) 
+			switch (_direction)
 			{
 				case Direction.East:
 					bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
@@ -220,69 +227,67 @@ namespace WPF_App
 					bitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
 					break;
 			}
-
 			return bitmap;
-			
 		}
 
 		public static void CalculateTrackSize()
-			//Calculate the size of the track with maths.
-			//Walks through the track and calculates the highest and lowest X&Y positions
-			//Then takes the absolute of Highest X - Lowest X, and Highest Y - Lowest Y
-			//and sets the size of the track to them
+		//Calculate the size of the track with maths.
+		//Walks through the track and calculates the highest and lowest X&Y positions
+		//Then takes the absolute of Highest X - Lowest X, and Highest Y - Lowest Y
+		//and sets the size of the track to them
+		{
+			int xCurrent = 0;
+			int yCurrent = 0;
+			int xMin = 0;
+			int yMin = 0;
+			int xMax = 0;
+			int yMax = 0;
+
+			foreach (Section section in Race.Track.Sections)
 			{
-				int xCurrent = 0;
-				int yCurrent = 0;
-				int xMin = 0;
-				int yMin = 0;
-				int xMax = 0;
-				int yMax = 0;
-
-				foreach (Section section in Race.Track.Sections)
+				if (_direction == Direction.East)
 				{
-					if (_direction == Direction.East)
+					xCurrent += 1;
+					if (xCurrent >= xMax)
 					{
-						xCurrent += 1;
-						if (xCurrent >= xMax)
-						{
-							xMax = xCurrent;
-						}
+						xMax = xCurrent;
 					}
-					if (_direction == Direction.West)
-					{
-						xCurrent -= 1;
-						if (xCurrent <= xMin)
-						{
-							xMin = xCurrent;
-						}
-					}
-					if (_direction == Direction.North)
-					{
-						yCurrent += -1;
-						if (yCurrent <= yMin)
-						{
-							yMin = yCurrent;
-						}
-					}
-					if (_direction == Direction.South)
-					{
-						yCurrent += 1;
-						if (yCurrent >= yMax)
-						{
-							yMax = yCurrent;
-						}
-					}
-					DetermineDirection(section.SectionType, _direction);
 				}
-				TrackWidth = (xMax - xMin);
-				TrackHeight = (yMax - yMin + 1);
+				if (_direction == Direction.West)
+				{
+					xCurrent -= 1;
+					if (xCurrent <= xMin)
+					{
+						xMin = xCurrent;
+					}
+				}
+				if (_direction == Direction.North)
+				{
+					yCurrent += -1;
+					if (yCurrent <= yMin)
+					{
+						yMin = yCurrent;
+					}
+				}
+				if (_direction == Direction.South)
+				{
+					yCurrent += 1;
+					if (yCurrent >= yMax)
+					{
+						yMax = yCurrent;
+					}
+				}
+				DetermineDirection(section.SectionType, _direction);
 			}
-
+			TrackWidth = (xMax - xMin);
+			TrackHeight = (yMax - yMin + 1);
+		}
 		public static void DetermineDirection(SectionTypes type, Direction dir)
+			//Determines the direction of the participant based on the direction
+			//that they entered a specific type of corner
 		{
 			switch (type)
 			{
-				// sets the direction according to where the corner is entered
 				case SectionTypes.CornerNE:
 					if (dir == Direction.East)
 					{
@@ -324,24 +329,25 @@ namespace WPF_App
 					}
 					break;
 			}
-
 		}
 
-		public static void moveImageCursor()
+		public static void MoveImageCursor()
+			//Move the image cursor for the next piece of track with it's matching participants
+			// +1 and -1 because it's multiplied by the imagesize
 		{
 			switch (_direction)
 			{
 				case Direction.East:
-					xpos += 1;
+					Xposition += 1;
 					break;
 				case Direction.South:
-					ypos += 1;
+					Yposition += 1;
 					break;
 				case Direction.West:
-					xpos += -1;
+					Xposition += -1;
 					break;
 				case Direction.North:
-					ypos += -1;
+					Yposition += -1;
 					break;
 			}
 		}
@@ -364,12 +370,12 @@ namespace WPF_App
 		private const String Squid2L = "WPF Images\\Squid2.png";
 		private const String Squid3L = "WPF Images\\Squid3.png";
 		private const String Squid4L = "WPF Images\\Squid4.png";
-		
+
 		private const String Squid1_Ink = "WPF Images\\Squid1_Ink.png";
 		private const String Squid2_Ink = "WPF Images\\Squid2_Ink.png";
 		private const String Squid3_Ink = "WPF Images\\Squid3_Ink.png";
 		private const String Squid4_Ink = "WPF Images\\Squid4_Ink.png";
-		
+
 		private const String WinnerFrame = "WPF Images\\WinnerFrame.png";
 		#endregion
 	}

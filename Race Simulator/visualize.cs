@@ -15,7 +15,7 @@ namespace Race_Simulator
 			ypos = 15;
 			Race = race;
 			_direction = Direction.East;
-			Data.CurrentRace.DriversChanged += OnDriversChanged;
+			Data.CurrentRace.ParticipantsChanged += OnParticipantsChanged;
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
 			Data.Competition.CompetitionFinished += OnCompetitionFinished;
 		}
@@ -89,7 +89,7 @@ namespace Race_Simulator
 		// function takes a linkedlist of tracks (from currentrace.track.sections)
 		// searches which section it's currently dealing with
 		// and then draws that section, by calling PrintTrack.
-		// sectiondata is given to put drivers on the track in the right place.
+		// sectiondata is given to put participants on the track in the right place.
 		// then when it exits the loop, updated xpos & ypos.
 		public static void DrawTrack(Track track)
 		{
@@ -133,7 +133,7 @@ namespace Race_Simulator
 			foreach (string s in type)
 			{
 				string temp = s;
-				// if drivers exist - replace 1/2 with their initals
+				// if participants exist - replace 1/2 with their initals
 				if (data.Right != null && data.Left != null)
 				{
 					temp = ReplaceString(s,data.Left,data.Right);
@@ -228,7 +228,7 @@ namespace Race_Simulator
 			else return (stringmetnummer.Replace("1", participant1.Name[0].ToString()).Replace("2", participant2.Name[0].ToString()));
 		}
 
-		// method overload in case only 1 driver needs to be moved
+		// method overload in case only 1 participant needs to be moved
 		public static string ReplaceString(string stringmetnummer, IParticipant participant)
 		{
 			if (Race.GetSectionData(participant.CurrentSection).Left == participant)
@@ -253,7 +253,7 @@ namespace Race_Simulator
 		}
 
 
-		public static void OnDriversChanged(object sender, DriversChangedEventArgs args)
+		public static void OnParticipantsChanged(object sender, ParticipantsChangedEventArgs args)
 		{
 			Console.Clear();
 			DrawTrack(args.Track);

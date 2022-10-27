@@ -66,8 +66,8 @@ namespace WPF_App
 			}));
 		}
 
-		private void CurrentRace_DriversChanged(object? sender, DriversChangedEventArgs e)
-			//Replaces the TrackImage when the drivers change.
+		private void CurrentRace_ParticipantsChanged(object? sender, ParticipantsChangedEventArgs e)
+			//Replaces the TrackImage when the participants change.
 		{
 			this.TrackImage.Dispatcher.BeginInvoke(
 			DispatcherPriority.Render,
@@ -98,7 +98,7 @@ namespace WPF_App
 		private void InitializeRace()
 		{
 			//Resubscribe to events and initialize visualizer
-			Data.CurrentRace.DriversChanged += CurrentRace_DriversChanged;
+			Data.CurrentRace.ParticipantsChanged += CurrentRace_ParticipantsChanged;
 			Data.CurrentRace.RaceFinished += CurrentRace_RaceFinished;
 			WPFVisualizer.Initialize(Data.CurrentRace);
 

@@ -1,11 +1,11 @@
 ﻿namespace Model
 {
 
-	public class DriversChangedEventArgs : EventArgs
+	public class ParticipantsChangedEventArgs : EventArgs
 	{
 		public Track Track { get; set; }
 
-		public DriversChangedEventArgs(Track track)
+		public ParticipantsChangedEventArgs(Track track)
 		{
 			Track = track;
 		}

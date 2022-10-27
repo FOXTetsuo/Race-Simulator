@@ -6,7 +6,7 @@ namespace Controller
 	public class Race
 	{
 		const int SectionLength = 100;
-		public event EventHandler<DriversChangedEventArgs> DriversChanged;
+		public event EventHandler<ParticipantsChangedEventArgs> ParticipantsChanged;
 
 		public event EventHandler<EventArgs> RaceFinished;
 		public int PointIndex { get; set; }
@@ -117,7 +117,7 @@ namespace Controller
 			Timer.Stop();
 			BreakAndRecover();
 			CheckWhetherToMoveParticipants();
-			DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
+			ParticipantsChanged?.Invoke(this, new ParticipantsChangedEventArgs(Track));
 			Timer.Start();
 		}
 
@@ -128,7 +128,7 @@ namespace Controller
 
 		// kijkt of elke participant verder is dan de lengte van de track
 		// zo ja, haal de lengte van de track van de distanceCovered af,
-		// en beweeg de driver naar het volgende stuck track
+		// en beweeg de participant naar het volgende stuck track
 		public void CheckWhetherToMoveParticipants()
 		{
 			foreach (IParticipant participant in Participants)
@@ -318,7 +318,7 @@ namespace Controller
 			//stop timer, unsubscribe to events
 			Timer.Stop();
 			Timer.Elapsed -= OnTimedEvent;
-			DriversChanged = null;
+			ParticipantsChanged = null;
 			GC.Collect(0);
 		}
 
