@@ -17,8 +17,8 @@ namespace Controller
 		public List<IParticipant>? Participants { get; set; }
 		public DateTime StartTime { get; set; }
 		private Dictionary<Section, SectionData> _positions { get; set; }
-		// returns sectiondata from a section, if there isn't any, a new sectiondata is made first.
 		public SectionData GetSectionData(Section section)
+		// returns sectiondata from a section, if there isn't any, a new sectiondata is made first.
 		{
 			if (!_positions.ContainsKey(section))
 			{
@@ -26,12 +26,11 @@ namespace Controller
 			}
 			return _positions[section];
 		}
-
-		// constructor
 		public Race(Track track, List<IParticipant>? participants)
+		//Determines how many laps in each race
 		{
 			PointIndex = 1;
-			AmountOfLaps = 0;
+			AmountOfLaps = 1;
 			Timer = new System.Timers.Timer(500);
 			Timer.Elapsed += OnTimedEvent;
 			_random = new Random(DateTime.Now.Millisecond);
@@ -41,15 +40,14 @@ namespace Controller
 			_positions = new Dictionary<Section, SectionData>();
 			RandomizeEquipment();
 		}
-
-		public void UpdateSpeed(IParticipant participant)
+		private void UpdateSpeed(IParticipant participant)
+		//Updates the speed of the participant
 		{
 			participant.Equipment.Speed = new Func<int>(() => participant.Equipment.Quality * participant.Equipment.Performance)();
 		}
 
-
-		// randomizes the equipment of the racers
 		public void RandomizeEquipment()
+		// randomizes the equipment of the racers
 		{
 			foreach (IParticipant participant in Participants)
 			{
@@ -75,7 +73,7 @@ namespace Controller
 						// zorgt dat er geen out of bounds error kan komen, en zet de index naar de laatste track.	
 						// track.Sections.Count - 1 omdat dit 1 groter is dan de maximale array
 						// vervolgens + (i/2), omdat dit vervolgens in GetSectionData gebruikt wordt bij de volgende stap.
-						// zo garandeer je dat je altijd het laatste stuck section pakt.
+						// zo garandeer je dat je altijd het laatste stuk section pakt.
 
 						if (index - (i / 2) < 0)
 						{
@@ -87,7 +85,8 @@ namespace Controller
 						// 0/2 == 0, 1/2 == 0;
 
 						SectionData sectionData = GetSectionData(track.Sections.ElementAt(index - (i / 2)));
-						//checkt of dingen al gevuld zijn
+						//checkt of sectionData al gevuld zijn. zo niet -> plaats dan de participant(s)
+						//bij 1 participant wordt er 1 geplaatst, bij 2 participants 2.
 
 						if (sectionData.Left == null)
 						{
@@ -96,7 +95,6 @@ namespace Controller
 							// onthoudt waar de participant is op dit moment
 							participants[i].CurrentSection = track.Sections.ElementAt(index - (i / 2));
 						}
-						// checkt of er wel nog twee participants zijn om toe te voegen m.b.v modulo
 						else if (sectionData.Right == null)
 						{
 							sectionData.Right = participants[i];
@@ -114,10 +112,13 @@ namespace Controller
 
 		public void OnTimedEvent(object sender, EventArgs args)
 		{
-			//Comment in case you're trying to fix bugs :')
-			DetermineIfCarShouldBreak();
+			//Timer.stop to prevent desynchronization issues in case of
+			//PC hanging / drawing taking longer than expected.
+			Timer.Stop();
+			BreakAndRecover();
 			CheckWhetherToMoveParticipants();
 			DriversChanged?.Invoke(this, new DriversChangedEventArgs(Track));
+			Timer.Start();
 		}
 
 		public void Start()
@@ -143,7 +144,7 @@ namespace Controller
 			}
 		}
 
-		public void DetermineIfCarShouldBreak()
+		public void BreakAndRecover()
 		{
 			foreach (IParticipant participant in Data.CurrentRace.Participants)
 			{
@@ -175,25 +176,37 @@ namespace Controller
 
 		public void AdvanceParticipantIfPossible(IParticipant participant)
 		{
-			int i = 0;
+			// keeps track of the position of the current track in Track.Sections
+			int index = 0;
 			foreach (Section section in Track.Sections)
 			{
+				//loop through the sections to find the current section
 				if (section == participant.CurrentSection)
 				{
-					if (Track.Sections.Count <= (i + 1))
+					//reset index to prevent indexOutofBounds
+					if (Track.Sections.Count <= (index + 1))
 					{
-						i = -1;
+						index = -1;
 					}
-					SectionData newData = GetSectionData(Track.Sections.ElementAt(i + 1));
+					//grab the sectiondata of the section one step further than the current
+					SectionData newData = GetSectionData(Track.Sections.ElementAt(index + 1));
 
+					//IF either of these is empty, then advance the participant.
 					if (newData.Left == null || newData.Right == null)
 					{
+						//remove the participant from the old sectiondata
+						//and place the participant on the new sectiondata
 						participant.DistanceCovered -= 100;
 						SectionData sectData = GetSectionData(section);
 						RemoveParticipantFromSectionData(sectData, participant);
 						PlaceParticipantOnSectionData(newData, participant);
+						//set their new currentsection 
+						participant.CurrentSection = Track.Sections.ElementAt(index + 1);
 
-						participant.CurrentSection = Track.Sections.ElementAt(i + 1);
+						//if the participant has finished,
+						//set currentsection to null, remove them from sectiondata
+						//set performance to 0 to stop them from moving
+						//and check if the race is finished.
 
 						if (CheckFinish(participant) == true)
 						{
@@ -213,7 +226,7 @@ namespace Controller
 					// participant distancecovered terug naar wat hij was voordat de advanceparticipant functie gecallt werd
 					else participant.DistanceCovered = 100;
 				}
-				i++;
+				index++;
 
 			}
 		}

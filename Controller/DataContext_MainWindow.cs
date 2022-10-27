@@ -14,8 +14,8 @@ namespace Controller
 	{
 		public event PropertyChangedEventHandler? PropertyChanged;
 		private string _winnerString;
-		public string WinnerString { get { return _winnerString; } set { _winnerString = value; OnPropertyChanged(); } }
 		private string _raceTrackName;
+		public string WinnerString { get { return _winnerString; } set { _winnerString = value; OnPropertyChanged(); } }
 		public string RaceTrackName { get { return _raceTrackName; } set { _raceTrackName = value; OnPropertyChanged(); } }
 
 		public DataContext_MainWindow()
@@ -37,7 +37,7 @@ namespace Controller
 			WinnerString = new Func<string>(() => "The winner is: " + Data.Competition.Winner.Name)();
 		}
 
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
+		private void OnPropertyChanged([CallerMemberName] string name = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}

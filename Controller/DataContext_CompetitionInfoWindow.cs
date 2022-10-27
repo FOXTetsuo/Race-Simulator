@@ -12,12 +12,9 @@ namespace Controller
 		private BindingList<Track> _tracks;
 		public BindingList<IParticipant> InklingData { get { return _inklingData; } set { _inklingData = value; OnPropertyChanged(); } }
 		public BindingList<Track> Tracks { get { return _tracks; } set { _tracks = value; OnPropertyChanged(); } }
-		protected void OnPropertyChanged([CallerMemberName] string name = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-		}
 		public DataContext_CompetitionInfoWindow()
 		{
+			//Bind to events, make a list of tracks and reload the leaderboard
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
 			Data.Competition.CompetitionFinished += OnCompetitionFinished;
 			
@@ -26,37 +23,43 @@ namespace Controller
 			{
 				Tracks.Add(track);
 			}
-
-			ReOrderLeaderboard();
+			RefreshLeaderBoard();
 		}
 
-		//TODO: This is a bit of a hack, but it works for now.
 		private void OnRaceFinished(object? sender, EventArgs e)
 		{
 			//Resub to racefinishedevent, because race has now changed:
 			Data.CurrentRace.RaceFinished += OnRaceFinished;
 
+			//Reassign Tracks to newTracks, because you can't change
+			//it in this thread (The origin is a UI thread, so it can
+			//only be edited from there.)
 			BindingList<Track> newTracks = new BindingList<Track>();
 			foreach (Track track in Data.Competition.Tracks)
 			{
 				newTracks.Add(track);
 			}
 			Tracks = newTracks;
-			ReOrderLeaderboard();
+			
+			RefreshLeaderBoard();
 		}
 
 		private void OnCompetitionFinished(object? sender, EventArgs e)
 		{
-			ReOrderLeaderboard();
-			Tracks = null;
+			RefreshLeaderBoard();
 		}
 
-		public void ReOrderLeaderboard()
+		private void RefreshLeaderBoard()
+		//Fill the leaderboard with participants sorted by points
 		{
 			List<IParticipant> UnsortedInklingData = new List<IParticipant>();
 			Data.CurrentRace.Participants.ForEach((item) => UnsortedInklingData.Add(item));
 			//LINQ statement om data te orderen
 			InklingData = new BindingList<IParticipant>(UnsortedInklingData.OrderByDescending(x => x.Points).ToList());
+		}
+		private void OnPropertyChanged([CallerMemberName] string name = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 	}
 }

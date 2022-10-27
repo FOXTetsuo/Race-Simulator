@@ -23,13 +23,13 @@ namespace Controller
 		}
 		public static void AddTracks()
 		{
-			Competition.Tracks.Enqueue(new Track("Skifftastic race", TrackBuilder("Skifftastic race")));
-			Competition.Tracks.Enqueue(new Track("Splat city", TrackBuilder("Splat city")));
-			Competition.Tracks.Enqueue(new Track("NYEEEEEEEEEEEEEEEEEEEOM", TrackBuilder("NYEEEEEEEEEEEEEEEEEEEOM")));
+			//Competition.Tracks.Enqueue(new Track("Skifftastic race", TrackBuilder("Skifftastic race")));
+			//Competition.Tracks.Enqueue(new Track("Splat city", TrackBuilder("Splat city")));
+			Competition.Tracks.Enqueue(new Track("Inktopia", TrackBuilder("Inktopia")));
 		}
 		
 		public static SectionTypes[] TrackBuilder(string trackName)
-		// Takes the tracknname and builds the track.
+		// Takes the trackname and builds the track.
 		{
 			if (trackName.Equals("Skifftastic race"))
 			{
@@ -69,9 +69,8 @@ namespace Controller
 				};
 				return build;
 			}
-			if (trackName.Equals("NYEEEEEEEEEEEEEEEEEEEOM"))
+			if (trackName.Equals("Inktopia"))
 			{
-				// width : 6 height : 3
 				SectionTypes[] build = new SectionTypes[]
 				{
 						SectionTypes.CornerNW,
