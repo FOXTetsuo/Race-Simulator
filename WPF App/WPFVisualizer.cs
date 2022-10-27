@@ -127,11 +127,13 @@ namespace WPF_App
 		
 		public static BitmapSource DrawWinnerFrame(string winner)
 		{
-			Bitmap canvas = new Bitmap(1200, 800);
+			Bitmap canvas = new Bitmap(400,400);
 			Graphics graphics = Graphics.FromImage(canvas);
 			//TODO FIX HARDCODED NUMBERS - actualy center image - Implement specific winner - show text - open compwindow
-			graphics.DrawImage(ImageHandler.CloneImageFromCache(WinnerFrame), 400, 240);
-			graphics.DrawImage(ImageHandler.CloneImageFromCache(winner), 480, 305);
+			graphics.DrawImage(ImageHandler.CloneImageFromCache(WinnerFrame), 0, 0);
+			
+			int x = (400 - ImageHandler.CloneImageFromCache(winner).Width) / 2;
+			graphics.DrawImage(ImageHandler.CloneImageFromCache(winner), x, x);
 			return (ImageHandler.CreateBitmapSourceFromGdiBitmap(canvas));
 		}
 		
@@ -268,7 +270,7 @@ namespace WPF_App
 					}
 					DetermineDirection(section.SectionType, _direction);
 				}
-				TrackWidth = (XMax - XMin + 1);
+				TrackWidth = (XMax - XMin);
 				TrackHeight = (YMax - YMin + 1);
 			}
 

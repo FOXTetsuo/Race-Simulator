@@ -10,11 +10,8 @@ namespace Controller
 		public event PropertyChangedEventHandler? PropertyChanged;
 		private BindingList<IParticipant> _inklingData;
 		private BindingList<Track> _tracks;
-		private string _winnerString = "The winner is: ";
 		public BindingList<IParticipant> InklingData { get { return _inklingData; } set { _inklingData = value; OnPropertyChanged(); } }
 		public BindingList<Track> Tracks { get { return _tracks; } set { _tracks = value; OnPropertyChanged(); } }
-			
-		public string WinnerString { get { return _winnerString; } set { _winnerString = value; OnPropertyChanged(); } }
 		protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
@@ -51,8 +48,6 @@ namespace Controller
 		private void OnCompetitionFinished(object? sender, EventArgs e)
 		{
 			ReOrderLeaderboard();
-			WinnerString += InklingData.First().Name;
-			WinnerString += "!";
 			Tracks = null;
 		}
 
