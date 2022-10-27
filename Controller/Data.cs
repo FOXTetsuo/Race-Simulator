@@ -1,5 +1,4 @@
-﻿ using Model;
-using System.Runtime.CompilerServices;
+﻿using Model;
 
 namespace Controller
 {
@@ -17,7 +16,7 @@ namespace Controller
 		{
 			Competition.Participants.Add(new Inkling("Mike", new Genetics(), TeamColors.Orange));
 			Competition.Participants.Add(new Inkling("Chrimst", new Genetics(), TeamColors.Green));
-			Competition.Participants.Add(new Inkling("Bruger",  new Genetics(), TeamColors.Purple));
+			Competition.Participants.Add(new Inkling("Bruger", new Genetics(), TeamColors.Purple));
 			Competition.Participants.Add(new Inkling("Pimpin", new Genetics(), TeamColors.Red));
 
 		}
@@ -27,7 +26,7 @@ namespace Controller
 			Competition.Tracks.Enqueue(new Track("Splat city", TrackBuilder("Splat city")));
 			//Competition.Tracks.Enqueue(new Track("Inktopia", TrackBuilder("Inktopia")));
 		}
-		
+
 		public static SectionTypes[] TrackBuilder(string trackName)
 		// Takes the trackname and builds the track.
 		{
@@ -45,7 +44,7 @@ namespace Controller
 						SectionTypes.Straight,
 						SectionTypes.CornerSW,
 						SectionTypes.StraightVertical,
-						
+
 				};
 				return build;
 			}
@@ -65,7 +64,7 @@ namespace Controller
 						SectionTypes.StraightVertical,
 						SectionTypes.CornerNE,
 						SectionTypes.CornerSW
-						
+
 				};
 				return build;
 			}
@@ -110,7 +109,7 @@ namespace Controller
 				return build;
 			}
 		}
-		
+
 		public static bool NextRace()
 		// Makes a new track from the queue of races. If there are no races to be loaded, end the competition
 		{
@@ -121,7 +120,7 @@ namespace Controller
 				return true;
 			}
 			else
-			{		
+			{
 				Competition.EndCompetition();
 				return false;
 			}

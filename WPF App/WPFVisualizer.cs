@@ -140,10 +140,10 @@ namespace WPF_App
 		}
 
 		private static void DrawParticipantssInSection(Graphics graphics, Race race, Section section)
-			//Draws all of the participants in a given section
+		//Draws all of the participants in a given section
 		{
 			if (race.GetSectionData(section).Left is not null || race.GetSectionData(section).Right is not null)
-				//Only draws if there are participants in the section.
+			//Only draws if there are participants in the section.
 			{
 				//Draws the correct participant for each section
 				foreach (IParticipant participant in race.Participants)
@@ -165,7 +165,7 @@ namespace WPF_App
 
 		}
 		private static void DrawParticipant(Graphics graphics, IParticipant participant, Side side)
-			//Draws a single participant, on the side of the track that is given
+		//Draws a single participant, on the side of the track that is given
 		{
 			int xposition = CalculateXPosition();
 			int yposition = CalculateYPosition();
@@ -185,7 +185,7 @@ namespace WPF_App
 					xposition += (ImageSize / 2);
 				}
 			}
-			
+
 			if (_direction == Direction.East || _direction == Direction.West)
 			{
 				if (side == Side.Left)
@@ -213,7 +213,7 @@ namespace WPF_App
 		}
 
 		public static Bitmap RotateParticipant(Bitmap bitmap)
-			//Rotates a participant based on their direction.
+		//Rotates a participant based on their direction.
 		{
 			switch (_direction)
 			{
@@ -283,8 +283,8 @@ namespace WPF_App
 			TrackHeight = (yMax - yMin + 1);
 		}
 		public static void DetermineDirection(SectionTypes type, Direction dir)
-			//Determines the direction of the participant based on the direction
-			//that they entered a specific type of corner
+		//Determines the direction of the participant based on the direction
+		//that they entered a specific type of corner
 		{
 			switch (type)
 			{
@@ -332,8 +332,8 @@ namespace WPF_App
 		}
 
 		public static void MoveImageCursor()
-			//Move the image cursor for the next piece of track with it's matching participants
-			// +1 and -1 because it's multiplied by the imagesize
+		//Move the image cursor for the next piece of track with it's matching participants
+		// +1 and -1 because it's multiplied by the imagesize
 		{
 			switch (_direction)
 			{

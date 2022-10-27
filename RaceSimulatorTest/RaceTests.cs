@@ -1,7 +1,4 @@
-﻿using Controller;
-using Model;
-
-namespace RaceSimulatorTest
+﻿namespace RaceSimulatorTest
 {
 	[TestFixture]
 	public class RaceTests

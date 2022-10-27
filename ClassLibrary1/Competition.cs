@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Model
+﻿namespace Model
 {
 	public class Competition
 	{
 		public event EventHandler<EventArgs> CompetitionFinished;
 		public Queue<Track> Tracks { get; set; }
 		public List<IParticipant>? Participants { get; set; }
-		public IParticipant Winner {get; set;}
+		public IParticipant Winner { get; set; }
 
 		public Track NextTrack()
 		// Gets the next track in the queue

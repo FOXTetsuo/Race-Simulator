@@ -38,52 +38,52 @@ namespace Race_Simulator
 
 		#region graphics
 		private static string[] _finishHorizontal = {
-			"-----", 
-			"   #2", 
+			"-----",
+			"   #2",
 			"   # ",
-			"  1# ", 
+			"  1# ",
 			"-----" };
-		private static string[] _straightPath = { 
-			"-----", 
-			"   1 ", 
-			"     ", 
-			" 2   ", 
+		private static string[] _straightPath = {
+			"-----",
+			"   1 ",
+			"     ",
+			" 2   ",
 			"-----" };
-		private static string[] _straightPathVertical = { 
-			"-1  -", 
-			"-   -", 
-			"-   -", 
-			"-  2-", 
+		private static string[] _straightPathVertical = {
+			"-1  -",
+			"-   -",
+			"-   -",
+			"-  2-",
 			"-   -" };
-		private static string[] NE = { 
-			"----\\", 
-			"    -", 
-			"1   -", 
-			"   2-", 
+		private static string[] NE = {
+			"----\\",
+			"    -",
+			"1   -",
+			"   2-",
 			"\\   -" };
-		private static string[] _NW = { 
-			"/----", 
-			"-   2", 
-			"-    ", 
-			"- 1  ", 
+		private static string[] _NW = {
+			"/----",
+			"-   2",
+			"-    ",
+			"- 1  ",
 			"-   /" };
-		private static string[] _SE = { 
-			"/   -", 
-			"  2 -", 
-			"1   -", 
+		private static string[] _SE = {
+			"/   -",
+			"  2 -",
+			"1   -",
 			"    -",
 			"----/" };
-		private static string[] _SW = { 
-			"-1  \\", 
-			"-    ", 
-			"-  2 ", 
-			"-    ", 
+		private static string[] _SW = {
+			"-1  \\",
+			"-    ",
+			"-  2 ",
+			"-    ",
 			"\\----" };
-		private static string[] _start = { 
-			"-----", 
-			"  1 ]",  
-			"    ]", 
-			"  2 ]", 
+		private static string[] _start = {
+			"-----",
+			"  1 ]",
+			"    ]",
+			"  2 ]",
 			"-----" };
 		#endregion
 		// function takes a linkedlist of tracks (from currentrace.track.sections)
@@ -126,7 +126,7 @@ namespace Race_Simulator
 				// set where to draw the next part
 				Console.SetCursorPosition(xpos, ypos);
 			}
-		
+
 		}
 		public static void PrintTrack(string[] type, SectionData data)
 		{
@@ -136,7 +136,7 @@ namespace Race_Simulator
 				// if participants exist - replace 1/2 with their initals
 				if (data.Right != null && data.Left != null)
 				{
-					temp = ReplaceString(s,data.Left,data.Right);
+					temp = ReplaceString(s, data.Left, data.Right);
 				}
 				else if (data.Left != null)
 				{
@@ -166,7 +166,7 @@ namespace Race_Simulator
 				ypos += -10;
 			}
 		}
-		public static void DetermineDirection(SectionTypes type, Direction dir )
+		public static void DetermineDirection(SectionTypes type, Direction dir)
 		{
 			switch (type)
 			{
@@ -247,7 +247,7 @@ namespace Race_Simulator
 					return (stringmetnummer.Replace("2", participant.Name[0].ToString()));
 				}
 				else return (stringmetnummer.Replace("2", "X"));
-				
+
 			}
 			else return null;
 		}

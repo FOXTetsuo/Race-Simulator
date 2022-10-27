@@ -2,7 +2,6 @@
 using Model;
 using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -67,7 +66,7 @@ namespace WPF_App
 		}
 
 		private void CurrentRace_ParticipantsChanged(object? sender, ParticipantsChangedEventArgs e)
-			//Replaces the TrackImage when the participants change.
+		//Replaces the TrackImage when the participants change.
 		{
 			this.TrackImage.Dispatcher.BeginInvoke(
 			DispatcherPriority.Render,
@@ -79,7 +78,7 @@ namespace WPF_App
 		}
 
 		private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
-			//Calls shutdown for the app, so that all windows close (even the hidden ones)
+		//Calls shutdown for the app, so that all windows close (even the hidden ones)
 		{
 			this.Close();
 			Application.Current.Shutdown();
@@ -116,8 +115,8 @@ namespace WPF_App
 		}
 
 		private void OnClose(object sender, System.ComponentModel.CancelEventArgs e)
-			//Calls shutdown when main window is closed via X-button in topright corner.
-			//(or through any other means)
+		//Calls shutdown when main window is closed via X-button in topright corner.
+		//(or through any other means)
 		{
 			Application.Current.Shutdown();
 		}
