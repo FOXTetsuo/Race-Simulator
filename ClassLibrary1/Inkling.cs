@@ -37,7 +37,22 @@ namespace Model
 			"Isn't actually an inkling...",
 			"Has a pet cat named Binky",
 			"Doesn't understand the difference between a skiff and a rowboat",
-			"Believes in fairies"
+			"Believes in fairies",
+			"Is a secret agent",
+			"Is a secret agent for the secret government conspiracy",
+			"Was the first inkling on the moon",
+			"Was the first inkling to discover the earth was round",
+			"Once fell off of the moon",
+			"Abducted by an UFO as a child",
+			"Read a book once",
+			"Has a pet squid named Squidward",
+			"Has a pet octopus named Octavius",
+			"Has a pet sea anemone named Anemone",
+			"Uses a lot of conditioner",
+			"Decided to turn their life around",
+			"Once ate a whole bag of chips",
+			"Around 80% of their diet is chips",
+			"Has a pet dog named Dog",
 		};
 
 		public Inkling(string name, IEquipment equipment, TeamColors teamcolor)
