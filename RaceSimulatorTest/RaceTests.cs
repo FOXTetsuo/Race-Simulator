@@ -1,144 +1,174 @@
-﻿namespace RaceSimulatorTest
+﻿using Controller;
+using Model;
+
+namespace RaceSimulatorTest
 {
 	[TestFixture]
 	public class RaceTests
 	{
+		[Test]
+		public void RandomizeEquipment_EquipmentRandomized()
+		{
+			// Arrange
+			Data.Initialize();
+			Data.NextRace();
+			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+
+			foreach (IParticipant participant in Data.CurrentRace.Participants)
+			{
+				participant.Equipment.Performance = 0;
+				participant.Equipment.Quality = 0;
+				participant.Equipment.Speed = 0;
+			}
+			Boolean randomized = true;
+
+			// Act
+			Data.CurrentRace.RandomizeEquipment();
+
+			// Assert
+			foreach (IParticipant participant in Data.CurrentRace.Participants)
+			{
+				if (participant.Equipment.Performance == 0 || participant.Equipment.Quality == 0 || participant.Equipment.Speed == 0)
+				{
+					randomized = false;
+				}
+			}
+
+			Assert.That(randomized == true);
+		}
+
+		[Test]
+		public void PlaceContestants_ContestantsOnTrack()
+		{
+			// Arrange
+			Data.Initialize();
+			Data.NextRace();
+
+
+			// Act
+			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+
+			// Assert
+			if (Data.CurrentRace.Participants.Count > 0)
+				Assert.Pass();
+			else Assert.Fail();
+
+		}
+
 		//[Test]
-		//public void GetSectionData_ReturnData()
+		//public void PlaceContestants_StateUnderTest_ExpectedBehavior()
 		//{
 		//	// Arrange
-		//	Data.Initialize();
-		//	Data.NextRace();
-		//	Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
-
+		//	var race = new Race(TODO, TODO);
+		//	Track track = null;
+		//	List participants = null;
 
 		//	// Act
-		//	var result = Data.CurrentRace.GetSectionData(
-		//	;
+		//	race.PlaceContestants(
+		//		track,
+		//		participants);
 
 		//	// Assert
 		//	Assert.Fail();
 		//}
 
 		//[Test]
-		//public void RandomizeEquipment_EquipmentRandomized()
+		//public void OnTimedEvent_StateUnderTest_ExpectedBehavior()
 		//{
 		//	// Arrange
-		//	Data.Initialize();
-		//	Data.NextRace();
-		//	Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
-
-		//	foreach (IParticipant participant in Data.CurrentRace.Participants)
-		//	{
-		//		participant.Equipment.Performance = 0;
-		//		participant.Equipment.Quality = 0;
-		//		participant.Equipment.Speed = 0;
-		//	}
-		//	Boolean randomized = true;
+		//	var race = new Race(TODO, TODO);
+		//	object sender = null;
+		//	EventArgs args = null;
 
 		//	// Act
-		//	Data.CurrentRace.RandomizeEquipment();
+		//	race.OnTimedEvent(
+		//		sender,
+		//		args);
 
 		//	// Assert
-		//	foreach (IParticipant participant in Data.CurrentRace.Participants)
-		//	{
-		//		if (participant.Equipment.Performance == 0 || participant.Equipment.Quality == 0 || participant.Equipment.Speed == 0)
-		//		{
-		//			randomized = false;
-		//		}
-		//	}
-
-		//	Assert.That(randomized == true);
+		//	Assert.Fail();
 		//}
 
 		//[Test]
-		//public void PlaceContestants_ContestantsOnTrack()
+		//public void Start_StateUnderTest_ExpectedBehavior()
 		//{
 		//	// Arrange
-		//	Data.Initialize();
-		//	Data.NextRace();
-
+		//	var race = new Race(TODO, TODO);
 
 		//	// Act
-		//	Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
+		//	race.Start();
 
 		//	// Assert
-		//	if (Data.CurrentRace.Participants.Count > 0)
-		//		Assert.Pass();
-		//	else Assert.Fail();
-
+		//	Assert.Fail();
 		//}
 
-		//	[Test]
-		//	public void AdvanceParticipant_StateUnderTest_ExpectedBehavior()
-		//	{
-		//		// Arrange
-		//		var race = new Race(TODO, TODO);
-		//		IParticipant participant = null;
+		//[Test]
+		//public void CheckWhetherToMoveParticipants_StateUnderTest_ExpectedBehavior()
+		//{
+		//	// Arrange
+		//	var race = new Race(TODO, TODO);
 
-		//		// Act
-		//		race.AdvanceParticipant(
-		//			participant);
+		//	// Act
+		//	race.CheckWhetherToMoveParticipants();
 
-		//		// Assert
-		//		Assert.Fail();
-		//	}
+		//	// Assert
+		//	Assert.Fail();
+		//}
 
-		//	[Test]
-		//	public void CheckRaceFinished_StateUnderTest_ExpectedBehavior()
-		//	{
-		//		// Arrange
-		//		var race = new Race(TODO, TODO);
+		//[Test]
+		//public void BreakAndRecover_StateUnderTest_ExpectedBehavior()
+		//{
+		//	// Arrange
+		//	var race = new Race(TODO, TODO);
 
-		//		// Act
-		//		var result = race.CheckRaceFinished();
+		//	// Act
+		//	race.BreakAndRecover();
 
-		//		// Assert
-		//		Assert.Fail();
-		//	}
+		//	// Assert
+		//	Assert.Fail();
+		//}
 
-		//	[Test]
-		//	public void CheckFinish_StateUnderTest_ExpectedBehavior()
-		//	{
-		//		// Arrange
-		//		var race = new Race(TODO, TODO);
-		//		IParticipant participant = null;
+		//[Test]
+		//public void BreakCar_StateUnderTest_ExpectedBehavior()
+		//{
+		//	// Arrange
+		//	var race = new Race(TODO, TODO);
+		//	IParticipant participant = null;
 
-		//		// Act
-		//		var result = race.CheckFinish(
-		//			participant);
+		//	// Act
+		//	race.BreakCar(
+		//		participant);
 
-		//		// Assert
-		//		Assert.Fail();
-		//	}
+		//	// Assert
+		//	Assert.Fail();
+		//}
 
-		//	[Test]
-		//	public void OverTake_StateUnderTest_ExpectedBehavior()
-		//	{
-		//		// Arrange
-		//		var race = new Race(TODO, TODO);
-		//		Section section = null;
+		//[Test]
+		//public void AdvanceParticipantIfPossible_StateUnderTest_ExpectedBehavior()
+		//{
+		//	// Arrange
+		//	var race = new Race(TODO, TODO);
+		//	IParticipant participant = null;
 
-		//		// Act
-		//		race.OverTake(
-		//			section);
+		//	// Act
+		//	race.AdvanceParticipantIfPossible(
+		//		participant);
 
-		//		// Assert
-		//		Assert.Fail();
-		//	}
+		//	// Assert
+		//	Assert.Fail();
+		//}
 
-		//	[Test]
-		//	public void Cleaner_StateUnderTest_ExpectedBehavior()
-		//	{
-		//		// Arrange
-		//		var race = new Race(TODO, TODO);
+		//[Test]
+		//public void Cleaner_StateUnderTest_ExpectedBehavior()
+		//{
+		//	// Arrange
+		//	var race = new Race(TODO, TODO);
 
-		//		// Act
-		//		race.Cleaner();
+		//	// Act
+		//	race.Cleaner();
 
-		//		// Assert
-		//		Assert.Fail();
-		//	}
+		//	// Assert
+		//	Assert.Fail();
 		//}
 	}
 }

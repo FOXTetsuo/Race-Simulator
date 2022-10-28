@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
+using Model;
 
 namespace Controller
 {
@@ -18,13 +19,20 @@ namespace Controller
 			Competition.Participants.Add(new Inkling("Chrimst", new Genetics(), TeamColors.Green));
 			Competition.Participants.Add(new Inkling("Bruger", new Genetics(), TeamColors.Purple));
 			Competition.Participants.Add(new Inkling("Pimpin", new Genetics(), TeamColors.Red));
-
+			if (Competition.Participants.Count < 3)
+			{
+				throw new ImproperCompetitionException();
+			}
 		}
 		public static void AddTracks()
 		{
 			Competition.Tracks.Enqueue(new Track("Skifftastic race", TrackBuilder("Skifftastic race")));
 			Competition.Tracks.Enqueue(new Track("Splat city", TrackBuilder("Splat city")));
-			//Competition.Tracks.Enqueue(new Track("Inktopia", TrackBuilder("Inktopia")));
+			Competition.Tracks.Enqueue(new Track("Inktopia", TrackBuilder("Inktopia")));
+			if (Competition.Tracks.Count == 0)
+			{
+				throw new ImproperCompetitionException();
+			}
 		}
 
 		public static SectionTypes[] TrackBuilder(string trackName)
@@ -121,11 +129,16 @@ namespace Controller
 			}
 			else
 			{
-				Competition.EndCompetition();
+				try { Competition.EndCompetition(); }
+				catch (Exception ImproperCompetitionException) { Console.WriteLine(ImproperCompetitionException.Message); }
 				return false;
 			}
 		}
-
 	}
+}
+
+public class ImproperCompetitionException : Exception
+{
+	public ImproperCompetitionException() : base("Competition was improperly initialized") { }
 }
 
