@@ -47,7 +47,7 @@ namespace Model
 			Equipment = equipment;
 			TeamColor = teamcolor;
 			DistanceCovered = 0;
-			LoopsPassed = -1;
+			LoopsPassed = 0;
 			LapTime = 0;
 			Random = new Random();
 			FunFact = FunFacts[Random.Next(FunFacts.Count)];

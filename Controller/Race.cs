@@ -60,6 +60,9 @@ namespace Controller
 		public void PlaceContestants(Track track, List<IParticipant> participants)
 		// plaats beginposities voor alle contestants
 		{
+			//Randomizes the list of participants
+			participants = RandomizeList(participants);
+			
 			// houdt bij waar in de lijst de foreach is
 			// index = -1 zodat het plaatsen 1 plek begint voor de start/finish
 			int index = -1;
@@ -88,20 +91,10 @@ namespace Controller
 						//checkt of sectionData al gevuld zijn. zo niet -> plaats dan de participant(s)
 						//bij 1 participant wordt er 1 geplaatst, bij 2 participants 2.
 
-						if (sectionData.Left == null)
-						{
-							sectionData.Left = participants[i];
-
-							// onthoudt waar de participant is op dit moment
-							participants[i].CurrentSection = track.Sections.ElementAt(index - (i / 2));
-						}
-						else if (sectionData.Right == null)
-						{
-							sectionData.Right = participants[i];
-
-							// onthoudt waar de participant is op dit moment
-							participants[i].CurrentSection = track.Sections.ElementAt(index - (i / 2));
-						}
+						PlaceParticipantOnSectionData(sectionData, participants[i]);
+						
+						// onthoudt waar de participant is op dit moment
+						participants[i].CurrentSection = track.Sections.ElementAt(index - (i / 2));
 
 					}
 					return;
@@ -322,5 +315,28 @@ namespace Controller
 			GC.Collect(0);
 		}
 
+		public List<P> RandomizeList<P>(List<P> list)
+		{
+			List<bool> Used = new List<bool>();
+			for (int i = 0; i < list.Count; i++)
+			{
+				Used.Add(false);
+			}
+			List<P> newList = new List<P>();
+			for (int i = 0; i < list.Count; i++)
+			{
+				int randomIndex = _random.Next(0, list.Count);
+				if (Used.ElementAt(randomIndex) == true)
+				{
+					i--;
+				}
+				else
+				{
+					Used[randomIndex] = true;
+					newList.Add(list[randomIndex]);
+				}
+			}
+			return newList;
+		}
 	}
 }

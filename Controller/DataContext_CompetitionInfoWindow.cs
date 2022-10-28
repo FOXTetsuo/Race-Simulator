@@ -33,7 +33,8 @@ namespace Controller
             //Reassign Tracks to newTracks, because you can't change
             //it in this thread (The origin is a UI thread, so it can
             //only be edited from there.)
-            BindingList<Track> newTracks = new BindingList<Track>();
+            
+			BindingList<Track> newTracks = new BindingList<Track>();
             foreach (Track track in Data.Competition.Tracks)
             {
                 newTracks.Add(track);
@@ -53,6 +54,7 @@ namespace Controller
         {
             List<IParticipant> UnsortedInklingData = new List<IParticipant>();
             Data.CurrentRace.Participants.ForEach((item) => UnsortedInklingData.Add(item));
+
             //LINQ statement om data te orderen. Eerst gesorteerd door punten, daarna door laptime van de laatste race.
             //Stel dat er twee mensen zijn met een even aantal punten, wint dus de snelste racer in de laatste race,
             //en staat deze hier ook bovenaan.

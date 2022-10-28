@@ -24,6 +24,7 @@ namespace WPF_App
 		public void StartCompetition()
 		{
 			Data.Initialize();
+
 			Data.NextRace();
 			Data.CurrentRace.PlaceContestants(Data.CurrentRace.Track, Data.CurrentRace.Participants);
 
