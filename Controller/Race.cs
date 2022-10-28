@@ -216,16 +216,11 @@ namespace Controller
 						}
 						return;
 					}
-					//TODO: Decide if behavior below is wanted. As of right now 
-					//momentum is conserved.
-					// participant distancecovered back to what it was before function was called
-					//else participant.DistanceCovered = Sectionlength;
 				}
 				index++;
 			}
 		}
 
-		//TODO: methods hieronder private, maar dan kan je ze natuurlijk ook niet meer testen
 		private void PrepareNextRace()
 		{
 			Cleaner();

@@ -20,7 +20,7 @@
 		public void EndCompetition()
 		{
 			Winner = Participants.OrderByDescending(x => x.Points).ThenBy(x => x.LapTime).First();
-			CompetitionFinished.Invoke(this, new EventArgs());
+			CompetitionFinished?.Invoke(this, new EventArgs());
 		}
 
 		public Competition()
