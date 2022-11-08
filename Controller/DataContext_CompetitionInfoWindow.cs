@@ -7,9 +7,8 @@ namespace Controller
     public class DataContext_CompetitionInfoWindow : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
-        private BindingList<IParticipant> _inklingData;
         private BindingList<Track> _tracks;
-        public BindingList<IParticipant> InklingData { get { return _inklingData; } set { _inklingData = value; OnPropertyChanged(); } }
+        public BindingList<IParticipant> InklingData { get; set; }
         public BindingList<Track> Tracks { get { return _tracks; } set { _tracks = value; OnPropertyChanged(); } }
         public DataContext_CompetitionInfoWindow()
         {
